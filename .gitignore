@@ -1,0 +1,18 @@
+﻿# Python virtual environment
+venv*/
+__pycache__/
+*.pyc
+*.pyo
+
+# Simulink/MATLAB build artifacts
+slprj/
+*.slxc
+*.asv
+
+# OS & IDE
+.DS_Store
+desktop.ini
+.vscode/
+
+# Large binary files không cần thiết
+*.mp4
