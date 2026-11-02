@@ -1,0 +1,549 @@
+function motion_calibration_gui()
+% =========================================================================
+% motion_calibration_gui.m
+% Tính cánh tay đòn (rx,rz) từ Pitch hoặc (ry,rz) từ Roll
+%
+% Cấu trúc file 15 tham số (Dashboard_Stewart3):
+%   col1  = time (s)
+%   col2  = X (mm),  col3 = Y (mm),  col4 = Z (mm)
+%   col5  = Yaw (°), col6 = Pitch (°), col7 = Roll (°)
+%   col8  = ax_i (m/s²), col9 = ay_i, col10 = az_i   ← gia tốc quán tính body
+%   col11 = axg (m/s²),  col12 = ayg, col13 = azg     ← hình chiếu trọng lực
+%   col14 = wz (rad/s),  col15 = wy,  col16 = wx      ← vận tốc góc body
+%
+% Phương trình vật lý ĐẦY ĐỦ (có centripetal term):
+%   PITCH (quay quanh Y):
+%     delta_ax =  alpha_y * rz  -  wy² * rx
+%     delta_az = -alpha_y * rx  -  wy² * rz
+%   ROLL (quay quanh X):
+%     delta_ay =  -alpha_x * rz  -  wx² * ry
+%     delta_az = alpha_x * ry  -  wx² * rz
+%
+% Sửa so với phiên bản cũ:
+%   1. col gyro Roll: col14(wz) → col16(wx)
+%   2. Bổ sung centripetal term (-w²·r) vào phương trình
+%   3. Dùng least-squares time-domain thay vì phasor FFT
+%   4. Thêm plot kiểm tra gia tốc của head, pivot và gia tốc góc
+%   5. Thêm plot so sánh vận tốc góc & gia tốc góc của head và pivot
+% =========================================================================
+
+    fig = uifigure('Name', 'Motion Calibration Tool (Pitch / Roll)', ...
+                   'Position', [300 200 680 560], 'Resize', 'off');
+
+    % ── Tiêu đề ──────────────────────────────────────────────────────────
+    uilabel(fig, 'Text', 'MOTION CALIBRATION TOOL', ...
+        'Position', [0 510 680 30], 'HorizontalAlignment', 'center', ...
+        'FontSize', 16, 'FontWeight', 'bold', 'FontColor', [0.1 0.35 0.65]);
+
+    % ── Chọn file HEAD ────────────────────────────────────────────────────
+    uilabel(fig, 'Text', 'HEAD File:', ...
+        'Position', [20 465 85 22], 'HorizontalAlignment', 'right', 'FontWeight', 'bold');
+    txtHead = uieditfield(fig, 'text', 'Editable', 'off', ...
+        'Position', [115 465 420 22], 'BackgroundColor', [0.97 0.97 0.97]);
+    uibutton(fig, 'push', 'Text', 'Browse...', ...
+        'Position', [545 465 110 22], ...
+        'ButtonPushedFcn', @(~,~) selectFile('head'));
+
+    % ── Chọn file PIVOT ───────────────────────────────────────────────────
+    uilabel(fig, 'Text', 'PIVOT File:', ...
+        'Position', [20 430 85 22], 'HorizontalAlignment', 'right', 'FontWeight', 'bold');
+    txtPivot = uieditfield(fig, 'text', 'Editable', 'off', ...
+        'Position', [115 430 420 22], 'BackgroundColor', [0.97 0.97 0.97]);
+    uibutton(fig, 'push', 'Text', 'Browse...', ...
+        'Position', [545 430 110 22], ...
+        'ButtonPushedFcn', @(~,~) selectFile('pivot'));
+
+    % ── Motion type ───────────────────────────────────────────────────────
+    uilabel(fig, 'Text', 'Motion Type:', ...
+        'Position', [20 390 85 22], 'HorizontalAlignment', 'right', 'FontWeight', 'bold');
+    ddMotion = uidropdown(fig, 'Items', {'Pitch (quay quanh Y)', 'Roll (quay quanh X)'}, ...
+        'Value', 'Pitch (quay quanh Y)', 'Position', [115 390 180 22]);
+
+    % ── Tần số lọc ────────────────────────────────────────────────────────
+    uilabel(fig, 'Text', 'Filter cutoff (Hz):', ...
+        'Position', [310 390 115 22], 'HorizontalAlignment', 'right');
+    efFc = uieditfield(fig, 'numeric', 'Value', 3.0, ...
+        'Position', [435 390 60 22], 'Limits', [0.1 25]);
+    uilabel(fig, 'Text', '(≈ 3× f_motion)', ...
+        'Position', [505 390 150 22], 'FontColor', [0.5 0.5 0.5]);
+
+    % ── Nút Run ───────────────────────────────────────────────────────────
+    uibutton(fig, 'push', 'Text', '▶  Run Calculation', ...
+        'Position', [240 345 200 34], ...
+        'FontSize', 13, 'FontWeight', 'bold', ...
+        'BackgroundColor', [0.18 0.60 0.25], 'FontColor', 'white', ...
+        'ButtonPushedFcn', @(~,~) runCalculation());
+
+    % ── Panel kết quả ─────────────────────────────────────────────────────
+    pnl = uipanel(fig, 'Title', 'Results', ...
+        'Position', [20 30 640 300], 'FontWeight', 'bold', 'FontSize', 12);
+
+    % --- Thông tin tín hiệu ---
+    uilabel(pnl, 'Text', 'Dominant frequency:', ...
+        'Position', [15 245 145 22], 'HorizontalAlignment', 'right');
+    lblFreq = uilabel(pnl, 'Text', '--', ...
+        'Position', [165 245 200 22], 'FontWeight', 'bold');
+
+    uilabel(pnl, 'Text', 'ω amplitude (rad/s):', ...
+        'Position', [15 215 145 22], 'HorizontalAlignment', 'right');
+    lblOmega = uilabel(pnl, 'Text', '--', ...
+        'Position', [165 215 200 22], 'FontWeight', 'bold');
+
+    uilabel(pnl, 'Text', 'α amplitude (rad/s²):', ...
+        'Position', [15 185 145 22], 'HorizontalAlignment', 'right');
+    lblAlpha = uilabel(pnl, 'Text', '--', ...
+        'Position', [165 185 200 22], 'FontWeight', 'bold');
+
+    uilabel(pnl, 'Text', 'Centripetal / Euler ratio:', ...
+        'Position', [15 155 145 22], 'HorizontalAlignment', 'right');
+    lblRatio = uilabel(pnl, 'Text', '--', ...
+        'Position', [165 155 300 22], 'FontWeight', 'bold');
+
+    % Separator
+    uilabel(pnl, 'Text', '────────────────────────────────────────────────────────────────', ...
+        'Position', [15 135 610 18], 'FontColor', [0.7 0.7 0.7]);
+
+    % --- Kết quả lever arm ---
+    uilabel(pnl, 'Text', 'rz (mm):', ...
+        'Position', [15 105 80 22], 'HorizontalAlignment', 'right', ...
+        'FontSize', 13, 'FontWeight', 'bold');
+    lblRz = uilabel(pnl, 'Text', '--', ...
+        'Position', [100 105 150 22], 'FontSize', 14, 'FontWeight', 'bold', ...
+        'FontColor', [0.1 0.35 0.65]);
+
+    uilabel(pnl, 'Text', 'rx (mm):', ...
+        'Position', [15 70 80 22], 'HorizontalAlignment', 'right', 'FontSize', 13);
+    lblRx = uilabel(pnl, 'Text', '--', ...
+        'Position', [100 70 200 22], 'FontSize', 13);
+
+    uilabel(pnl, 'Text', 'ry (mm):', ...
+        'Position', [320 70 80 22], 'HorizontalAlignment', 'right', 'FontSize', 13);
+    lblRy = uilabel(pnl, 'Text', '--', ...
+        'Position', [405 70 200 22], 'FontSize', 13);
+
+    % --- Chất lượng fit ---
+    uilabel(pnl, 'Text', 'RMSE:', ...
+        'Position', [15 35 80 22], 'HorizontalAlignment', 'right');
+    lblRmse = uilabel(pnl, 'Text', '--', ...
+        'Position', [100 35 200 22]);
+
+    uilabel(pnl, 'Text', 'Relative error:', ...
+        'Position', [320 35 100 22], 'HorizontalAlignment', 'right');
+    lblRelErr = uilabel(pnl, 'Text', '--', ...
+        'Position', [425 35 150 22]);
+
+    % ── AppData ───────────────────────────────────────────────────────────
+    setappdata(fig, 'appData', struct('headFile',[], 'pivotFile',[], ...
+                                     'headData',[], 'pivotData',[]));
+
+    % =====================================================================
+    % selectFile
+    % =====================================================================
+    function selectFile(which)
+        [fname, fpath] = uigetfile({'*.csv;*.txt','Data files (*.csv,*.txt)'}, ...
+                                   ['Select ' upper(which) ' file']);
+        if isequal(fname, 0), return; end
+        fullPath = fullfile(fpath, fname);
+        app = getappdata(fig, 'appData');
+        try
+            data = parseMoogFile(fullPath);
+            if isempty(data)
+                uialert(fig, 'File contains no numeric data.', 'Read Error'); return;
+            end
+            if size(data,2) < 16
+                uialert(fig, sprintf('File has %d columns — need at least 16.', size(data,2)), ...
+                    'Format Error'); return;
+            end
+            switch which
+                case 'head'
+                    app.headData = data; app.headFile = fullPath;
+                    txtHead.Value = fname;
+                case 'pivot'
+                    app.pivotData = data; app.pivotFile = fullPath;
+                    txtPivot.Value = fname;
+            end
+            setappdata(fig, 'appData', app);
+        catch ME
+            uialert(fig, ['Error reading file: ' ME.message], 'Read Error');
+        end
+    end
+
+    % =====================================================================
+    % runCalculation
+    % =====================================================================
+    function runCalculation()
+        app = getappdata(fig, 'appData');
+        if isempty(app.headData) || isempty(app.pivotData)
+            uialert(fig, 'Please select both HEAD and PIVOT files first.', 'Missing Data');
+            return;
+        end
+
+        motionStr = ddMotion.Value;
+        isPitch   = startsWith(motionStr, 'Pitch');
+        fc_user   = efFc.Value;
+
+        % ------------------------------------------------------------------
+        % 1. ĐỌC ĐÚNG CỘT
+        %    Dashboard: col14=wz, col15=wy, col16=wx  (1-indexed)
+        % ------------------------------------------------------------------
+        t_h  = app.headData(:,1);
+        ax_h = app.headData(:,8);
+        ay_h = app.headData(:,9);
+        az_h = app.headData(:,10);
+        % Vận tốc góc body frame (rad/s)
+        wy_h = app.headData(:,15);   % WY ← Pitch
+        wx_h = app.headData(:,16);   % WX ← Roll
+
+        t_p  = app.pivotData(:,1);
+        ax_p = app.pivotData(:,8);
+        ay_p = app.pivotData(:,9);
+        az_p = app.pivotData(:,10);
+        wy_p = app.pivotData(:,15);   % WY của pivot
+        wx_p = app.pivotData(:,16);   % WX của pivot
+
+        % ------------------------------------------------------------------
+        % 2. ĐỒNG BỘ THỜI GIAN VÀ NỘI SUY
+        % ------------------------------------------------------------------
+        dt = min(mean(diff(t_h)), mean(diff(t_p)));
+        t_start = max(t_h(1), t_p(1));
+        t_end   = min(t_h(end), t_p(end));
+        t = (t_start : dt : t_end)';
+        N = length(t);
+        
+        if N < 20
+            uialert(fig, 'Insufficient overlapping time points (< 20).', 'Time Error');
+            return;
+        end
+        
+        I = @(tv,xv) interp1(tv, xv, t, 'linear', 'extrap');
+
+        % Nội suy tất cả các kênh
+        ax_h_i = I(t_h, ax_h); ay_h_i = I(t_h, ay_h); az_h_i = I(t_h, az_h);
+        ax_p_i = I(t_p, ax_p); ay_p_i = I(t_p, ay_p); az_p_i = I(t_p, az_p);
+        
+        if isPitch
+            gyro_h_raw = I(t_h, wy_h);   % ω_y head
+            gyro_p_raw = I(t_p, wy_p);   % ω_y pivot
+        else
+            gyro_h_raw = I(t_h, wx_h);   % ω_x head
+            gyro_p_raw = I(t_p, wx_p);   % ω_x pivot
+        end
+
+        % ------------------------------------------------------------------
+        % 3. LỌC BUTTERWORTH (bậc 4, zero-phase)
+        % ------------------------------------------------------------------
+        fs  = 1 / dt;
+        Wn  = min(fc_user / (fs/2), 0.99);
+        [bf, af] = butter(4, Wn, 'low');
+
+        % Lọc tất cả các kênh
+        ax_h_f = filtfilt(bf, af, ax_h_i);
+        ay_h_f = filtfilt(bf, af, ay_h_i);
+        az_h_f = filtfilt(bf, af, az_h_i);
+        ax_p_f = filtfilt(bf, af, ax_p_i);
+        ay_p_f = filtfilt(bf, af, ay_p_i);
+        az_p_f = filtfilt(bf, af, az_p_i);
+        gyro_h = filtfilt(bf, af, gyro_h_raw);
+        gyro_p = filtfilt(bf, af, gyro_p_raw);
+
+        % Tính hiệu số gia tốc (head - pivot) và khử offset
+        dax = ax_h_f - ax_p_f;
+        day = ay_h_f - ay_p_f; %sua o day
+        daz = az_h_f - az_p_f;
+
+
+        % ------------------------------------------------------------------
+        % 4. GIA TỐC GÓC (đạo hàm + lọc thêm)
+        % ------------------------------------------------------------------
+        alpha_h = filtfilt(bf, af, gradient(gyro_h, t));
+        alpha_p = filtfilt(bf, af, gradient(gyro_p, t));
+        % Dùng alpha của head cho phương trình (có thể dùng trung bình)
+        alpha   = alpha_h;   % hoặc (alpha_h+alpha_p)/2
+
+        % ------------------------------------------------------------------
+        % 5. THỐNG KÊ TÍN HIỆU
+        % ------------------------------------------------------------------
+        omega_amp = max(abs(gyro_h));
+        alpha_amp = max(abs(alpha));
+
+        % Ước tính tần số từ zero-crossing
+        zc = find(diff(sign(gyro_h - mean(gyro_h))));
+        f_dom = 0;
+        if length(zc) >= 2
+            f_dom = fs / (2 * mean(diff(zc)));
+        end
+
+        % Tỷ lệ centripetal/euler
+        if alpha_amp > 1e-8
+            centripetal_ratio = (omega_amp^2) / alpha_amp;
+        else
+            centripetal_ratio = Inf;
+        end
+
+        % ------------------------------------------------------------------
+        % 5b. VẼ ĐỒ THỊ GIA TỐC DÀI (ay, az)
+        % ------------------------------------------------------------------
+        plotAccelerations(t, ay_h_f, az_h_f, ay_p_f, az_p_f);
+
+        % ------------------------------------------------------------------
+        % 5c. VẼ SO SÁNH VẬN TỐC GÓC & GIA TỐC GÓC
+        % ------------------------------------------------------------------
+        plotGyroComparison(t, gyro_h, gyro_p, alpha_h, alpha_p, isPitch);
+
+        % ------------------------------------------------------------------
+        % 6. XÂY DỰNG HỆ PHƯƠNG TRÌNH LEAST SQUARES
+        % ------------------------------------------------------------------
+        A_mat = zeros(2*N, 2);
+        B_vec = zeros(2*N, 1);
+
+        for k = 1:N
+            al = alpha(k);
+            w2 = gyro_h(k)^2;   % dùng gyro của head
+
+            if isPitch
+                % Cấu trúc ma trận chuẩn cho Pitch: tìm nghiệm [rz, rx]'
+                A_mat(2*k-1, :) = [ al, -w2];
+                A_mat(2*k,   :) = [-w2, -al];
+                B_vec(2*k-1)    = dax(k);
+                B_vec(2*k)      = daz(k);
+            else
+                % Cấu trúc ma trận chuẩn cho Roll: tìm nghiệm [rz, ry]'
+                A_mat(2*k-1, :) = [-al, -w2];
+                A_mat(2*k,   :) = [-w2,  al];
+                B_vec(2*k-1)    = day(k);
+                B_vec(2*k)      = daz(k);
+            end
+        end
+
+        % ------------------------------------------------------------------
+        % 7. LỌC MẪU — giữ khi alpha đủ lớn
+        % ------------------------------------------------------------------
+        a_norm = repelem(abs(alpha), 2);
+        thr    = prctile(a_norm, 30);    % loại 30% mẫu alpha nhỏ nhất
+        valid  = a_norm > thr;
+
+        A_f = A_mat(valid, :);
+        B_f = B_vec(valid);
+
+        n_valid = sum(valid) / 2;
+        fprintf('Số mẫu hợp lệ: %d / %d (%.0f%%)\n', n_valid, N, 100*n_valid/N);
+
+        if rank(A_f) < 2
+            uialert(fig, 'Ma trận A suy biến — chuyển động không đủ kích thích. Dùng quỹ đạo lớn hơn.', 'Rank Error');
+            return;
+        end
+
+        % ------------------------------------------------------------------
+        % 8. GIẢI BÌNH PHƯƠNG TỐI THIỂU
+        %    x = [rz; rx]  (Pitch)  hoặc  [rz; ry]  (Roll)
+        % ------------------------------------------------------------------
+        r_sol = A_f \ B_f;        % đơn vị: mét
+        rz_m  = r_sol(1);
+        r2_m  = r_sol(2);         % rx (pitch) hoặc ry (roll)
+
+        rz_mm = rz_m * 1000;
+        r2_mm = r2_m * 1000;
+
+        % ------------------------------------------------------------------
+        % 9. ĐÁNH GIÁ CHẤT LƯỢNG FIT
+        % ------------------------------------------------------------------
+        residual = B_f - A_f * r_sol;
+        rmse     = sqrt(mean(residual.^2));
+        rel_err  = rmse / (norm(r_sol) + 1e-12) * 100;
+
+        % ------------------------------------------------------------------
+        % 10. CẬP NHẬT GUI
+        % ------------------------------------------------------------------
+        lblFreq.Text  = sprintf('%.4f Hz', f_dom);
+        lblOmega.Text = sprintf('%.5f rad/s', omega_amp);
+        lblAlpha.Text = sprintf('%.5f rad/s²', alpha_amp);
+        lblRatio.Text = sprintf('%.4f  (%s)', centripetal_ratio, ...
+            ternary(centripetal_ratio > 0.05, '⚠ Đáng kể — centripetal được tính vào', 'Nhỏ, ổn'));
+
+        lblRz.Text = sprintf('%.3f mm', rz_mm);
+        lblRmse.Text   = sprintf('%.6f m/s²', rmse);
+
+        color_err = ternary(rel_err < 5, [0.1 0.5 0.1], [0.7 0.2 0.1]);
+
+        if isPitch
+            lblRx.Text = sprintf('%.3f mm', r2_mm);
+            lblRy.Text = 'N/A (Pitch)';
+            lblRelErr.Text = sprintf('%.2f%%', rel_err);
+            lblRelErr.FontColor = color_err;
+            fprintf('\n========== PITCH ==========\n');
+            fprintf('f ≈ %.4f Hz\n', f_dom);
+            fprintf('ω_max = %.5f rad/s,  α_max = %.5f rad/s²\n', omega_amp, alpha_amp);
+            fprintf('Centripetal ratio = %.4f\n', centripetal_ratio);
+            fprintf('rz = %.3f mm\n', rz_mm);
+            fprintf('rx = %.3f mm\n', r2_mm);
+            fprintf('|r| = %.3f mm\n', norm([r2_mm, rz_mm]));
+            fprintf('RMSE = %.6f m/s²,  Sai số tương đối = %.2f%%\n', rmse, rel_err);
+        else
+            lblRx.Text = 'N/A (Roll)';
+            lblRy.Text = sprintf('%.3f mm', r2_mm);
+            lblRelErr.Text = sprintf('%.2f%%', rel_err);
+            lblRelErr.FontColor = color_err;
+            fprintf('\n========== ROLL ==========\n');
+            fprintf('f ≈ %.4f Hz\n', f_dom);
+            fprintf('ω_max = %.5f rad/s,  α_max = %.5f rad/s²\n', omega_amp, alpha_amp);
+            fprintf('Centripetal ratio = %.4f\n', centripetal_ratio);
+            fprintf('rz = %.3f mm\n', rz_mm);
+            fprintf('ry = %.3f mm\n', r2_mm);
+            fprintf('|r| = %.3f mm\n', norm([r2_mm, rz_mm]));
+            fprintf('RMSE = %.6f m/s²,  Sai số tương đối = %.2f%%\n', rmse, rel_err);
+        end
+        fprintf('============================\n');
+
+        % ------------------------------------------------------------------
+        % 11. VẼ ĐỒ THỊ KIỂM TRA FIT
+        % ------------------------------------------------------------------
+        plotResiduals(t, alpha, gyro_h, B_vec, A_mat, r_sol, isPitch, valid);
+    end
+
+    % =====================================================================
+    % plotAccelerations — vẽ gia tốc dài của head và pivot (ay, az)
+    % =====================================================================
+    function plotAccelerations(t, ay_h, az_h, ay_p, az_p)
+        figure('Name', 'Linear Acceleration Comparison', 'NumberTitle', 'off', ...
+               'Position', [100 100 900 500]);
+
+        subplot(2,1,1);
+        plot(t, ay_h, 'b', 'LineWidth', 1.2); hold on;
+        plot(t, ay_p, 'r--', 'LineWidth', 1.2);
+        ylabel('ay (m/s²)'); grid on;
+        legend('Head ay', 'Pivot ay', 'Location','best');
+        title('Gia tốc dài theo trục Y');
+
+        subplot(2,1,2);
+        plot(t, az_h, 'b', 'LineWidth', 1.2); hold on;
+        plot(t, az_p, 'r--', 'LineWidth', 1.2);
+        ylabel('az (m/s²)'); grid on;
+        legend('Head az', 'Pivot az', 'Location','best');
+        title('Gia tốc dài theo trục Z');
+        xlabel('Time (s)');
+        sgtitle('So sánh gia tốc dài Head vs Pivot (đã lọc)', 'FontWeight','bold', 'FontSize',12);
+    end
+
+    % =====================================================================
+    % plotGyroComparison — vẽ vận tốc góc và gia tốc góc của head & pivot
+    % =====================================================================
+    function plotGyroComparison(t, gyro_h, gyro_p, alpha_h, alpha_p, isPitch)
+        figure('Name', 'Gyroscope & Angular Acceleration Comparison', 'NumberTitle', 'off', ...
+               'Position', [150 150 900 600]);
+
+        ax1 = subplot(2,1,1);
+        plot(t, gyro_h, 'b', 'LineWidth', 1.2); hold on;
+        plot(t, gyro_p, 'r--', 'LineWidth', 1.2);
+        ylabel('ω (rad/s)'); grid on;
+        legend('Head ω', 'Pivot ω', 'Location','best');
+        if isPitch
+            title('Vận tốc góc ω_y');
+        else
+            title('Vận tốc góc ω_x');
+        end
+
+        ax2 = subplot(2,1,2);
+        plot(t, alpha_h, 'b', 'LineWidth', 1.2); hold on;
+        plot(t, alpha_p, 'r--', 'LineWidth', 1.2);
+        ylabel('α (rad/s²)'); grid on;
+        legend('Head α', 'Pivot α', 'Location','best');
+        if isPitch
+            title('Gia tốc góc α_y');
+        else
+            title('Gia tốc góc α_x');
+        end
+        xlabel('Time (s)');
+        sgtitle('So sánh vận tốc góc & gia tốc góc Head vs Pivot', 'FontWeight','bold', 'FontSize',12);
+    end
+
+    % =====================================================================
+    % plotResiduals — vẽ đồ thị kiểm tra fit
+    % =====================================================================
+    function plotResiduals(t, alpha, gyro, B_vec, A_mat, r_sol, isPitch, valid)
+        N = length(t);
+        B_est = A_mat * r_sol;
+
+        B_meas_ax = B_vec(1:2:end);   % delta_ax hoặc delta_ay
+        B_meas_az = B_vec(2:2:end);   % delta_az
+        B_est_ax  = B_est(1:2:end);
+        B_est_az  = B_est(2:2:end);
+
+        valid_t = valid(1:2:end);     % logical mask theo time
+
+        hFig = figure('Name','Calibration Residuals','NumberTitle','off', ...
+                       'Position',[100 100 900 600]);
+
+        ax1 = subplot(3,1,1);
+        plot(t, B_meas_ax, 'b', 'LineWidth',1.2, 'DisplayName','Đo thực tế');
+        hold on;
+        plot(t, B_est_ax,  'r--', 'LineWidth',1.2, 'DisplayName','Ước lượng');
+        yline(0,'k:');
+        ylabel(ternary(isPitch,'Δax (m/s²)','Δay (m/s²)'), 'FontSize',10);
+        legend('Location','best'); grid on; title('Kiểm tra fit — Trục 1');
+
+        ax2 = subplot(3,1,2);
+        plot(t, B_meas_az, 'b', 'LineWidth',1.2, 'DisplayName','Đo thực tế');
+        hold on;
+        plot(t, B_est_az,  'r--', 'LineWidth',1.2, 'DisplayName','Ước lượng');
+        yline(0,'k:');
+        ylabel('Δaz (m/s²)', 'FontSize',10);
+        legend('Location','best'); grid on; title('Kiểm tra fit — Δaz');
+
+        ax3 = subplot(3,1,3);
+        yyaxis left;
+        plot(t, alpha, 'k', 'LineWidth',1.2);
+        ylabel('α (rad/s²)'); 
+        yyaxis right;
+        plot(t, gyro.^2, 'Color',[0.8 0.4 0], 'LineWidth',1.0);
+        ylabel('ω² (rad²/s²)');
+        hold on;
+        % Tô vùng bị loại (alpha nhỏ)
+        yL = ylim;
+        fill_t = t(~valid_t);
+        if ~isempty(fill_t)
+            for kk = 1:length(fill_t)
+                xpatch = [fill_t(kk)-0.01, fill_t(kk)+0.01, fill_t(kk)+0.01, fill_t(kk)-0.01];
+                ypatch = [yL(1), yL(1), yL(2), yL(2)];
+                fill(xpatch, ypatch, [1 0.85 0.85], 'EdgeColor','none', 'FaceAlpha',0.3);
+            end
+        end
+        xlabel('Time (s)'); grid on;
+        title('Tín hiệu góc — vùng hồng = mẫu bị loại (α nhỏ)');
+
+        linkaxes([ax1 ax2 ax3], 'x');
+        sgtitle('Kiểm tra chất lượng fit — đỏ=ước lượng, xanh=đo', ...
+                'FontWeight','bold', 'FontSize',12);
+    end
+
+end
+
+% =========================================================================
+% Hàm tiện ích
+% =========================================================================
+function out = ternary(cond, a, b)
+    if cond, out = a; else, out = b; end
+end
+
+% =========================================================================
+% parseMoogFile — đọc file định dạng ~M[ ... ]]
+% =========================================================================
+function data = parseMoogFile(filename)
+    fid = fopen(filename, 'r');
+    if fid == -1, error('Cannot open file: %s', filename); end
+    raw   = fread(fid, '*char')';
+    fclose(fid);
+    lines = strsplit(raw, newline);
+    data  = [];
+    pat   = '[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?';
+    for i = 1:length(lines)
+        line = strtrim(lines{i});
+        if isempty(line), continue; end
+        nums = regexp(line, pat, 'match');
+        if isempty(nums), continue; end
+        row  = str2double(nums);
+        row(isnan(row)) = [];
+        if length(row) >= 15
+            data = [data; row]; %#ok<AGROW>
+        end
+    end
+end

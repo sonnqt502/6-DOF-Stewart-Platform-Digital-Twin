@@ -1,0 +1,43 @@
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_jitprj] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\EMLReport] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\TwoTankDemo] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\TwoTankDemo\ProcessCtrlExp] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\TwoTankDemo\ProcessCtrlExp\sfun] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\TwoTankDemo\ProcessCtrlExp\sfun\info] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\TwoTankDemo\_self] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\TwoTankDemo\_self\sfun] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\TwoTankDemo\_self\sfun\info] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\Matlab2016\slprj\_sfprj\precompile] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\doc] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_jitprj] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\EMLReport] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\PP] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\PP\ProcessCtrlExp] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\PP\ProcessCtrlExp\sfun] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\PP\ProcessCtrlExp\sfun\info] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\PP\_self] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\PP\_self\sfun] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\PP\_self\sfun\info] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\P_PI_RW_khongDoOutFlowslx] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\P_PI_RW_khongDoOutFlowslx\ProcessCtrlExp] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\P_PI_RW_khongDoOutFlowslx\ProcessCtrlExp\sfun] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\P_PI_RW_khongDoOutFlowslx\ProcessCtrlExp\sfun\info] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\P_PI_RW_khongDoOutFlowslx\_self] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\P_PI_RW_khongDoOutFlowslx\_self\sfun] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\P_PI_RW_khongDoOutFlowslx\_self\sfun\info] 
+[Warning: Name is nonexistent or not a directory: C:\Users\Admin\Desktop\LTDK\Process Control Toolbox\slprj\_sfprj\precompile] 
+=== RESULTS WITH RIGOROUS GLOBAL PCA (PITCH) ===
+centrez    | rx (mm)    | rz (mm)    | pearson    | rmse      
+---------------------------------------------------------------
+0.0        | NaN        | NaN        | NaN        | NaN       
+-100.0     | NaN        | NaN        | NaN        | NaN       
+-200.0     | NaN        | NaN        | NaN        | NaN       
+-300.0     | NaN        | NaN        | NaN        | NaN       
+-400.0     | NaN        | NaN        | NaN        | NaN       
+-500.0     | NaN        | NaN        | NaN        | NaN       

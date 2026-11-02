@@ -1,0 +1,343 @@
+TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI
+ĐỒ ÁN NGHIÊN CỨU CỬ NHÂN
+Nghiên cứu thiết kế phần mềm mô phỏng hoạt động của hệ thống mô phỏng lái CKAS W2 6 bậc tự do
+NGUYỄN QUANG THẾ SƠN
+Son.nqt226226@sis.hust.edu.vn
+Ngành: Kỹ thuật Cơ điện tử
+Chuyên ngành:Hệ thống cơ điện tử thông minh
+ĐỀ TÀI TỐT NGHIỆP
+Biểu mẫu của Đề tài/khóa luận tốt nghiệp theo qui định của viện, tuy nhiên cần đảm bảo giáo viên giao đề tài ký và ghi rõ họ và tên.
+Trường hợp có 2 giáo viên hướng dẫn thì sẽ cùng ký tên. 
+Lời cảm ơn
+Em xin được bày tỏ lòng biết ơn chân thành đến PGS.TS.Phạm Đức An đã thận tình quan tâm, chỉ dạy và hướng dẫn em trong quá trình làm đồ án nghiên cứu cử nhân. Không chỉ vậy, thầy còn giúp em thay đổi hướng tư duy và dẫn dắt em những bước đầu chập chững trên con đường nghiên cứu này. Em xin bày tỏ lòng biết ơn sâu sắc đến thầy.
+Em cũng xin trân trọng cảm ơn Trường Cơ khí, khoa Cơ điện tử đã tạo điều kiện thuận lợi cho em trong quá trình học tập tại trường cũng như trong quá trình thực hiện đồ án.
+Cuối cùng em xin cảm ơn các anh, các bạn trong Smart Equipment and Robot Lab đã đồng hành, chia sẻ và hỗ trợ em trong quá trình học tập là làm đồ án.
+Tóm tắt nội dung đồ án
+Hệ mô phỏng lái CKAS W2 là một cơ cấu phức tạp và có giá thành cao. Việc kiểm thử các quỹ đạo hoặc thuật toán mới trực tiếp trên hệ thống này có thể làm cơ cấu bị hỏng hóc, gây tốn kém về tiền bạc và thời gian trong quá trình thử nghiệm đó.
+Vì thế đồ án nghiên cứu cử nhân: “Nghiên cứu thiết kế phần mềm mô phỏng hoạt động của hệ thống mô phỏng lái CKAS W2 6 bậc tự do” thực hiện các yêu cầu sau:
+- Tìm hiểu cơ sở lý thuyết về động học bệ Stewart 6 bậc tự do (động học thuận, động học ngược).
+- Xây dựng mô hình 3D và không gian mô phỏng bằng Solidwork, Matlab Simulink.
+- Phát triển phần mềm/GUI tích hợp các module đã xây dựng: mô phỏng chuyển động, hiệu chuẩn tâm quay, kiểm tra giới hạn không gian hoạt động.
+Cuối cùng dưới sự hướng dẫn của PSG.TS. Phạm Đức An, đồ án của em đã thực hiện được các yêu cầu đặt ra.
+MỤC LỤC
+Hình 1-1 Universal Tyre-Testing Machine by Hayes, M.. Kinematics of general planar Stewart-Gough platforms.	2
+Hình 1-2 A 6-UPS Gough-Stewart Platform by https://blog.quakelogic.net/motionmaster-6-stewart-platform-for-advanced-6-dof-testing-across-industries/	4
+Hình 1-3 A RUS Gough-Stewart Platform : CKAS W25 https://www.ckas.com.au/includes/template/uploads/file/CKAS%20W%20Series%20Data%20Sheet.pdf	4
+Hình 1-4: A RUS Gough-Stewart Platform.	5
+Hình 1-5: Phân loại cấu trúc phân bố hình học by Mohammad H. Abedin-Nasab	6
+Hình 1-6: CKAS W2 6 bậc tự do by  CKAS Mechatronics Product Catalogue 1905.doc	7
+Hình 1-7: Hệ tọa độ phương tiện by [3]	8
+Hình 1-8: Hệ tọa độ cơ sở by [3]	10
+Hình 2-1: Sơ đồ cấu tạo cơ khí của hệ thống	15
+Hình 2-2: Minh họa một cụm liên kết cơ khí	15
+Hình 2-3: Bệ cố định	16
+Hình 2-4: Bản vẽ chi tiết Bệ cố định	16
+Hình 2-5: Tay ngắn	17
+Hình 2-6: Bản vẽ chi tiết tay ngắn	17
+Hình 2-7: Tay dài	18
+Hình 2-8: Bản vẽ chi tiết tay dài	18
+Hình 2-9: Chốt	19
+Hình 2-10: Bản vẽ chi tiết chốt	19
+Hình 2-11: Khớp chữ Y	20
+Hình 2-12: Thông số chi tiết khớp chữ Y	20
+Hình 2-13: Khớp cầu	21
+Hình 2-14 Thông số chi tiết khớp cầu	21
+Hình 2-15: Bệ động	22
+Hình 2-16: Thông số chi tiết bệ động	22
+Hình 2-17: Thiết kế tổng thể	23
+Hình 2-18: Lực tác động lên bệ động	25
+Hình 2-19: Ứng suất bệ động	25
+Hình 2-20: Biến dạng bệ động	26
+Hình 2-21: Lực tác dụng lên tay dài	27
+Hình 2-22:Ứng suất tay dài	28
+Hình 2-23: BIến dạng tay dài	28
+Hình 2-24: Lực tác dụng lên chốt	29
+Hình 2-25: Trường hợp tay dài vuông với chốt	29
+Hình 2-26: Ứng suất chốt trường hợp tay dài vuông với chốt	30
+Hình 2-27: Biến dạng của chốt trường hợp tay dài vuông với chốt	30
+Hình 2-28 Lực tác dụng trường hợp  tay dài song song với chốt	31
+Hình 2-29: Ứng suất trường hợp tay dài song song với chốt	31
+Hình 2-30: Biến dạng trường hợp tay dài song song  với chốt	31
+Hình 2-31: Lực tác dụng lên tay ngắn	32
+Hình 2-32: Lực tác dụng trường hợp tay ngắn vuông với đế, tay dài vuông với chốt	33
+Hình 2-33: Biến dạng tay ngắn trường hợp 1	33
+Hình 2-34 Ứng suất tay ngắn trường hợp 1	34
+Hình 2-35: Lực tác dụng tay ngắn trường hợp 2	34
+Hình 2-36: Ứng suất tay ngắn trường hợp 2	35
+Hình 2-37: Biến dạng tay ngắn tường hợp 2	35
+Hình 2-38: Lực tác dụng tay ngắn trường hợp 3	36
+Hình 2-39 Ứng suất tay ngắn trường hợp 3	36
+Hình 2-40: Biến dạng tay ngắn trường hợp 3	37
+Bảng 1-1: Thông số giới hạn theo các trục của CKAS W2	8
+Bảng 2-1: Bảng tổng hợp kết quả kiểm bền	37
+TỔNG QUAN VỀ HỆ MÔ PHỎNG LÁI XE VÀ CƠ CẤU GOUGH-STEWART PLATFORM
+Giới thiệu chung về hệ thống mô phỏng lái 
+Mô phỏng lái  (Driving Simulation) là công nghệ tái tạo lại các cảm giác vật lý về gia tốc, vận tốc và vị trí không gian cho người dùng khi lái thông qua một cơ cấu cơ điện tử chuyên dụng. Mục đích cốt lõi của hệ thống này là "đánh lừa" cơ quan tiền đình và hệ thần kinh cảm giác, khiến người sử dụng cảm nhận được lực quán tính giống hệt như đang điều khiển một phương tiện thực tế mặc dù không gian hoạt động của hệ thống là hữu hạn. Trong các ngành công nghiệp hiện đại, công nghệ này đóng vai trò nền tảng trong việc đào tạo lái xe an toàn, nghiên cứu động lực học phương tiện và phát triển các hệ thống giải trí thực tế ảo cao cấp.
+Khác với phương tiện thực tế có thể di chuyển trên những quãng đường dài vô tận, hệ mô phỏng lái bị giới hạn nghiêm ngặt bởi hành trình cơ khí của các cánh tay đòn hoặc xi-lanh. Do đó, hệ thống không mô phỏng lại quãng đường mà tập trung mô phỏng lại gia tốc hay các lực quán tính. Nguyên lý này khai thác triệt để tác động của trọng lực Trái Đất. Ví dụ, để mô phỏng cảm giác một chiếc xe đang tăng tốc liên tục về phía trước, bệ mô phỏng sẽ từ từ ngóc đầu lên (Pitching up). Lúc này, trọng lực tác dụng lên lưng người lái sẽ tạo ra một lực ép tương đương với lực quán tính ép họ vào ghế khi xe tăng tốc thật, tạo ra ảo giác chuyển động hoàn hảo dù bệ đứng yên tại chỗ. 
+Để đạt được ảo giác chân thực này, một hệ thống chuyên nghiệp phải hoạt động dựa trên sự phối hợp thời gian thực của nhiều khối chức năng phức tạp. Đầu tiên, mô hình động lực học phương tiện sẽ xử lý tín hiệu đầu vào từ vô lăng, chân ga và môi trường ảo để tính toán ra gia tốc lý thuyết. Tiếp theo, thuật toán lọc rửa trôi (Washout Filter) đóng vai trò như bộ não, tiếp nhận dữ liệu gia tốc để tạo ra quỹ đạo nghiêng bệ tối ưu, sau đó điều khiển bệ lùi về vị trí cân bằng với vận tốc cực chậm nhằm tránh kịch hành trình cơ khí. Từ quỹ đạo không gian mong muốn này, khối tính toán động học sẽ giải bài toán động học ngược để nội suy ra chính xác góc quay của 6 động cơ tại mỗi mili-giây. Cuối cùng, tầng phần cứng điều khiển công nghiệp sẽ phát xung để các cơ cấu chấp hành di chuyển bệ mô phỏng đồng bộ.
+Trong bối cảnh nghiên cứu và phát triển hiện đại, việc số hóa toàn bộ quy trình thiết kế này là một tiêu chuẩn bắt buộc. Các kỹ sư thường kết hợp các phần mềm thiết kế cơ khí 3D để xây dựng cấu trúc không gian, sau đó xuất mô hình sang các môi trường mô phỏng toán học cấp cao. Quy trình liên kết mô phỏng chéo này cho phép đánh giá toàn diện sự tương tác giữa thuật toán điều khiển và đáp ứng vật lý của hệ thống cơ khí. Nhờ đó, người thiết kế có thể kiểm tra chính xác các góc định vị, phân tích giới hạn vặn xoắn và tính toán mô-men xoắn yêu cầu của động cơ trước khi tiến hành gia công thực tế, giúp tối ưu hóa chi phí và đảm bảo độ cứng vững an toàn tuyệt đối cho hệ thống
+Lịch sử phát triển của cơ cấu Gough-Stewart Platform
+Cơ cấu robot song song 6 bậc tự do, thường được biết đến rộng rãi với tên gọi Gough-Stewart Platform, có một lịch sử phát triển thú vị và trải qua nhiều thập kỷ hoàn thiện trước khi trở thành nền tảng tiêu chuẩn cho các hệ thống mô phỏng hiện đại. Theo quá trình hình thành của cơ cấu này có thể được chia thành các cột mốc quan trọng sau:
+Nền tảng toán học sơ khai (Thế kỷ 19):Mặc dù Hexapod bắt đầu bùng nổ cùng với sự phát triển của máy tính, nhưng nền tảng lý thuyết của nó đã xuất hiện từ rất sớm. Vào khoảng những năm 1800, nhà toán học người Pháp Augustine Louis Cauchy đã tiên phong nghiên cứu về độ cứng vững của cấu trúc "khối bát diện có khớp nối" (articulated octahedron). Những nghiên cứu tiên phong của Cauchy về cơ học và phân tích toán học đã đặt nền móng lý thuyết vững chắc cho các cơ cấu liên kết song song sau này.
+Trái với tên gọi phổ biến, người đầu tiên thiết kế và chế tạo thành công cơ cấu Hexapod hoàn chỉnh trong thực tế không phải là Stewart, mà là một kỹ sư ô tô người Anh tên là V. E. (Eric) Gough. Vào năm 1949, trong quá trình làm việc tại nhà máy cao su Dunlop (Anh), Gough đã thiết kế một cơ cấu cơ khí song song gọi là "Máy kiểm tra lốp xe vạn năng" (Universal Tyre-Testing Machine).
+Hệ thống của Gough chính thức đi vào hoạt động năm 1954, sử dụng cấu trúc bát diện với 6 chân kích cơ khí để kiểm tra các đặc tính của lốp máy bay dưới tác dụng của tải trọng kết hợp đa hướng. Cỗ máy nguyên bản của Gough hoạt động bền bỉ đến tận những năm 1980 và hiện đang được lưu giữ tại Bảo tàng Khoa học London.
+Hình 1-1 Universal Tyre-Testing Machine by Hayes, M.. Kinematics of general planar Stewart-Gough platforms.
+Năm 1965, D. Stewart, một kỹ sư người Anh, đã xuất bản một bài báo khoa học nổi tiếng trước Viện Kỹ sư Cơ khí Anh (IMechE). Trong tài liệu này, Stewart đề xuất sử dụng một cơ cấu không gian 6 bậc tự do để làm nền tảng cho buồng lái mô phỏng máy bay (flight simulator).
+Mặc dù Stewart không phải là người chế tạo thực tế cỗ máy đầu tiên, và ý tưởng về buồng bay mô phỏng thương mại đầu tiên lại được kỹ sư người Mỹ Klaus Cappel phát triển độc lập và cấp bằng sáng chế vào cùng thời kỳ (1962 - 1971), nhưng bài báo của Stewart đã gây tiếng vang quá lớn trong giới học thuật. Kể từ đó, thuật ngữ "Gough-Stewart Platform" ra đời và trở thành danh từ chung để gọi mọi cơ cấu liên kết song song 6 chân.
+Ngày nay, để đảm bảo tính công bằng cho người phát minh ra nó, giới học thuật và các nhà nghiên cứu cơ điện tử thường sử dụng tên gọi kép là " Gough-Stewart Platform". Thuật ngữ "Hexapod" (có nghĩa là sáu chân) ban đầu là một thương hiệu được đăng ký bởi công ty Geodetic Technology dành cho máy công cụ, nhưng hiện nay cũng đã trở thành một cách gọi phổ biến.
+Từ mục đích ban đầu là kiểm tra lốp xe và mô phỏng buồng lái máy bay, ưu điểm vượt trội về độ cứng vững, khả năng chịu tải trọng lớn và độ chính xác định vị cực cao đã giúp Hexapod vươn ra nhiều lĩnh vực công nghiệp. Ngày nay, cơ cấu này được ứng dụng rộng rãi trong các máy phay CNC 6 trục ghép động học song song, robot phẫu thuật y khoa, hệ thống căn chỉnh kính thiên văn vũ trụ, và đặc biệt là trong các hệ thống giải trí, mô phỏng lái xe (Driving Simulator).
+Các dạng cơ cấu Gough-Stewart Platform trong mô phỏng chuyển động
+Bệ động lực học Gough-Stewart  có khá nhiều biến thể tùy thuộc vào mục đích ứng dụng, yêu cầu về không gian làm việc (workspace) và loại cơ cấu truyền động. Trong phân tích động học hệ thống thường phân loại theo hai tiêu chí chính: Cấu hình khớp nối (Joint Configurations) và Cấu trúc phân bố hình học (Geometric Arrangements).
+Phân loại theo Cấu hình khớp nối:
+ Cấu hình 6-UPS (Universal - Prismatic - Spherical): Đây là cấu hình kinh điển và phổ biến nhất. Khớp dưới là khớp các-đăng (Universal), kết nối với phần thân là một cơ cấu truyền động tịnh tiến (Prismatic - đóng vai trò như các xy-lanh), và gắn với bệ động bên trên bằng khớp trên là khớp cầu (Spherical). Các hệ thống mô phỏng truyền động bằng xy-lanh điện hoặc thủy lực tải trọng lớn thường sử dụng loại này.
+Hình 1-2 A 6-UPS Gough-Stewart Platform by https://blog.quakelogic.net/motionmaster-6-stewart-platform-for-advanced-6-dof-testing-across-industries/
+Cấu hình 6-RUS (Revolute - Universal - Spherical) / 6-RSS: Cấu hình này sử dụng động cơ xoay (Revolute) đặt cố định tại các khớp dưới. Chuyển động xoay của động cơ làm xoay các tay đòn (crank/servo arm), từ đó truyền lực qua các thanh nối (linkage) đẩy lên khớp cầu. Việc sử dụng động cơ xoay giúp hệ thống có thời gian đáp ứng nhanh, kết cấu gọn, đặc biệt lý tưởng cho các bệ mô phỏng lái xe hoặc bay có kích thước tầm trung.
+Hình 1-3 A RUS Gough-Stewart Platform : CKAS W25 https://www.ckas.com.au/includes/template/uploads/file/CKAS%20W%20Series%20Data%20Sheet.pdf
+Cấu hình 6-PUS (Prismatic - Universal - Spherical): Thường gặp trong các máy phay CNC 6 trục. Khớp tịnh tiến (P) không nằm ở giữa chân mà nằm trượt dọc theo các ray dẫn hướng cố định tại đế. Cơ cấu này mang lại độ cứng vững cơ khí cực kỳ cao, tuy nhiên không gian làm việc thường bị giới hạn.
+Hình 1-4: A RUS Gough-Stewart Platform. 
+https://www.quanser.com/products/hexapod/
+Phân loại theo cấu trúc phân bố hình học:
+Cách phân loại này dựa trên số lượng vị trí các điểm neo (attachment points) ở đế (khớp A) và ở bệ (khớp B).
+Cấu trúc 6-6 (General Stewart Platform): Có 6 khớp dưới (A) định vị độc lập trên đế và 6 khớp trên (B) định vị độc lập trên bệ động. Cấu hình này có không gian làm việc rộng nhất, chịu lực xoắn tốt, nhưng bài toán động học thuận (Forward Kinematics) lại cực kỳ phức tạp và đa nghiệm, bắt buộc phải dùng các phương pháp số như Newton-Raphson để giải.
+Cấu trúc 3-3 (Octahedral / Cấu trúc gốc của thiết kế Gough): Các chân được chụm lại thành từng cặp. Có 3 điểm neo ở đế và 3 điểm neo ở bệ động, tạo thành các hình tam giác (như một khối bát diện). Lợi thế là toán học đơn giản hơn, có thể tìm được nghiệm giải tích (analytical solution) cho động học thuận. Tuy nhiên, kết cấu chịu lực kém hơn và rất dễ rơi vào các điểm kì dị (Singularity) trong quá trình hoạt động.
+Cấu trúc 6-3 (hoặc 3-6): Đế có 6 điểm nối (A) dàn trải đều, nhưng các thanh truyền lại chụm vào 3 điểm neo (B) trên bệ động (hoặc ngược lại). Đây là giải pháp dung hòa giữa khả năng chịu lực của dạng 6-6 và sự đơn giản hóa tính toán của dạng 3-3.
+Hình 1-5: Phân loại cấu trúc phân bố hình học by Mohammad H. Abedin-Nasab
+Hệ thống mô phỏng lái CKAS W2 6DOF
+Hệ thống CKAS W2 6 DOF là một trong những nền tảng bệ động cơ học (Motion Platform) tiêu chuẩn công nghiệp được phát triển chuyên biệt cho các ứng dụng mô phỏng lái xe và huấn luyện có độ chân thực cao. Hệ thống này cho phép tái tạo đầy đủ 6 bậc tự do trong không gian (Surge, Sway, Heave, Roll, Pitch, Yaw), cung cấp khả năng phản hồi động lực học, giúp người lái cảm nhận rõ ràng lực quán tính, độ nghiêng và các dao động vật lý xảy ra khi phương tiện vận hành.
+Hình 1-6: CKAS W2 6 bậc tự do by  CKAS Mechatronics Product Catalogue 1905.doc
+Đặc điểm cấu tạo
+Về mặt cấu trúc động học, CKAS W2 được thiết kế dạng RUS – 3-3 Gough-Stewart Platform, bao gồm ba thành phần chính liên kết chặt chẽ với nhau:
+Bệ cố định (Base): Là phần khung đế chịu lực chính, thường được neo chặt xuống sàn bằng các bulông cường độ cao để đảm bảo độ cứng vững trong quá trình hệ thống dao động mạnh. Trên bệ cố định bao gồm 6 động cơ được phân bố thành 3 cặp động cơ.
+Bệ động (Platform): Là phần khung phía trên, nơi sẽ lắp đặt trực tiếp cabin lái, ghế ngồi, vô lăng. Bên dưới bệ động được gắn 6 khớp cầu phân bố thành 3 cặp khớp cầu.
+Cụm chân truyền động (Actuators/Legs): Hệ thống CKAS W2 sử dụng các khâu Tay quay và Tay đòn để truyền động từ động cơ đến Bệ động thông qua các khớp. Sự thay đổi góc quay động cơ sẽ điều khiển vị trí và góc nghiêng của Bệ động trong không gian 3D.
+Các thông số kỹ thuật 
+Các thông số kỹ thuật của CKAS W2 được thiết kế tối ưu nhằm cân bằng giữa khả năng chịu tải và tốc độ đáp ứng thời gian thực (real-time response). Theo  Các thông số cơ bản của nền tảng W2:
+ Khối lượng tải trọng giới hạn: 200 
+Moment quán tính của tải trọng giới hạn: 100 
+Giới hạn các trục:
+Bảng 1-1: Thông số giới hạn theo các trục của CKAS W2
+Các định nghĩa quan trọng
+Các hệ trục tọa độ
+Định nghĩa các trục: Tất cả dữ liệu Descartes được trao đổi với Hệ thống Chuyển động CKAS phải tuân thủ hệ trục tọa độ chung được thể hiện trong Hình 1-7. Hệ trục Tiến-Phải-Xuống (hoặc Bắc-Đông-Xuống) này thường được sử dụng trong ngành hàng không.
+Hình 1-7: Hệ tọa độ phương tiện by 
+Tịnh tiến dương tương ứng với chuyển động theo hướng của các trục. Chuyển động xoay dương tương ứng với chuyển động quay theo chiều kim đồng hồ quanh trục theo hướng trục (ví dụ, xoay dương quanh trục y (Pitch) là mũi hướng lên).
+Phép quay từ hệ tọa độ này sang hệ tọa độ khác có thể được xem như ba phép quay riêng biệt quanh mỗi trục. Thứ tự của các phép quay này rất quan trọng và được thực hiện như sau:
+1. Xoay quanh trục z (yaw ψ);
+2. Xoay quanh trục y mới (pitch θ); 
+3. Xoay quanh trục x mới (roll ϕ).
+Các góc quay ψ, θ, ϕ được gọi là góc Euler.
+Hệ tọa độ phương tiện
+Hệ tọa độ phương tiện là một hệ thống chuyển động (không quán tính) được gắn vào phương tiện đang được mô phỏng trong thế giới mô phỏng (Hình 1-7). Hệ thống này dịch chuyển và xoay theo phương tiện được mô phỏng (tốt nhất là đặt tâm tại đầu của phi công hoặc người lái chính).
+Tất cả các tham số động lực học (như gia tốc tuyến tính, hình chiếu trọng lực, vận tốc góc) được cung cấp trong lệnh ~M đều được tính toán và biểu diễn trong hệ tọa độ này nhằm mục đích tạo ra các cảm giác chuyển động. (Lưu ý: vận tốc góc trong hệ này không hoàn toàn giống với tốc độ thay đổi góc Euler, mà cần áp dụng phép xoay bảo toàn động lượng góc khi cần chuyển đổi).
+Hệ tọa độ bệ động
+Hệ tọa độ bệ động được gắn chặt vào bệ động vật lý thực tế của hệ thống chuyển động CKAS W2 (phần bệ lắp cabin nâng tải). Nó tịnh tiến và xoay theo chuyển động thực tế của phần cứng thiết bị.
+Gốc tọa độ đặt ở tâm của bệ động và trùng với gốc tọa độ của Hệ tọa độ định khi ở vị trí Trung gian (Neutral position).
+Các tham số động học của lệnh ~M thể hiện vị trí của Hệ tọa độ bệ động so với Hệ tọa độ cố định.
+Hệ tọa độ cơ sở
+Hệ tọa độ cở sở là một hệ cố định gắn liền với bệ động (phần không chuyển động) của Hệ tọa độ Bệ động. Về cơ bản, đây là hệ tọa độ "thế giới" của nền tảng bay. Các trục của hệ này được ký hiệu bằng chỉ số phụ B (.
+Gốc tọa độ được đặt ở trọng tâm của bệ động khi ở vị trí trung lập. Sau khi thực hiện lệnh ~M 0 0 0 0 0 0, hệ tọa độ cơ sở và Hệ tọa độ bệ động trùng nhau.
+Hình 1-8: Hệ tọa độ cơ sở by 
+Điểm tâm quay (Pivot Point)
+Điểm tâm quay là điểm mà phép quay của nền bệ động được thực hiện xung quanh điểm đó bằng lệnh ~M. Theo mặc định, bệ động quay quanh gốc tọa độ của Hệ tọa độ cơ sở, tức là trọng tâm của bệ động. Tuy nhiên, điểm này có thể được dịch chuyển theo chiều dọc lên hoặc xuống dọc theo trục bằng lệnh ~centre_z. Tọa độ  của điểm tâm quay được thiết lập bằng lệnh này được ký hiệu là .
+Với  khác 0, Hệ thống sẽ thêm một lượng tịnh tiến nhất định vào bệ động để mô phỏng chuyển động quay quanh điểm tâm quay mới (Hình 7). Điều này có thể hữu ích trong một số ứng dụng như triệt tiêu gia tốc tuyến tính sinh ra do chuyển động quay, điều không mong muốn, tại điểm quan sát (ví dụ: đầu người).
+Tuy nhiên khi thay đổi giá trị  sẽ ảnh hưởng đến các giới hạn chuyển động của hệ thống do việc phải thêm một lượng tịnh tiến vào cho mỗi chuyển động quay.
+Các lệnh điều khiển cơ bản
+Khi thao tác, điều khiển, giám sát hệ thống CKAS W2 ta thực hiện bằng các lệnh có sẵn. Để tránh nhầm lẫn khi sử dụng ta cần định nghĩa chính xác các tham số trong các câu lệnh cơ bản.
+~M (Cartesian Move - Di chuyển theo tọa độ Descartes)
+Câu lệnh này nhằm mục đích thực hiện việc di chuyển bệ động trong hệ tọa độ Descartes và/hoặc báo cáo vị trí hiện tại trong hệ tọa độ cơ sở.
+Cấu trúc lệnh: ~M[ <x> <y> <z> <yaw> <pitch> <roll>[ <axi> <ayi> <azi> <axg><ayg> <azg> <ωz> <ωy> <ωx>]]
+Trong đó :
+<x> <y> <z> : float: dịch chuyển bệ động thủ công, đơn vị mm (tiến, phải, xuống so với vị trí trung lập).
+<yaw> <pitch> <roll> : float: qoay bệ động thủ công, độ (góc Euler; xoay quanh các trục Z, Y, X theo thứ tự đó)
+<axi> <ayi> <azi> : float: gia tốc quán tính (không tính trọng lực) theo trục tọa độ của vật thể, m/s²
+<axg> <ayg> <azg> : float: hình chiếu của gia tốc trọng trường lên các trục của vật thể, m/s²
+<ωz> <ωy> <ωx> : float: vận tốc góc của vật thể theo hướng xoay ngang, xoay dọc và xoay ngang, rad/s.
+~N (Motor Move – Di chuyển động cơ)
+Lệnh ~N là lệnh di chuyển động cơ cấp thấp, cho phép bạn điều khiển trực tiếp một hoặc tất cả các động cơ trên hệ thống chuyển động CKAS.
+Cấu trúc câu lệnh: ~N[<m>][ <v>[.<c>]
+Trong đó:
+<m> (Số thứ tự động cơ): Giá trị từ 1 đến 6. Nếu không chỉ định, lệnh sẽ áp dụng cho tất cả các động cơ. Lưu ý: <m> phải viết liền ngay sau chữ N (ví dụ: ~N1).
+<v> (Giá trị điều khiển): Thường là vị trí mục tiêu của động cơ (tính bằng số đếm xung - encoder counts)
+<c> (Từ điều khiển - Control Word): Là một số thập lục phân 16-bit xác định hành vi của động cơ, mặc định là 0. Bạn có thể sử dụng các bit của từ điều khiển này để kích hoạt các tính năng đặc biệt:
+Bit 0: Nếu bằng 0, <v> là lệnh điều khiển theo vị trí. Nếu bằng 1, <v> là lệnh điều khiển tốc độ quay (RPM).
+Bit 1: Nếu bằng 1, động cơ sẽ dừng lại nhanh chóng, phanh được kích hoạt và bị ngắt điện.
+Bit 5: Cờ bỏ qua lỗi (Ignore errors flag). Khi được bật, bộ điều khiển sẽ ép động cơ chạy bất chấp nó (hoặc động cơ khác) đang báo lỗi và vô hiệu hóa luôn lớp bảo vệ phần cứng. Tính năng này vô cùng nguy hiểm và dễ gây hỏng hóc nếu động cơ bị ép chạy quá giới hạn.
+Bit 6: Di chuyển ngay lập tức (bỏ qua độ trễ tính toán hệ thống ~delay).
+Bit 12: Dùng để đặt lại/xóa lỗi (Fault reset)
+Lệnh ~centre_z (Pivot Point)
+Lệnh ~centre_z (Pivot Point) được sử dụng để thiết lập hoặc báo cáo tọa độ theo trục  của điểm xoay (pivot point). Đây là điểm tham chiếu mà bệ sẽ sử dụng làm tâm để thực hiện các thao tác chuyển động xoay trong không gian tọa độ Descartes thông qua lệnh ~M.
+Cấu trúc câu lệnh: ~centre_z [<h>].
+Trong đó <h>: float: Là khoảng cách tọa độ Z (mm) so với gốc của hệ tọa độ cơ sở. Nếu không nhập tham số này, hệ thống sẽ báo cáo độ cao của tâm quay hiện tại.
+Lệnh ~park
+Các nguy cơ rủi ro
+Do hệ thống CKAS W2 là một cơ cấu lớn, phức tạp, việc sử dụng, nghiên cứu, thử nghiệm trực tiếp trên hệ thống tiềm ẩn rất nhiều rủi ro:
+Rủi ro phản ứng khó lường khi vượt giới hạn không gian: Khi phần mềm gửi lệnh di chuyển Cartesian (~M) với các tọa độ vượt quá khả năng vật lý của hệ thống, các động cơ bị ép đến giới hạn phần cứng sẽ báo lỗi và không di chuyển, trong khi các động cơ khác vẫn tiếp tục di chuyển. Điều này dẫn đến việc bệ đỡ bị vặn xoắn và di chuyển đến một vị trí hoàn toàn khác với yêu cầu theo một cách rất khó lường và nguy hiểm.
+Rủi ro gãy vỡ cơ học do điều khiển cấp thấp sai lầm: Các kịch bản kiểm thử thường cần can thiệp trực tiếp vào từng động cơ thông qua lệnh ~N. Tuy nhiên, lệnh này hoàn toàn bỏ qua mọi giới hạn an toàn về động học. Nếu người lập trình có sai sót trong việc tính toán số xung encoder, hoặc dùng cờ "bỏ qua lỗi" (bit 5 trong Control Word), động cơ sẽ bị ép chạy vượt ra ngoài phạm vi hoạt động bình thường, rất dễ gây ra hư hỏng cơ học.
+Nguy cơ sập hệ thống do thiết lập dừng/đỗ sai: Trong quá trình thử nghiệm, nếu phần mềm ra lệnh dừng động cơ thủ công bằng cách đặt tốc độ bằng 0 (ví dụ lệnh ~N1 0.1), động cơ sẽ không thể giữ được một tải trọng đáng kể. Hệ thống có thể bị trượt từ từ xuống, và có khả năng tăng tốc độ trượt dẫn đến sập hoàn toàn (collapse). Tương tự, nếu gửi lệnh ngắt điện biến tần (~disable) trên một hệ thống không trang bị phanh cơ khí, bệ nền có thể tự do rơi xuống dưới tác dụng của tải trọng.
+Các rủi ro khi sử dụng có thể gây ra hậu quả nghiêm trọng ảnh hưởng đến sức khỏe, tính mạng của con người. Không chỉ thế, một thiết bị lớn khi bị hỏng, gãy sẽ tốn thời gian và tiền bạc để sửa chữa, bảo hành hoặc thay thế. Có thể thấy việc thực hiện thử nghiệm các thuật toán, các thí nghiệm trực tiếp trên hệ thống CKAS W2 là vô cùng mạo hiểm. Vì thế ta cần nghiên cứu thiết kế một chương trình mô phỏng hệ thống mô phỏng lái để kiểm tra chương trình điều khiển trước khi thực hiện trên hệ thống thật.
+THIẾT KẾ CẤU HÌNH CƠ KHÍ CHO CHƯƠNG TRÌNH MÔ PHỎNG
+Cấu hình cơ khí của chương trình mô phỏng hệ thống mô phỏng lái CKAS W2 6 bậc tự do dựa trên cấu hình cơ khí thực tế của hệ thống. Tuy nhiên CKAS Mechatronics không công bố tài liệu về các chi tiết cụ thể như bản vẽ, vật liệu. Điều này đòi hỏi ta phải tự thiết kế các chi tiết để đạt được các thông số hoạt động cơ bản sát với thiết bị thực tế như tải trọng tối đa và giới hạn chuyển động các trục như mục 1.4.2 đã nêu. 
+Thiết kế hệ thống cơ khí
+Tiến hành phân tích cấu trúc cơ khí của CKAS W2 bao gồm các chi tiết chính: 
+6 động cơ cố định trên bệ tĩnh, đóng vai trò như khớp quay (revolute joint) đồng thời là khâu phát động cho hệ thống
+Các khâu Tay ngắn, một đầu được gắn với trục quay của động cơ, đầu còn lại gắn với chốt của khớp Các-đăng.
+Chốt ngoài liên kết với tay ngắn còn gắn với khớp chữ Y tạo thành khớp Các-đăng cho phép tay dài quay quanh trục của chốt, đồng thời quay quanh trục của khớp chữ Y.
+Khớp chữ Y liên kết với tay dài thông qua liên kết ren.
+Tay dài một đầu gắn với khớp Các-đăng, đầu còn lại gắn với khớp cầu.
+Các khớp cầu được lắp cố định bên dưới Bệ động. 
+Do cấu trúc RUS 3-3 như đã giới thiệu ở Mục 1.4.1, 6 động cơ được sắp xếp thành 3 cặp động cơ tương ứng với 3 cặp khớp cầu. Các cụm động cơ và khớp cầu được xếp vị trí đối xứng qua trục .
+Hình 2-1: Sơ đồ cấu tạo cơ khí của hệ thống
+Hình 2-2: Minh họa một cụm liên kết cơ khí
+Bệ cố định
+	Nhiệm vụ chính của bệ cố định : 
+Làm trụ vững cho cả hệ thống robot.
+Là vị trí lắp đặt động cơ, mạch điều khiển và thiết bị kết nối.
+Cấu tạo là tấm thép dày 6mm được hàn thêm khung gá động cơ và hộp giảm tốc.
+Hình 2-3: Bệ cố định
+Hình 2-4: Bản vẽ chi tiết Bệ cố định
+Tay ngắn
+Tay ngắn là khâu động được dẫn động bởi động cơ. Khi quay, nó làm thay đổi góc và vị trí đầu tay dài, từ đó điều khiển chuyển động của Bệ động. Tay ngắn chịu phản lực từ tay dài thông qua chốt liên kết.
+Hình 2-5: Tay ngắn
+Hình 2-6: Bản vẽ chi tiết tay ngắn
+Tay dài
+Tay dài là khâu truyền lực từ tay ngắn lên bệ động thông qua khớp cầu. Đây là khâu trung gian chịu nén, uốn do tải gây ra.
+Hình 2-7: Tay dài
+Hình 2-8: Bản vẽ chi tiết tay dài
+Chốt
+Chốt là chi tiết liên kết giữa tay ngắn và khớp Các đăng, cho phép tay dài gắn với khớp chữ Y của khớp Các-đăng quay tương đối quanh trục của chốt. Chốt chịu lực cắt và uốn tại điểm nối.
+Hình 2-9: Chốt
+Hình 2-10: Bản vẽ chi tiết chốt
+Khớp chữ Y
+Khớp chữ Y không được thiết kế mà được chọn dựa theo kích thước của tay dài, ta chọn chi tiết F-M20X150Y. Một đầu của khớp chữ Y có ren lắp với tay dài, thanh trụ ở đầu còn lại đâm xuyên qua lỗ trụ của chốt tạo thành khớp Các-đăng.
+Hình 2-11: Khớp chữ Y
+Hình 2-12: Thông số chi tiết khớp chữ Y
+Khớp cầu 
+Giúp bệ động chuyển động linh hoạt, quay tự do theo 3 bậc tự do góc quanh điểm khớp, đồng thời truyền lực mà không tạo mô men dư, tránh ứng suất uốn trên thanh truyền. Tương tự như khớp chữ Y, ta chọn khớp cầu cho phù hợp với kích thước tay dài, ta chọn chi tiết F-M29X150U.
+Hình 2-13: Khớp cầu
+Hình 2-14 Thông số chi tiết khớp cầu
+Bệ động
+Bệ động là nơi gắn ghế lái và các module mô phỏng. Bệ động nhận lực và chuyển động từ cơ cấu chấp hành để đạt gia tốc, vận tốc, góc nghiêng và tọa độ mong muốn. Đây là khâu bị động, kết nối với các tay dài thông qua khớp cầu.
+Hình 2-15: Bệ động
+Hình 2-16: Thông số chi tiết bệ động
+Thực hiện lắp các chi tiết ta được kết quả thiết kế tổng thể như hình vẽ.
+Hình 2-17: Thiết kế tổng thể
+Kiểm bền các chi tiết
+Trong quá trình thiết kế các chi tiết trong hệ thống cơ khí, việc đánh giá khả năng chịu tải và độ bền của các chi tiết là bước quan trọng xác định độ chính xác của thiết kế. Việc thiết kế ra các chi tiết giống với cơ cấu CKAS W2 nhưng không đủ bền để đáp ứng tải trọng yêu cầu sẽ dẫn đến kết quả vô nghĩa.
+Hệ thống mô phỏng lái là một hệ thống động lực học phức tạp, được thiết kế để "làm việc liên tục" và "tái tạo gia tốc, vận tốc" tác động lên người lái. Điều này có nghĩa là trong quá trình vận hành, các chi tiết máy sẽ chịu tác dụng của tải trọng động (lực quán tính) thay đổi liên tục, có khả năng gây ra phá hủy do mỏi (fatigue).
+Tuy nhiên, trước khi tiến hành các phân tích động lực học hoặc phân tích mỏi phức tạp, một bước kiểm nghiệm cơ bản và bắt buộc là phải đảm bảo độ bền tĩnh của kết cấu. Phân tích tĩnh cho phép chúng ta đánh giá khả năng chịu tải của hệ thống dưới tác dụng của các tải trọng thường trực (trọng lượng của người lái và thiết bị) khi hệ thống ở trạng thái đứng yên.
+Phương pháp phân tích số sử dụng phần mềm mô phỏng phần tử hữu hạn (FEM) cho phép đánh giá nhanh chóng các trường hợp tải trọng tĩnh. Trong báo cáo này, hệ thống mô phỏng lái được kiểm bền bằng SolidWorks Simulation với mục tiêu xác định khả năng chịu tải tĩnh và hệ số an toàn tĩnh của các chi tiết chính, so sánh ứng suất von Mises lớn nhất với giới hạn chảy của vật liệu. Kết quả này là cơ sở ban đầu để đánh giá tính hợp lý của thiết kế về độ bền cơ bản
+Mô tả dữ liệu đầu vào và các giả thiết 
+Hệ thống mô phỏng lái khi hoạt động chịu hai loại tải trọng chính:
+Tải trọng tĩnh: Trọng lực của người lái và các cơ cấu đặt trên Bệ động .
+Tải trọng động: Lực quán tính sinh ra khi Bệ động "tái tạo gia tốc"
+ Phạm vi của báo cáo này chỉ tập trung vào việc kiểm nghiệm độ bền của hệ thống dưới tác dụng của Tải trọng tĩnh. Mục tiêu là kiểm tra xem hệ thống có đủ cứng vững và bền để chịu được trọng lượng của chính nó và người vận hành khi ở trạng thái đứng yên hay không. Đây là điều kiện tải cơ bản nhất mà kết cấu phải thỏa mãn.
+ Dữ liệu đầu vào: 
+Xét các chi tiết đều được gia công từ thép CT3 với ứng suất chảy tới hạn của vật liệu là 
+Khối lượng của người lái và cơ cấu đặt trên Bệ động: 
+Khối lượng của Bệ động:  
+Khối lượng của Tay dài: .
+Khối lượng của Tay ngắn 
+Bỏ qua khối lượng của các khớp và chốt rất nhỏ so với khối lượng của các chi tiết khác.
+Các giả thiết phân tích:
+Loại bài toán: Phân tích tĩnh tuyến tính (Linear Static Analysis). Lựa chọn này phù hợp với mục tiêu kiểm tra độ bền tĩnh của kết cấu. Phân tích này sẽ không xét đến ảnh hưởng của gia tốc hay tuổi thọ mỏi.
+Điều kiện tải: Chỉ xét trọng lực (Gravity) được kích hoạt theo phương Z.
+Giả thiết tải trọng: Để đơn giản hóa bài toán tĩnh, ta xét trường hợp lý tưởng: coi tải P đặt tại tâm của bệ động. Do cấu trúc cơ cấu đối xứng, giả thiết này dẫn đến việc các phản lực tại 6 chân đỡ bằng nhau. 
+Các khớp trượt hoặc ổ lăn được mô hình hóa bằng Fixed Hinger, cho phép quay tự do quanh một trục nhưng không dịch chuyển tịnh tiến.
+Vật liệu đàn hồi tuyến tính, bỏ qua biến dạng lớn và ảnh hưởng nhiệt.
+Kiểm bền Bệ động
+Platform chịu tải là trọng lượng của người, hệ ghế lái và trọng lượng của chính nó:
+  Coi tải đặt tại tâm của platform. Do vị trí các điểm liên kết của tay dài với platform (điểm  đối xứng với nhau qua tâm Bệ động (O) nên các lực  bằng nhau 
+Hình 2-18: Lực tác động lên bệ động
+Tại điểm  là điểm đặt các khớp cầu, ta đặt Fixed Hinger tại các điểm , đặt tải  lên bề mặt trên Platform.
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation: 
+Hình 2-19: Ứng suất bệ động
+Hình 2-20: Biến dạng bệ động
+Ứng suất của platform là:  và có độ biến dạng lớn nhất tại tâm platform .
+ Hệ số an toàn của chi tiết: 
+Kiểm bền cụm thanh dài
+Cụm tay quay dài chịu lực tác dụng  là phản lực của lực  và trọng lượng của chính nó  . (.
+                                 .
+ Phân tích lực  thành lực dọc trục  và lực pháp tuyến . Tương tự phân tích  thành  và .
+Do hai đầu của thanh dài đều là khớp cầu và khớp xoay nên chỉ còn chịu thành phần lực dọc trục  và  . Gọi  là tổng hợp lực của chi tiết , ta có:
+Hình 2-21: Lực tác dụng lên tay dài
+Lực dọc trục lớn nhất khi tay dài có phương thẳng đứng tức  hay
+Ta tiến hành kiểm nghiệm trường hợp chi tiết chịu tải lớn nhất:
+Tại đầu dưới của tay dài, ta thiết lập điều kiện biên Fixed Hinge (Bản lề cố định). Ràng buộc này mô phỏng đúng khớp bản lề, cho phép chi tiết quay tự do quanh trục chốt nhưng ngăn cản mọi tịnh tiến.  có điểm đặt lực ở khớp cầu như hình vẽ. 
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Kết quả:
+Hình 2-22:Ứng suất tay dài
+Hình 2-23: BIến dạng tay dài
+Ứng suất lớn nhất của cụm tay dài:  và có độ biến dạng lớn nhất điểm tiếp xúc phía trên của khớp cầu: .
+ Hệ số an toàn của chi tiết: .
+Kiểm bền chốt
+Chốt là bộ phận liên kết giữa cụm tay dài và tay ngắn. Chốt có khả năng xoay quanh trục lỗ của tay ngắn nên không có thành phần ứng suất do moment quay gây ra ở chi tiết này. Phân tích lực  do cụm tay dài tác động lên chốt thành hai thành phần  vuông góc với chốt,  dọc trục như hình vẽ.
+Hình 2-24: Lực tác dụng lên chốt
+Dễ thấy  lớn nhất khi cụm tay dài vuông góc với chốt,  lớn nhất khi cụm tay dài song song với chốt.
+Có khâu tay ngắn là khâu chủ động, ta coi bộ phân liên kết giữa chốt và tay ngắn ở trên chốt là cố định, đặt Fixed Hinger ở vị trí đấy.
+ lớn nhất khi cụm tay dài vuông góc với chốt:
+Hình 2-25: Trường hợp tay dài vuông với chốt
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Kết quả:
+Hình 2-26: Ứng suất chốt trường hợp tay dài vuông với chốt
+Hình 2-27: Biến dạng của chốt trường hợp tay dài vuông với chốt
+Ứng suất lớn nhất của cụm tay dài:  và có độ biến dạng lớn nhất điểm tiếp xúc với platform của khớp cầu .
+Hệ số an toàn của chi tiết: 
+ lớn nhất khi cụm tay dài song song với chốt:
+Hình 2-28 Lực tác dụng trường hợp  tay dài song song với chốt
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Kết quả:
+Hình 2-29: Ứng suất trường hợp tay dài song song với chốt
+Hình 2-30: Biến dạng trường hợp tay dài song song  với chốt
+Ứng suất lớn nhất của cụm tay dài: và có độ biến dạng lớn nhất điểm tiếp xúc với platform của khớp cầu .
+Hệ số an toàn của chi tiết: 
+Qua kết quả mô phỏng, ứng suất lớn nhất trong cả hai trường hợp biên là , cho hệ số an toàn cao . Vì hệ số an toàn này lớn hơn mức yêu cầu rất nhiều, chi tiết được kết luận là có đủ dự trữ độ bền để chịu được tải trọng kết hợp của cả hai thành phần lực trong thực tế làm.
+Kiểm bền tay ngắn
+Hình 2-31: Lực tác dụng lên tay ngắn
+Tay ngắn là chi tiết gắn trực tiếp với động cơ, chuyển động quay quanh trục động cơ, liên kết với các chi tiết khác tạo chuyển động cho toàn bộ cơ cấu.
+Có  là phản lực tay ngắn tác động lên chốt.
+ Tay ngắn phải chịu tác dụng của  là lực trực đối của  và trọng lượng của chính nó .
+Phân tích lực  thành 3 lực thành phần,  và  có phương và chiều như hình vẽ. 
+Xét hệ thống ở trạng thái tĩnh, khi đó tay ngắn gắn chặt với trục của động cơ và động cơ khóa cứng do đó coi bộ phận tiếp xúc với trục động cơ là cố định.
+Căn cứ vào giới hạn hoạt động của chi tiết ta kiểm nghiệm độ bền của chi tiết với các trường hợp.
+Tay ngắn vuông với đế và tay dài vuông góc với chốt:
+Khi đó  ,   =,  cùng phương và chiều với  
+Hình 2-32: Lực tác dụng trường hợp tay ngắn vuông với đế, tay dài vuông với chốt
+Lúc này  và    =
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Hình 2-33: Biến dạng tay ngắn trường hợp 1
+Hình 2-34 Ứng suất tay ngắn trường hợp 1
+Ứng suất lớn nhất của tay ngắn:  và có độ biến dạng lớn nhất tại điểm tiếp xúc với chốt .
+Hệ số an toàn của chi tiết: 
+Tay ngắn song song với đế và tay dài song song với chốt:
+Hình 2-35: Lực tác dụng tay ngắn trường hợp 2
+Lúc này  và    =
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Hình 2-36: Ứng suất tay ngắn trường hợp 2
+Hình 2-37: Biến dạng tay ngắn tường hợp 2
+Ứng suất lớn nhất của tay ngắn:  và có độ biến dạng lớn nhất tại điểm tiếp xúc với chốt: .
+Hệ số an toàn của chi tiết: 
+Tay ngắn vuông góc với đế và cụm chân dài vuông góc với chốt
+Hình 2-38: Lực tác dụng tay ngắn trường hợp 3
+Khi đó  và    =.
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Hình 2-39 Ứng suất tay ngắn trường hợp 3
+Hình 2-40: Biến dạng tay ngắn trường hợp 3
+Ứng suất lớn nhất của tay ngắn:  và có độ biến dạng lớn nhất điểm tiếp xúc với chốt: .
+ Hệ số an toàn của chi tiết: 
+ Các trường hợp trên kiểm nghiệm chi tiết chịu tác dụng bởi các lực lớn nhất theo từng phương. Căn cứ vào kết quả mô phỏng ta thấy chi tiết chịu ảnh hưởng nhiều nhất bởi lực uốn dọc trục của chốt với ứng suất lớn nhất là:  và hệ số an toàn
+ .
+Tổng hợp kiểm bền
+Bảng 2-1: Bảng tổng hợp kết quả kiểm bền
+ Báo cáo đã tiến hành phân tích tĩnh tuyến tính cho các chi tiết chính của hệ thống mô phỏng lái. Kết quả mô phỏng (tổng hợp trong Bảng 1) cho thấy sự chênh lệch lớn về độ bền giữa các chi tiết:
+Các chi tiết truyền động bao gồm: Cụm tay dài ( Chốt (), Tay quay ngắn  có hệ số an toàn rất cao, chi tiết platform  ( thấp hơn nhưng cũng vẫn ở mức dư bền lí tưởng.  Các chi tiết này được kết luận là bền, đảm bảo độ cứng vững và khả năng làm việc ổn định tuyệt đối trong điều kiện tải trọng tĩnh đã giả định.
+Kết luận:
+Thiết kế hiện tại của Platform, Cụm tay dài, Chốt, và Tay ngắn là đạt yêu cầu.
+XÂY DỰNG CHƯƠNG TRÌNH MÔ PHỎNG HỆ THỐNG MÔ PHỎNG LÁI CKAS
+Việc mô phỏng lại hệ thống mô phỏng lái CKAS W2 6 bậc tự do yêu cầu phải có khả năng tái tạo các chức năng chuyển động của cơ cấu, đồng th
+PHỤ LỤC
+Chi tiết số liệu thí nghiệm
+Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có).
+Chi tiết các bước tính toán
+Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có).
+Chi tiết sơ đồ mô phỏng
+Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trình phụ lục tại đây (nếu có). Trìn

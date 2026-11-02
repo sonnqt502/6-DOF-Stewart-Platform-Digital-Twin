@@ -1,0 +1,2 @@
+bao_cao_tinh_moment_stewart.tex:1093:67: Error: `)' expected, found `}'.   M_i^{(+40)} &= 300\times(-628{,}4) = -188\,520\ \text{(thay vì }-223\,020\text{ ở home)}\\  
+bao_cao_tinh_moment_stewart.tex:1093:92: Error: `}' expected, found `)'.   M_i^{(+40)} &= 300\times(-628{,}4) = -188\,520\ \text{(thay vì }-223\,020\text{ ở home)}\\  

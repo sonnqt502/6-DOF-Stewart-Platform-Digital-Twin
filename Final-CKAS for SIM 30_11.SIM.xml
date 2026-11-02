@@ -1,0 +1,2673 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<SimscapeMultibodyImportXML version="2.0" xmlns="urn:mathworks:SimscapeMultibody:import" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Created by="" on="03/21/26||09:53:27" using="Simscape Multibody Link Version 7.4" from="SolidWorks 30.0.0"/>
+<ModelUnits mass="kilogram" length="millimeter"/>
+<DataUnits mass="kilogram" length="meter"/>
+<RootAssembly name="Final-CKAS for SIM 30_11.SIM" uid="Final-CKAS for SIM 30_11.SIM" version="2009">
+<AssemblyFile name="Final-CKAS for SIM 30_11.SIM.SLDASM" type="SolidWorks Assembly"/>
+<InstanceTree>
+<Instance name="HG-SR202B_with_gear.SIM-1" uid="HG-SR202B_with_gear.SIM-1" entityUid="HG-SR202B_with_gear.SIM" rigid="true">
+<Transform>
+<Rotation>-5.3606024020532455e-16 0.75983880641432378 -0.650111519869365 -1 -4.6712989941859529e-16 2.7859345582285645e-16 0 0.650111519869365 0.75983880641432378</Rotation>
+<Translation>0.59495672740283878 0.20199999999999982 -0.69537486385226044</Translation>
+</Transform>
+<Instance name="MAB180-L1-35-114.3-200-M12-82.SIM-1" uid="MAB180-L1-35-114.3-200-M12-82.SIM-1" entityUid="MAB180-L1-35-114.3-200-M12-82.SIM*:*Default">
+<Transform>
+<Rotation>-0.28772358605998294 -0.49971397412366697 0.81700739414665924 -0.54760542597243311 0.78571205633510144 0.28772358605998327 -0.78571205633510144 -0.36461282011909246 -0.4997139741236668</Rotation>
+<Translation>-0.37169369378592687 0.17060688151261288 -0.14132556216378467</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="P-CKAS-002.SIM-1" uid="P-CKAS-002.SIM-1" entityUid="P-CKAS-002.SIM*:*Default">
+<Transform>
+<Rotation>-2.3923143675390047e-16 -1 -1.6653345369377328e-16 7.2164496600635175e-16 -1.6653345369377348e-16 1 -1 2.3923143675390032e-16 7.2164496600635175e-16</Rotation>
+<Translation>0.11499999999999987 6.6613381477509392e-16 0.069500000000000006</Translation>
+</Transform>
+</Instance>
+<Instance name="hg-sr202b.SIM-1" uid="hg-sr202b.SIM-1" grounded="true" entityUid="hg-sr202b.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+</Instance>
+<Instance name="HG-SR202B_with_gear.SIM-2" uid="HG-SR202B_with_gear.SIM-2" entityUid="HG-SR202B_with_gear.SIM" rigid="true">
+<Transform>
+<Rotation>-2.1091670374272851e-16 0.18309368829260309 -0.98309546907073642 -1.0000000000000002 -1.9428902930940239e-16 1.1102230246251565e-16 -1.2035141828575729e-16 0.98309546907073642 0.18309368829260292</Rotation>
+<Translation>0.89969066095062467 0.20199999999999985 -0.16756020815718586</Translation>
+</Transform>
+<Instance name="MAB180-L1-35-114.3-200-M12-82.SIM-1" uid="MAB180-L1-35-114.3-200-M12-82.SIM-1" entityUid="MAB180-L1-35-114.3-200-M12-82.SIM*:*Default">
+<Transform>
+<Rotation>-0.28772358605998316 -0.49971397412366692 0.81700739414665913 -0.547605425972433 0.78571205633510144 0.28772358605998316 -0.78571205633510133 -0.3646128201190923 -0.49971397412366692</Rotation>
+<Translation>-0.37169369378592698 0.17060688151261297 -0.14132556216378478</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="P-CKAS-002.SIM-1" uid="P-CKAS-002.SIM-1" entityUid="P-CKAS-002.SIM*:*Default">
+<Transform>
+<Rotation>-3.1352480502701098e-16 -1 -2.0388803177943634e-16 8.3266726846886741e-16 -2.0388803177943661e-16 1 -1 3.1352480502701093e-16 8.326672684688675e-16</Rotation>
+<Translation>0.11499999999999992 6.3837823915946501e-16 0.069500000000000006</Translation>
+</Transform>
+</Instance>
+<Instance name="hg-sr202b.SIM-1" uid="hg-sr202b.SIM-1" grounded="true" entityUid="hg-sr202b.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+</Instance>
+<Instance name="P-CKAS-001.SIM-1" uid="P-CKAS-001.SIM-1" grounded="true" entityUid="P-CKAS-001.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-004.SIM-1" uid="P-CKAS-004.SIM-1" entityUid="P-CKAS-004.SIM*:*Default">
+<Transform>
+<Rotation>0.15307991294333387 -0.98309546907073853 -0.10044819035625198 -0.54861634659809499 3.1692156431744219e-16 -0.83607422173235246 0.82194077919191977 0.18309368829259107 -0.53934224459872904</Rotation>
+<Translation>0.59253594675611476 0.20199999999997817 -0.26293437419854337</Translation>
+</Transform>
+</Instance>
+<Instance name="HG-SR202B_with_gear.SIM-8" uid="HG-SR202B_with_gear.SIM-8" entityUid="HG-SR202B_with_gear.SIM" rigid="true">
+<Transform>
+<Rotation>1.9099820431670574e-16 0.18309368829261555 0.98309546907073397 -1 -1.7357013611940171e-16 2.2660851130443916e-16 2.1212660251820307e-16 -0.98309546907073397 0.18309368829261555</Rotation>
+<Translation>-0.89969066095062222 0.20199999999999985 -0.16756020815719441</Translation>
+</Transform>
+<Instance name="MAB180-L1-35-114.3-200-M12-82.SIM-1" uid="MAB180-L1-35-114.3-200-M12-82.SIM-1" entityUid="MAB180-L1-35-114.3-200-M12-82.SIM*:*Default">
+<Transform>
+<Rotation>-0.28772358605998299 -0.49971397412366697 0.81700739414665913 -0.54760542597243311 0.78571205633510122 0.28772358605998327 -0.78571205633510133 -0.36461282011909235 -0.4997139741236668</Rotation>
+<Translation>-0.37169369378592687 0.17060688151261297 -0.14132556216378467</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="P-CKAS-002.SIM-1" uid="P-CKAS-002.SIM-1" entityUid="P-CKAS-002.SIM*:*Default">
+<Transform>
+<Rotation>-2.3923143675390047e-16 -1 -1.6653345369377338e-16 6.6613381477509392e-16 -1.6653345369377343e-16 1 -1 2.3923143675390032e-16 6.6613381477509392e-16</Rotation>
+<Translation>0.11499999999999987 6.106226635438361e-16 0.069499999999999895</Translation>
+</Transform>
+</Instance>
+<Instance name="hg-sr202b.SIM-1" uid="hg-sr202b.SIM-1" grounded="true" entityUid="hg-sr202b.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+</Instance>
+<Instance name="A-CKAS-01 for SIM.SIM-8" uid="A-CKAS-01 for SIM.SIM-8" entityUid="A-CKAS-01 for SIM.SIM" rigid="true">
+<Transform>
+<Rotation>0.94293249470694096 1.6080073470675638e-16 0.33298394920137681 1.457167719820518e-16 -1 0 0.33298394920137681 0 -0.94293249470694063</Rotation>
+<Translation>-0.075219804778001748 0.20200000000000018 0.66347701953965443</Translation>
+</Transform>
+<Instance name="P-CKAS-003.SIM-1" uid="P-CKAS-003.SIM-1" grounded="true" entityUid="P-CKAS-003.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0" g="0" b="1" a="1"/>
+<Diffuse r="0" g="0" b="1" a="1"/>
+<Specular r="0" g="0" b="0.5" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="E-B7204.SIM-1" uid="E-B7204.SIM-1" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-2.2204460492503131e-16 -0.62853384856383865 0.77778223251082934 -2.1849357591254441e-16 0.77778223251082923 0.62853384856383843 -0.99999999999999978 -1.1102230246251565e-16 -2.2204460492503131e-16</Rotation>
+<Translation>0 0 -0.0059999999999998943</Translation>
+</Transform>
+</Instance>
+<Instance name="E-B7204.SIM-2" uid="E-B7204.SIM-2" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-2.2204460492503136e-16 0.71822097150614927 0.69581508756907751 -2.1849357591255604e-16 0.69581508756907751 -0.71822097150614927 -1 -3.1150821852383115e-16 0</Rotation>
+<Translation>0 0 0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-1" uid="P-CKAS-008.SIM-1" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>-0.64927465564416009 0 -0.76055402276114326 0.76055402276114314 -1.2310665911863e-16 -0.64927465564415998 -1.9428902930940239e-16 -0.99999999999999989 0</Rotation>
+<Translation>0 0 -0.019999999999999907</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-2" uid="P-CKAS-008.SIM-2" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>0 1.1102230246251568e-16 1 1 0 0 0 1 -1.1102230246251568e-16</Rotation>
+<Translation>0 0 0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-009.SIM-1" uid="P-CKAS-009.SIM-1" entityUid="P-CKAS-009.SIM*:*Default">
+<Transform>
+<Rotation>1 0 -1.2648393349488551e-16 -1.2648393349488551e-16 1.6994867836842443e-16 -1 0 1 1.6994867836842443e-16</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNTL1N-STU-M20_214.SIM-1" uid="HNTL1N-STU-M20_214.SIM-1" entityUid="HNTL1N-STU-M20_214.SIM*:*Default">
+<Transform>
+<Rotation>0.23487298951710014 -0.97202606898956168 5.942461360659163e-16 -0.97202606898956168 -0.23487298951710012 1.0858827715389969e-15 -9.1593399531575415e-16 -8.3266726846886731e-16 -1</Rotation>
+<Translation>0 0 -0.019999999999999907</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="HG-SR202B_with_gear.SIM-6" uid="HG-SR202B_with_gear.SIM-6" entityUid="HG-SR202B_with_gear.SIM" rigid="true">
+<Transform>
+<Rotation>2.5537441748616529e-16 -0.94293249470694118 0.33298394920137592 -1 -2.4286128663675329e-16 2.3923143675390037e-16 -2.3584703375277069e-16 -0.33298394920137581 -0.9429324947069414</Rotation>
+<Translation>-0.30473393354778155 0.20199999999999985 0.8629350720094412</Translation>
+</Transform>
+<Instance name="MAB180-L1-35-114.3-200-M12-82.SIM-1" uid="MAB180-L1-35-114.3-200-M12-82.SIM-1" entityUid="MAB180-L1-35-114.3-200-M12-82.SIM*:*Default">
+<Transform>
+<Rotation>-0.28772358605998299 -0.49971397412366675 0.81700739414665935 -0.547605425972433 0.78571205633510144 0.28772358605998316 -0.78571205633510155 -0.36461282011909241 -0.49971397412366664</Rotation>
+<Translation>-0.37169369378592682 0.17060688151261288 -0.14132556216378478</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="P-CKAS-002.SIM-1" uid="P-CKAS-002.SIM-1" entityUid="P-CKAS-002.SIM*:*Default">
+<Transform>
+<Rotation>-3.0742341396527639e-16 -1 -2.4712718047239274e-16 7.2164496600635126e-16 -2.4712718047239293e-16 1 -1 3.0742341396527625e-16 7.2164496600635136e-16</Rotation>
+<Translation>0.11499999999999987 7.2164496600635175e-16 0.069500000000000117</Translation>
+</Transform>
+</Instance>
+<Instance name="hg-sr202b.SIM-1" uid="hg-sr202b.SIM-1" grounded="true" entityUid="hg-sr202b.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+</Instance>
+<Instance name="P-CKAS-004.SIM-6" uid="P-CKAS-004.SIM-6" entityUid="P-CKAS-004.SIM*:*Default">
+<Transform>
+<Rotation>-0.15307991294335466 0.98309546907073397 -0.10044819035626534 -0.54861634659809555 0 0.83607422173235213 0.82194077919191544 0.18309368829261585 0.53934224459872726</Rotation>
+<Translation>-0.59253594675610954 0.20199999999995216 -0.26293437419853238</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-004.SIM-10" uid="P-CKAS-004.SIM-10" entityUid="P-CKAS-004.SIM*:*Default">
+<Transform>
+<Rotation>0.78836155165825206 -0.33298394920137736 0.51730818033474746 -0.54861634659809244 2.3707870067341787e-15 0.83607422173235413 -0.27839929617790854 -0.94293249470694052 -0.18268043768666259</Rotation>
+<Translation>0.068560125793974344 0.20199999999995119 0.64461836964551711</Translation>
+</Transform>
+</Instance>
+<Instance name="HG-SR202B_with_gear.SIM-4" uid="HG-SR202B_with_gear.SIM-4" entityUid="HG-SR202B_with_gear.SIM" rigid="true">
+<Transform>
+<Rotation>0 -0.94293249470694063 -0.33298394920137703 -1.0000000000000002 -1.1102230246251565e-16 2.7755575615628914e-16 -2.8170007460542145e-16 0.33298394920137697 -0.94293249470694085</Rotation>
+<Translation>0.3047339335477901 0.2019999999999999 0.86293507200943964</Translation>
+</Transform>
+<Instance name="MAB180-L1-35-114.3-200-M12-82.SIM-1" uid="MAB180-L1-35-114.3-200-M12-82.SIM-1" entityUid="MAB180-L1-35-114.3-200-M12-82.SIM*:*Default">
+<Transform>
+<Rotation>-0.28772358605998305 -0.49971397412366692 0.81700739414665935 -0.54760542597243289 0.78571205633510155 0.28772358605998338 -0.78571205633510166 -0.36461282011909218 -0.4997139741236668</Rotation>
+<Translation>-0.37169369378592698 0.17060688151261291 -0.14132556216378478</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="P-CKAS-002.SIM-1" uid="P-CKAS-002.SIM-1" entityUid="P-CKAS-002.SIM*:*Default">
+<Transform>
+<Rotation>-2.2515396241586838e-16 -1 -1.7767754548217386e-16 7.2164496600635155e-16 -1.7767754548217403e-16 1 -1 2.2515396241586823e-16 7.2164496600635155e-16</Rotation>
+<Translation>0.11499999999999995 7.2164496600635175e-16 0.069499999999999784</Translation>
+</Transform>
+</Instance>
+<Instance name="hg-sr202b.SIM-1" uid="hg-sr202b.SIM-1" grounded="true" entityUid="hg-sr202b.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+</Instance>
+<Instance name="FlatForm_For_SIM.SIM-1" uid="FlatForm_For_SIM.SIM-1" entityUid="FlatForm_For_SIM.SIM" rigid="true">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<Instance name="Flatform for SIM.SIM-1" uid="Flatform for SIM.SIM-1" entityUid="Flatform for SIM.SIM" rigid="true">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<Instance name="P-CKAS-007.SIM-1" uid="P-CKAS-007.SIM-1" entityUid="P-CKAS-007.SIM*:*Default">
+<Transform>
+<Rotation>0.50000000000000744 1.9480944635219544e-15 -0.8660254037844346 5.1764148523147924e-15 -1 8.2572837456496018e-16 -0.8660254037844346 -4.9266146717741321e-15 -0.50000000000000711</Rotation>
+<Translation>-1.5127499473816322e-13 0.8513962713490586 -1.3106210979964561e-14</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-006.SIM-1" uid="P-CKAS-006.SIM-1" entityUid="P-CKAS-006.SIM*:*Default">
+<Transform>
+<Rotation>-0.49999968485007523 0.00056138206996398689 0.86602540378443693 0.0011227641399335353 0.99999936970014458 3.1363800445660672e-15 -0.86602485792874995 0.00097234226764217335 -0.500000000000003</Rotation>
+<Translation>-0.39428280458719289 0.79539627134905655 0.28537431028411964</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-006.SIM-3" uid="P-CKAS-006.SIM-3" entityUid="P-CKAS-006.SIM*:*Default">
+<Transform>
+<Rotation>0.95486946772574588 0.29702575579425955 -2.3592239273284576e-15 -0.29702575579425922 0.95486946772574577 -4.9404924595819466e-15 7.9103390504542404e-16 5.3845816694320092e-15 1</Rotation>
+<Translation>-0.050000000000151409 0.79539627134906077 -0.48414608018982519</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-010.SIM-4" uid="P-CKAS-010.SIM-4" entityUid="P-CKAS-010.SIM*:*Default">
+<Transform>
+<Rotation>-0.45277630759871662 -0.86602540378443738 0.21211698488634662 0.42423396977269767 -4.1147640850169864e-15 0.90555261519742614 -0.78423156922440329 0.50000000000000233 0.36739739497147716</Rotation>
+<Translation>-0.41180685194527655 0.79539627134905699 0.18002176990567584</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-006.SIM-4" uid="P-CKAS-006.SIM-4" entityUid="P-CKAS-006.SIM*:*Default">
+<Transform>
+<Rotation>0.81235367183575502 0.58316508113480758 -4.1217029789208937e-15 -0.58316508113480747 0.81235367183575491 -6.2727600891321345e-15 -2.9143354396410359e-16 7.4940054162198066e-15 0.99999999999999978</Rotation>
+<Translation>0.04999999999985083 0.79539627134906166 -0.48414608018980759</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20 with spring and flat washer.SIM-1" uid="HNT1-ST-MS20 with spring and flat washer.SIM-1" entityUid="HNT1-ST-MS20 with spring and flat washer.SIM" rigid="true">
+<Transform>
+<Rotation>0.49938393442825157 0.024813021479915237 -0.86602540378443693 -0.049626042959835463 0.99876786885649693 -3.0808688933348094e-15 0.86495834691336915 0.0429774138925169 0.50000000000000311</Rotation>
+<Translation>-0.37964697526323615 0.79539627134905655 0.27692431028411979</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" grounded="true" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="PWF20.SIM-1" uid="PWF20.SIM-1" entityUid="PWF20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -1 0 1 0 1 0 0</Rotation>
+<Translation>0 0 -0.0065999999999999392</Translation>
+</Transform>
+</Instance>
+<Instance name="SLW20.SIM-1" uid="SLW20.SIM-1" entityUid="SLW20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -1 0 1 0 1 0 0</Rotation>
+<Translation>0 0 -0.0025499999999999412</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="P-CKAS-010.SIM-5" uid="P-CKAS-010.SIM-5" entityUid="P-CKAS-010.SIM*:*Default">
+<Transform>
+<Rotation>0.0042348614914204351 0.86602540378443515 -0.49998206562651271 -0.99996413125301342 -8.31799906730879e-16 -0.008469722982842133 -0.0073349952661586476 0.500000000000006 0.86599434053834301</Rotation>
+<Translation>0.36180685194497558 0.79539627134905821 0.26662431028411637</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20 with spring and flat washer.SIM-6" uid="HNT1-ST-MS20 with spring and flat washer.SIM-6" entityUid="HNT1-ST-MS20 with spring and flat washer.SIM" rigid="true">
+<Transform>
+<Rotation>0.92176809429687578 0.38774164122042126 2.2514106660898921e-15 0.38774164122042115 -0.9217680942968759 4.8840995976417089e-15 3.9690473130349338e-15 -3.6290415117434797e-15 -1</Rotation>
+<Translation>-0.0500000000001515 0.79539627134906066 -0.46724608018983427</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" grounded="true" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="PWF20.SIM-1" uid="PWF20.SIM-1" entityUid="PWF20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -0.99999999999999989 0 1.0000000000000002 0 1 0 0</Rotation>
+<Translation>0 0 -0.0065999999999999948</Translation>
+</Transform>
+</Instance>
+<Instance name="SLW20.SIM-1" uid="SLW20.SIM-1" entityUid="SLW20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -0.99999999999999989 0 1.0000000000000002 0 1 0 0</Rotation>
+<Translation>0 0 -0.0025499999999999967</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="P-CKAS-006.SIM-5" uid="P-CKAS-006.SIM-5" entityUid="P-CKAS-006.SIM*:*Default">
+<Transform>
+<Rotation>-0.40591807430884563 0.2919426603794032 -0.86602540378443571 0.58388532075879673 0.81183614861768594 2.7287200277115176e-15 0.70307072841343332 -0.5056595206739406 -0.50000000000000522</Rotation>
+<Translation>0.44428280458691133 0.79539627134905766 0.1987717699056899</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-006.SIM-6" uid="P-CKAS-006.SIM-6" entityUid="P-CKAS-006.SIM*:*Default">
+<Transform>
+<Rotation>-0.0015533421745603489 0.49999758712227266 -0.86602540378443527 0.99999517424453355 0.0031066843491219555 7.9884016068731967e-16 0.0026904675678795856 -0.86602122455760888 -0.50000000000000588</Rotation>
+<Translation>0.39428280458671039 0.79539627134905777 0.28537431028401827</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-006.SIM-2" uid="P-CKAS-006.SIM-2" entityUid="P-CKAS-006.SIM*:*Default">
+<Transform>
+<Rotation>-0.49364690355823559 0.07945271932016329 0.86602540378443715 0.15890543864033102 0.98729380711646519 3.0808688933348094e-15 -0.85502151796191073 0.13761614666203728 -0.50000000000000255</Rotation>
+<Translation>-0.44428280458719305 0.79539627134905688 0.19877176990567602</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20 with spring and flat washer.SIM-3" uid="HNT1-ST-MS20 with spring and flat washer.SIM-3" entityUid="HNT1-ST-MS20 with spring and flat washer.SIM" rigid="true">
+<Transform>
+<Rotation>0.42635571470627004 -0.26119112645208992 0.86602540378443527 0.52238225290417484 0.85271142941252931 -8.309325449928906e-16 -0.73846975996858832 0.45239630150116134 0.500000000000006</Rotation>
+<Translation>0.37964697526293517 0.79539627134905821 0.27692431028411663</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" grounded="true" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="PWF20.SIM-1" uid="PWF20.SIM-1" entityUid="PWF20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -1 0 1.0000000000000002 0 1 0 0</Rotation>
+<Translation>0 0 -0.0066000000000000503</Translation>
+</Transform>
+</Instance>
+<Instance name="SLW20.SIM-1" uid="SLW20.SIM-1" entityUid="SLW20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -1 0 1.0000000000000002 0 1 0 0</Rotation>
+<Translation>0 0 -0.0025500000000000522</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="P-CKAS-010.SIM-1" uid="P-CKAS-010.SIM-1" entityUid="P-CKAS-010.SIM*:*Default">
+<Transform>
+<Rotation>0.99309111122105354 4.0245584642661925e-15 0.11734583424107206 -0.11734583424107206 6.3560268159790212e-15 0.99309111122105342 3.3167912860676552e-15 -1 6.7584826624056404e-15</Rotation>
+<Translation>0.049999999999850532 0.79539627134906155 -0.44664608018983226</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-010.SIM-2" uid="P-CKAS-010.SIM-2" entityUid="P-CKAS-010.SIM*:*Default">
+<Transform>
+<Rotation>0.99803112551421136 2.3860871260165702e-15 -0.062720590756437447 0.062720590756437447 4.9569305871183516e-15 0.99803112551421136 2.6922908347160042e-15 -1 4.7975142188174598e-15</Rotation>
+<Translation>-0.050000000000151569 0.79539627134906066 -0.44664608018983404</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-010.SIM-3" uid="P-CKAS-010.SIM-3" entityUid="P-CKAS-010.SIM*:*Default">
+<Transform>
+<Rotation>-0.46929081537471845 -0.86602540378443704 0.17252863705754645 0.34505727411509673 -3.495250099219954e-15 0.93858163074942969 -0.81283553575442979 0.50000000000000266 0.29882836514428551</Rotation>
+<Translation>-0.36180685194527662 0.79539627134905666 0.26662431028411959</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-010.SIM-6" uid="P-CKAS-010.SIM-6" entityUid="P-CKAS-010.SIM*:*Default">
+<Transform>
+<Rotation>0.25987938660719551 0.86602540378443527 0.42715653385693847 0.85431306771386739 -8.2572837456496018e-16 -0.51975877321438346 -0.45012430144348881 0.500000000000006 -0.73985681942522186</Rotation>
+<Translation>0.4118068519449764 0.7953962713490581 0.18002176990567292</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20 with spring and flat washer.SIM-2" uid="HNT1-ST-MS20 with spring and flat washer.SIM-2" entityUid="HNT1-ST-MS20 with spring and flat washer.SIM" rigid="true">
+<Transform>
+<Rotation>0.49817425323632314 0.042689734274583377 -0.86602540378443704 -0.085379468549171555 0.99634850647264039 -3.0808688933348094e-15 0.86286311762798906 0.073940788725198506 0.50000000000000266</Rotation>
+<Translation>-0.42964697526323631 0.79539627134905699 0.19032176990567609</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" grounded="true" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="PWF20.SIM-1" uid="PWF20.SIM-1" entityUid="PWF20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -1 0 1 0 0.99999999999999989 0 0</Rotation>
+<Translation>0 0 -0.0065999999999999948</Translation>
+</Transform>
+</Instance>
+<Instance name="SLW20.SIM-1" uid="SLW20.SIM-1" entityUid="SLW20.SIM*:*Default">
+<Transform>
+<Rotation>0 0 -1 0 1 0 0.99999999999999989 0 0</Rotation>
+<Translation>0 0 -0.0025500000000000522</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="HNT1-ST-MS20 with spring and flat washer.SIM-5" uid="HNT1-ST-MS20 with spring and flat washer.SIM-5" entityUid="HNT1-ST-MS20 with spring and flat washer.SIM" rigid="true">
+<Transform>
+<Rotation>0.90681347807006318 -0.4215321055275329 3.9551695252271202e-15 -0.42153210552753267 -0.90681347807006329 5.8703042427055152e-15 1.1171619185290638e-15 -6.9944050551384862e-15 -1</Rotation>
+<Translation>0.049999999999850754 0.79539627134906121 -0.46724608018983316</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" grounded="true" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="PWF20.SIM-1" uid="PWF20.SIM-1" entityUid="PWF20.SIM*:*Default">
+<Transform>
+<Rotation>0 -1.665334536937813e-16 -1 0 1.0000000000000002 1.665334536937813e-16 1 0 0</Rotation>
+<Translation>0 0 -0.0065999999999999948</Translation>
+</Transform>
+</Instance>
+<Instance name="SLW20.SIM-1" uid="SLW20.SIM-1" entityUid="SLW20.SIM*:*Default">
+<Transform>
+<Rotation>0 -1.665334536937813e-16 -1 0 1.0000000000000002 1.665334536937813e-16 1 0 0</Rotation>
+<Translation>0 0 -0.0025499999999999967</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="HNT1-ST-MS20 with spring and flat washer.SIM-4" uid="HNT1-ST-MS20 with spring and flat washer.SIM-4" entityUid="HNT1-ST-MS20 with spring and flat washer.SIM" rigid="true">
+<Transform>
+<Rotation>0.41353158814062629 -0.28105448868483984 0.8660254037844356 0.56210897736967758 0.82706317628124115 -2.6636678973623873e-15 -0.71625772119419917 0.48680065409743234 0.50000000000000533</Rotation>
+<Translation>0.42964697526293483 0.79539627134905777 0.19032176990567748</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" grounded="true" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="PWF20.SIM-1" uid="PWF20.SIM-1" entityUid="PWF20.SIM*:*Default">
+<Transform>
+<Rotation>-1.1102230246251565e-16 -1.6653345369377341e-16 -1 0 1 -1.6653345369377341e-16 1 0 -1.1102230246251564e-16</Rotation>
+<Translation>0 0 -0.0065999999999999948</Translation>
+</Transform>
+</Instance>
+<Instance name="SLW20.SIM-1" uid="SLW20.SIM-1" entityUid="SLW20.SIM*:*Default">
+<Transform>
+<Rotation>-1.1102230246251565e-16 -1.6653345369377341e-16 -1 0 1 -1.6653345369377341e-16 1 0 -1.1102230246251564e-16</Rotation>
+<Translation>0 0 -0.0025499999999999967</Translation>
+</Transform>
+</Instance>
+</Instance>
+</Instance>
+<Instance name="E-GYN20_b.SIM-3" uid="E-GYN20_b.SIM-3" entityUid="E-GYN20_b.SIM*:*Default">
+<Transform>
+<Rotation>-0.95612705763253969 -0.29295229929621952 -1.6061804332936902e-14 -0.29295229929621946 0.9561270576325398 -5.9412816152236719e-15 1.7097637827060113e-14 -9.7527759914927108e-16 -0.99999999999999978</Rotation>
+<Translation>-0.050000000000157765 0.79539627134905577 -0.42664608018984185</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_b.SIM-1" uid="E-GYN20_b.SIM-1" entityUid="E-GYN20_b.SIM*:*Default">
+<Transform>
+<Rotation>-0.31962191211256918 -0.38450205889890332 -0.86602540378444404 -0.76900411779781963 0.63924382422515202 -1.3521075954501038e-15 0.55360139099130012 0.66597710162775636 -0.49999999999999051</Rotation>
+<Translation>0.39448634386927539 0.79539627134906066 0.17002176990568599</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_b.SIM-2" uid="E-GYN20_b.SIM-2" entityUid="E-GYN20_b.SIM*:*Default">
+<Transform>
+<Rotation>-0.99602965485128858 -0.089022057136549371 -1.4570048547519348e-14 -0.089022057136549371 0.99602965485128847 -5.060778083262039e-15 1.4979924645848719e-14 -3.760655190671786e-15 -1</Rotation>
+<Translation>0.049999999999844419 0.79539627134905644 -0.42664608018984229</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_b.SIM-6" uid="E-GYN20_b.SIM-6" entityUid="E-GYN20_b.SIM*:*Default">
+<Transform>
+<Rotation>-0.24344730760093081 -0.43673036123201675 -0.86602540378444426 -0.87346072246404804 0.48689461520187627 -3.0660143897114531e-15 0.42166310573067772 0.75643917486177903 -0.49999999999999006</Rotation>
+<Translation>0.34448634386927501 0.79539627134905821 0.25662431028413257</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_b.SIM-4" uid="E-GYN20_b.SIM-4" entityUid="E-GYN20_b.SIM*:*Default">
+<Transform>
+<Rotation>0.45455680588685105 0.20827412278524465 -0.86602540378442738 -0.41654824557046721 0.90911361177366923 3.7004407270747402e-15 0.78731548272221186 0.36074136256585709 0.50000000000001943</Rotation>
+<Translation>-0.39448634386957998 0.79539627134906032 0.17002176990567863</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_b.SIM-5" uid="E-GYN20_b.SIM-5" entityUid="E-GYN20_b.SIM*:*Default">
+<Transform>
+<Rotation>0.49258430379764123 0.085794543254294364 0.86602540378442727 0.17158908650858801 -0.98516860759524227 -3.5512545081409367e-15 0.8531810411884112 0.14860050792860266 -0.50000000000001987</Rotation>
+<Translation>-0.34448634386957888 0.79539627134905966 0.25662431028412269</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="HG-SR202B_with_gear.SIM-10" uid="HG-SR202B_with_gear.SIM-10" entityUid="HG-SR202B_with_gear.SIM" rigid="true">
+<Transform>
+<Rotation>0 0.75983880641433221 0.65011151986935523 -1 -1.472504675732865e-16 2.3923143675390032e-16 2.7750655463541198e-16 -0.65011151986935523 0.75983880641433221</Rotation>
+<Translation>-0.59495672740283756 0.20199999999999985 -0.69537486385226366</Translation>
+</Transform>
+<Instance name="MAB180-L1-35-114.3-200-M12-82.SIM-1" uid="MAB180-L1-35-114.3-200-M12-82.SIM-1" entityUid="MAB180-L1-35-114.3-200-M12-82.SIM*:*Default">
+<Transform>
+<Rotation>-0.28772358605998294 -0.49971397412366686 0.81700739414665913 -0.54760542597243322 0.78571205633510122 0.28772358605998305 -0.78571205633510133 -0.36461282011909257 -0.49971397412366669</Rotation>
+<Translation>-0.37169369378592687 0.17060688151261283 -0.14132556216378456</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="P-CKAS-002.SIM-1" uid="P-CKAS-002.SIM-1" entityUid="P-CKAS-002.SIM*:*Default">
+<Transform>
+<Rotation>-2.3923143675390056e-16 -1 -1.6653345369377331e-16 6.6613381477509392e-16 -1.6653345369377351e-16 1 -1 2.3923143675390022e-16 6.6613381477509392e-16</Rotation>
+<Translation>0.11499999999999987 6.106226635438361e-16 0.069499999999999895</Translation>
+</Transform>
+</Instance>
+<Instance name="hg-sr202b.SIM-1" uid="hg-sr202b.SIM-1" grounded="true" entityUid="hg-sr202b.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+</Instance>
+<Instance name="A-CKAS-01 for SIM.SIM-1" uid="A-CKAS-01 for SIM.SIM-1" entityUid="A-CKAS-01 for SIM.SIM" rigid="true">
+<Transform>
+<Rotation>-0.18309368829259073 7.4197375674045496e-16 -0.98309546907073864 0 -1 -7.6327832942979512e-16 -0.98309546907073864 -2.9143354396410359e-16 0.18309368829259068</Rotation>
+<Translation>0.61219785613753497 0.2020000000000001 -0.26659624796436643</Translation>
+</Transform>
+<Instance name="P-CKAS-003.SIM-1" uid="P-CKAS-003.SIM-1" grounded="true" entityUid="P-CKAS-003.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0" g="0" b="1" a="1"/>
+<Diffuse r="0" g="0" b="1" a="1"/>
+<Specular r="0" g="0" b="0.5" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="E-B7204.SIM-1" uid="E-B7204.SIM-1" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-1.6653345369377348e-16 -0.62853384856383843 0.77778223251082912 -2.0253225347731134e-16 0.77778223251082923 0.62853384856383832 -0.99999999999999989 0 -2.5682513813808327e-16</Rotation>
+<Translation>0 0 -0.0059999999999998943</Translation>
+</Transform>
+</Instance>
+<Instance name="E-B7204.SIM-2" uid="E-B7204.SIM-2" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-1.6653345369377348e-16 0.71822097150614927 0.69581508756907762 -2.0253225347732298e-16 0.69581508756907773 -0.71822097150614916 -0.99999999999999989 -2.6053281658910246e-16 0</Rotation>
+<Translation>0 0 0.020000000000000129</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-1" uid="P-CKAS-008.SIM-1" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>-0.64927465564415987 0 -0.76055402276114337 0.76055402276114326 0 -0.64927465564415998 -1.5265566588595902e-16 -1 0</Rotation>
+<Translation>0 0 -0.019999999999999907</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-2" uid="P-CKAS-008.SIM-2" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>2.0616743609967659e-16 0 1 1 0 2.0616743609967656e-16 -1.0334391081767547e-16 1 0</Rotation>
+<Translation>0 0 0.020000000000000129</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-009.SIM-1" uid="P-CKAS-009.SIM-1" entityUid="P-CKAS-009.SIM*:*Default">
+<Transform>
+<Rotation>1 1.6653345369377348e-16 -3.2931667435941142e-16 0 1.5398735593319124e-16 -1 0 0.99999999999999989 1.9301205882860955e-16</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNTL1N-STU-M20_214.SIM-1" uid="HNTL1N-STU-M20_214.SIM-1" entityUid="HNTL1N-STU-M20_214.SIM*:*Default">
+<Transform>
+<Rotation>0.23487298951709992 -0.97202606898956179 4.8632956383310712e-16 -0.97202606898956179 -0.23487298951709992 1.0598066314565541e-15 -9.1593399531575434e-16 -7.2164496600635146e-16 -1</Rotation>
+<Translation>0 0 -0.019999999999999907</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="A-CKAS-01 for SIM.SIM-6" uid="A-CKAS-01 for SIM.SIM-6" entityUid="A-CKAS-01 for SIM.SIM" rigid="true">
+<Transform>
+<Rotation>0.18309368829261594 0 0.98309546907073397 -3.3306690738754696e-16 1 1.0928757898653885e-16 -0.98309546907073408 -1.1796119636642288e-16 0.18309368829261599</Rotation>
+<Translation>-0.61219785613753597 0.20200000000000001 -0.26659624796432158</Translation>
+</Transform>
+<Instance name="P-CKAS-003.SIM-1" uid="P-CKAS-003.SIM-1" grounded="true" entityUid="P-CKAS-003.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0" g="0" b="1" a="1"/>
+<Diffuse r="0" g="0" b="1" a="1"/>
+<Specular r="0" g="0" b="0.5" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="E-B7204.SIM-1" uid="E-B7204.SIM-1" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>0 -0.62853384856383876 0.77778223251082923 -2.9374278888650376e-16 0.77778223251082923 0.62853384856383865 -1 -1.1102230246251565e-16 -2.2204460492503131e-16</Rotation>
+<Translation>0 0 -0.0060000000000001164</Translation>
+</Transform>
+</Instance>
+<Instance name="E-B7204.SIM-2" uid="E-B7204.SIM-2" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>0 0.71822097150614927 0.69581508756907762 -2.9374278888651535e-16 0.69581508756907762 -0.71822097150614927 -1 -2.2432530085522516e-16 1.9165948292947978e-16</Rotation>
+<Translation>0 0 0.019999999999999907</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-1" uid="P-CKAS-008.SIM-1" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>-0.64927465564416009 1.1102230246251565e-16 -0.76055402276114314 0.76055402276114326 0 -0.64927465564415987 0 -1 0</Rotation>
+<Translation>0 0 -0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-2" uid="P-CKAS-008.SIM-2" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>-2.2007806867832769e-16 0 1 1 0 2.2007806867832769e-16 0 1 0</Rotation>
+<Translation>0 0 0.019999999999999907</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-009.SIM-1" uid="P-CKAS-009.SIM-1" entityUid="P-CKAS-009.SIM*:*Default">
+<Transform>
+<Rotation>1 1.9428902930940247e-16 -3.4322730693806253e-16 -3.4322730693806258e-16 2.451978913423837e-16 -1 -1.9428902930940235e-16 1 2.4519789134238375e-16</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNTL1N-STU-M20_214.SIM-1" uid="HNTL1N-STU-M20_214.SIM-1" entityUid="HNTL1N-STU-M20_214.SIM*:*Default">
+<Transform>
+<Rotation>0.23487298951710031 -0.97202606898956179 4.163336342344337e-16 -0.97202606898956168 -0.23487298951710009 1.0853623745150471e-15 -1.0408340855860843e-15 -6.106226635438361e-16 -1</Rotation>
+<Translation>0 0 -0.020000000000000018</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="A-CKAS-01 for SIM.SIM-10" uid="A-CKAS-01 for SIM.SIM-10" entityUid="A-CKAS-01 for SIM.SIM" rigid="true">
+<Transform>
+<Rotation>-0.94293249470694085 3.7941655026130228e-16 -0.33298394920137664 -2.1510571102112408e-16 1 1.672273430841642e-15 0.33298394920137669 1.609823385706477e-15 -0.94293249470694107</Rotation>
+<Translation>0.075219804778061242 0.20200000000000012 0.66347701953963423</Translation>
+</Transform>
+<Instance name="P-CKAS-003.SIM-1" uid="P-CKAS-003.SIM-1" grounded="true" entityUid="P-CKAS-003.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0" g="0" b="1" a="1"/>
+<Diffuse r="0" g="0" b="1" a="1"/>
+<Specular r="0" g="0" b="0.5" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="E-B7204.SIM-1" uid="E-B7204.SIM-1" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>0 -0.62853384856383854 0.77778223251082934 -2.500236333465086e-16 0.77778223251082934 0.62853384856383854 -1 -2.2935457724630838e-16 -1.1397272936530116e-16</Rotation>
+<Translation>0 0 -0.0059999999999998943</Translation>
+</Transform>
+</Instance>
+<Instance name="E-B7204.SIM-2" uid="E-B7204.SIM-2" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>0 0.71822097150614916 0.69581508756907762 -2.5002363334652048e-16 0.69581508756907762 -0.71822097150614916 -1 -1.7397021633134808e-16 1.7957221684163517e-16</Rotation>
+<Translation>0 0 0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-1" uid="P-CKAS-008.SIM-1" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>-0.64927465564415987 1.3264473007070941e-16 -0.76055402276114314 0.76055402276114314 0 -0.64927465564415987 0 -1 -1.5071084346452116e-16</Rotation>
+<Translation>0 0 -0.019999999999999907</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-2" uid="P-CKAS-008.SIM-2" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>0 -1.6653345369377341e-16 1 1 0 0 0 1 1.6653345369377341e-16</Rotation>
+<Translation>0 0 0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-009.SIM-1" uid="P-CKAS-009.SIM-1" entityUid="P-CKAS-009.SIM*:*Default">
+<Transform>
+<Rotation>1 2.7755575615628933e-16 -1.5997379506257634e-16 -1.5997379506257639e-16 2.0147873580238864e-16 -1 -2.7755575615628909e-16 1 2.0147873580238869e-16</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNTL1N-STU-M20_214.SIM-1" uid="HNTL1N-STU-M20_214.SIM-1" entityUid="HNTL1N-STU-M20_214.SIM*:*Default">
+<Transform>
+<Rotation>0.23487298951710014 -0.97202606898956168 3.0815711793236671e-16 -0.97202606898956168 -0.23487298951710012 1.0881402789783957e-15 -9.8532293435482643e-16 -5.5511151231257827e-16 -1</Rotation>
+<Translation>0 0 -0.019999999999999907</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="A-CKAS-01 for SIM.SIM-4" uid="A-CKAS-01 for SIM.SIM-4" entityUid="A-CKAS-01 for SIM.SIM" rigid="true">
+<Transform>
+<Rotation>-0.75983880641431989 -1.3083440309879374e-16 0.65011151986936966 0 -1.0000000000000002 -1.1102230246251565e-16 0.65011151986936977 0 0.75983880641431978</Rotation>
+<Translation>-0.53697805135948706 0.20200000000000023 -0.39688077157531548</Translation>
+</Transform>
+<Instance name="P-CKAS-003.SIM-1" uid="P-CKAS-003.SIM-1" grounded="true" entityUid="P-CKAS-003.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0" g="0" b="1" a="1"/>
+<Diffuse r="0" g="0" b="1" a="1"/>
+<Specular r="0" g="0" b="0.5" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="E-B7204.SIM-1" uid="E-B7204.SIM-1" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-1.6653345369377348e-16 -0.62853384856383832 0.77778223251082945 -1.7815011331918642e-16 0.77778223251082945 0.62853384856383832 -1 0 -2.415001377482741e-16</Rotation>
+<Translation>0 0 -0.0060000000000000053</Translation>
+</Transform>
+</Instance>
+<Instance name="E-B7204.SIM-2" uid="E-B7204.SIM-2" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-1.6653345369377348e-16 0.71822097150614916 0.69581508756907773 -1.7815011331919806e-16 0.69581508756907773 -0.71822097150614916 -1 -2.4356735559985517e-16 0</Rotation>
+<Translation>0 0 0.019999999999999907</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-1" uid="P-CKAS-008.SIM-1" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>-0.64927465564415976 1.6653345369377348e-16 -0.76055402276114337 0.76055402276114337 0 -0.64927465564415998 -1.1102230246251565e-16 -1 0</Rotation>
+<Translation>0 0 -0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-2" uid="P-CKAS-008.SIM-2" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>0 0 0.99999999999999989 1 1.2772605097580033e-16 0 -1.2772605097580033e-16 0.99999999999999989 0</Rotation>
+<Translation>0 0 0.019999999999999907</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-009.SIM-1" uid="P-CKAS-009.SIM-1" entityUid="P-CKAS-009.SIM*:*Default">
+<Transform>
+<Rotation>1 1.6653345369377343e-16 0 0 1.2960521577506641e-16 -1 -1.6653345369377343e-16 1 1.2960521577506641e-16</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNTL1N-STU-M20_214.SIM-1" uid="HNTL1N-STU-M20_214.SIM-1" entityUid="HNTL1N-STU-M20_214.SIM*:*Default">
+<Transform>
+<Rotation>0.23487298951709989 -0.97202606898956168 4.3563079522700793e-16 -0.97202606898956168 -0.23487298951709992 1.0332789898862312e-15 -9.0205620750793949e-16 -6.6613381477509373e-16 -0.99999999999999989</Rotation>
+<Translation>0 0 -0.020000000000000018</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="A-CKAS-01 for SIM.SIM-2" uid="A-CKAS-01 for SIM.SIM-2" entityUid="A-CKAS-01 for SIM.SIM" rigid="true">
+<Transform>
+<Rotation>0.75983880641432333 -2.3948417056511425e-16 -0.65011151986936555 0 1 -4.0081420809862954e-16 0.65011151986936555 3.2259840892389048e-16 0.75983880641432333</Rotation>
+<Translation>0.5369780513595297 0.20200000000000018 -0.39688077157528101</Translation>
+</Transform>
+<Instance name="P-CKAS-003.SIM-1" uid="P-CKAS-003.SIM-1" grounded="true" entityUid="P-CKAS-003.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0" g="0" b="1" a="1"/>
+<Diffuse r="0" g="0" b="1" a="1"/>
+<Specular r="0" g="0" b="0.5" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+</Instance>
+<Instance name="E-B7204.SIM-1" uid="E-B7204.SIM-1" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-1.6653345369377348e-16 -0.62853384856383843 0.77778223251082945 -2.2204460492502046e-16 0.77778223251082934 0.62853384856383854 -1 0 -2.2204460492503131e-16</Rotation>
+<Translation>0 0 -0.0059999999999998943</Translation>
+</Transform>
+</Instance>
+<Instance name="E-B7204.SIM-2" uid="E-B7204.SIM-2" entityUid="E-B7204.SIM*:*Default">
+<Transform>
+<Rotation>-1.6653345369377348e-16 0.71822097150614916 0.69581508756907784 -2.22044604925032e-16 0.69581508756907773 -0.71822097150614927 -1 -1.6653345369377348e-16 0</Rotation>
+<Translation>0 0 0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-1" uid="P-CKAS-008.SIM-1" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>-0.64927465564415998 0 -0.76055402276114337 0.76055402276114337 0 -0.64927465564415987 -1.6653345369377348e-16 -1 0</Rotation>
+<Translation>0 0 -0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-008.SIM-2" uid="P-CKAS-008.SIM-2" entityUid="P-CKAS-008.SIM*:*Default">
+<Transform>
+<Rotation>0 0 1 1 0 0 0 1 0</Rotation>
+<Translation>0 0 0.020000000000000018</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-009.SIM-1" uid="P-CKAS-009.SIM-1" entityUid="P-CKAS-009.SIM*:*Default">
+<Transform>
+<Rotation>1 1.6653345369377348e-16 -1.2314923825973493e-16 -1.2314923825973501e-16 1.7349970738090043e-16 -1 -1.6653345369377348e-16 1 1.7349970738090043e-16</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNTL1N-STU-M20_214.SIM-1" uid="HNTL1N-STU-M20_214.SIM-1" entityUid="HNTL1N-STU-M20_214.SIM*:*Default">
+<Transform>
+<Rotation>0.23487298951710006 -0.97202606898956168 4.9960036108132044e-16 -0.97202606898956168 -0.23487298951710006 1.0837361842355139e-15 -9.4368957093138306e-16 -7.2164496600635175e-16 -0.99999999999999978</Rotation>
+<Translation>0 0 -0.019999999999999907</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="P-CKAS-004.SIM-4" uid="P-CKAS-004.SIM-4" entityUid="P-CKAS-004.SIM*:*Default">
+<Transform>
+<Rotation>-0.63528163871487631 0.65011151986934468 0.41685998997854407 0.54861634659816172 -7.5346365526491088e-16 0.83607422173230872 0.54354148301397098 0.75983880641434098 -0.35666180691209759</Rotation>
+<Translation>-0.52397582096213269 0.2019999999999561 -0.38168399544700721</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-004.SIM-2" uid="P-CKAS-004.SIM-2" entityUid="P-CKAS-004.SIM*:*Default">
+<Transform>
+<Rotation>0.63528163871488941 -0.650111519869365 0.4168599899784925 0.5486163465981071 5.5511151231257827e-16 -0.83607422173234436 0.54354148301401073 0.75983880641432366 0.35666180691207428</Rotation>
+<Translation>0.52397582096215511 0.20199999999998702 -0.38168399544698373</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-004.SIM-8" uid="P-CKAS-004.SIM-8" entityUid="P-CKAS-004.SIM*:*Default">
+<Transform>
+<Rotation>-0.78836155165824295 0.33298394920138952 0.51730818033475368 -0.54861634659810199 5.3005468606526795e-16 -0.83607422173234802 -0.27839929617791564 -0.94293249470693641 0.18268043768667389</Rotation>
+<Translation>-0.068560125793952015 0.20199999999997542 0.64461836964552577</Translation>
+</Transform>
+</Instance>
+<Instance name="Link For SIM.SIM-10" uid="Link For SIM.SIM-10" entityUid="Link For SIM.SIM" rigid="true">
+<Transform>
+<Rotation>-0.52557565166627429 0.38765536812949297 -0.75729356918962321 0.60725040480749826 0.79437251853992785 -0.014807013529456764 0.59583318155059206 -0.46764903223348958 -0.65290673331983617</Rotation>
+<Translation>0.20027854692527577 0.4998896944524201 0.43058975027497548</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-1" uid="HNT1-ST-MS20.SIM-1" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>-0.89669289710148048 -0.44265319188700508 0 1.6653345369377348e-16 0 -1 0.44265319188700469 -0.89669289710148059 1.6653345369377348e-16</Rotation>
+<Translation>0 0.29500000000000004 0</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-005.simulation.SIM-1" uid="P-CKAS-005.simulation.SIM-1" grounded="true" entityUid="P-CKAS-005.simulation.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_h.SIM-1" uid="E-GYN20_h.SIM-1" entityUid="E-GYN20_h.SIM*:*Default">
+<Transform>
+<Rotation>-0.99985509902791181 -1.1102230246251565e-16 -0.017022953559372722 0 1 1.6653345369377348e-16 0.017022953559372334 2.2204460492503131e-16 -0.9998550990279117</Rotation>
+<Translation>0 0.372 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>0.2304215389667511 -0.97309090756218353 -1.7484315449086133e-16 0 1.6653345369377343e-16 -1 0.97309090756218353 0.2304215389667511 0</Rotation>
+<Translation>0 -0.27900000000000019 0</Translation>
+</Transform>
+</Instance>
+<Instance name="F-M20X150Y_Y_joint.SIM-1" uid="F-M20X150Y_Y_joint.SIM-1" entityUid="F-M20X150Y_Y_joint.SIM*:*Default">
+<Transform>
+<Rotation>-0.91337067320025167 2.6700105920928291e-16 -0.40712898857452917 -1.6653345369377343e-16 -1 -2.822061059835477e-16 -0.40712898857452917 -1.8995818443724538e-16 0.91337067320025167</Rotation>
+<Translation>0 -0.32500000000000018 0</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="Link For SIM-2.SIM-1" uid="Link For SIM-2.SIM-1" entityUid="Link For SIM-2.SIM" rigid="true">
+<Transform>
+<Rotation>-0.13662397187001918 -0.21116825790465657 0.96785425409199533 0.5529756468735334 0.79437251853993107 0.25137668100546634 -0.82191959720842389 0.56954391283029182 0.0082405753866686138</Rotation>
+<Translation>0.47304093580996998 0.4998896944524247 -0.041848565667207571</Translation>
+</Transform>
+<Instance name="E-GYN20_h.SIM-1" uid="E-GYN20_h.SIM-1" entityUid="E-GYN20_h.SIM*:*Default">
+<Transform>
+<Rotation>-0.91337067320025178 1.1102230246251565e-16 0.40712898857452928 1.6653345369377348e-16 1 2.2204460492503131e-16 -0.40712898857452928 1.960237527853792e-16 -0.91337067320025178</Rotation>
+<Translation>0 0.37199999999999994 0</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-005.simulation.SIM-1" uid="P-CKAS-005.simulation.SIM-1" grounded="true" entityUid="P-CKAS-005.simulation.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="F-M20X150Y_Y_joint.SIM-1" uid="F-M20X150Y_Y_joint.SIM-1" entityUid="F-M20X150Y_Y_joint.SIM*:*Default">
+<Transform>
+<Rotation>0.99985509902791192 0 -0.017022953559372406 0 -1 -1.1415201724330673e-16 -0.017022953559372406 1.1413547650504235e-16 -0.99985509902791192</Rotation>
+<Translation>0 -0.32499999999999996 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>0.23042153896675094 -0.97309090756218364 0 -1.5265566588595902e-16 0 -0.99999999999999989 0.97309090756218364 0.23042153896675083 0</Rotation>
+<Translation>0 -0.27899999999999991 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-1" uid="HNT1-ST-MS20.SIM-1" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>-0.8966928971014807 -0.44265319188700492 0 1.1102230246251565e-16 0 -0.99999999999999989 0.4426531918870048 -0.89669289710148059 1.9255430583342559e-16</Rotation>
+<Translation>0 0.29499999999999998 0</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="Link For SIM-2.SIM-2" uid="Link For SIM-2.SIM-2" entityUid="Link For SIM-2.SIM" rigid="true">
+<Transform>
+<Rotation>-0.64349126511572341 0.59882362603418682 -0.47679057941934433 0.55297564687360024 0.79437251853989588 0.25137668100543109 0.52927962900955194 -0.1018948805968741 -0.84230665889785028</Rotation>
+<Translation>-0.27276238888465765 0.49988969445243642 -0.38874118460785262</Translation>
+</Transform>
+<Instance name="E-GYN20_h.SIM-1" uid="E-GYN20_h.SIM-1" entityUid="E-GYN20_h.SIM*:*Default">
+<Transform>
+<Rotation>-0.91337067320025167 -1.1796119636642288e-16 0.40712898857452917 0 1 2.0816681711721685e-16 -0.4071289885745295 1.5265566588595902e-16 -0.91337067320025156</Rotation>
+<Translation>0 0.37200000000000011 0</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-005.simulation.SIM-1" uid="P-CKAS-005.simulation.SIM-1" grounded="true" entityUid="P-CKAS-005.simulation.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="F-M20X150Y_Y_joint.SIM-1" uid="F-M20X150Y_Y_joint.SIM-1" entityUid="F-M20X150Y_Y_joint.SIM*:*Default">
+<Transform>
+<Rotation>0.99985509902791181 2.7755575615628914e-16 -0.017022953559372556 3.8857805861880479e-16 -1 0 -0.017022953559372389 0 -0.99985509902791181</Rotation>
+<Translation>0 -0.32500000000000007 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>0.23042153896675094 -0.97309090756218353 0 0 0 -1 0.97309090756218364 0.23042153896675094 0</Rotation>
+<Translation>0 -0.27900000000000003 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-1" uid="HNT1-ST-MS20.SIM-1" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>-0.8966928971014807 -0.4426531918870048 1.4515170421144876e-16 0 -1.8735013540549514e-16 -1 0.44265319188700486 -0.89669289710148059 1.3728030034180996e-16</Rotation>
+<Translation>0 0.29500000000000015 0</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="Link For SIM.SIM-2" uid="Link For SIM.SIM-2" entityUid="Link For SIM.SIM" rigid="true">
+<Transform>
+<Rotation>0.77879449747364704 -0.5988236260341635 -0.18678703276209008 0.60725040480750847 0.79437251853992041 -0.014807013529446775 0.15724527517826037 -0.10189488059682153 0.98228883570071834</Rotation>
+<Translation>0.27276238888469956 0.4998896944524569 -0.3887411846078046</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-1" uid="HNT1-ST-MS20.SIM-1" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>-0.89669289710148048 -0.44265319188700486 0 0 -1.6653345369377348e-16 -0.99999999999999978 0.44265319188700492 -0.89669289710148048 1.3704327091806573e-16</Rotation>
+<Translation>0 0.29500000000000004 0</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-005.simulation.SIM-1" uid="P-CKAS-005.simulation.SIM-1" grounded="true" entityUid="P-CKAS-005.simulation.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_h.SIM-1" uid="E-GYN20_h.SIM-1" entityUid="E-GYN20_h.SIM*:*Default">
+<Transform>
+<Rotation>-0.99985509902791181 0 -0.017022953559372528 0 0.99999999999999978 1.8041124150158794e-16 0.017022953559372556 1.9428902930940239e-16 -0.99985509902791181</Rotation>
+<Translation>0 0.37200000000000011 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>0.23042153896675066 -0.97309090756218353 -1.3877787807814457e-16 0 1.9689111452336761e-16 -0.99999999999999978 0.97309090756218353 0.23042153896675066 0</Rotation>
+<Translation>0 -0.27900000000000008 0</Translation>
+</Transform>
+</Instance>
+<Instance name="F-M20X150Y_Y_joint.SIM-1" uid="F-M20X150Y_Y_joint.SIM-1" entityUid="F-M20X150Y_Y_joint.SIM*:*Default">
+<Transform>
+<Rotation>-0.91337067320025178 2.6714741530042829e-16 -0.40712898857452928 -1.5265566588595902e-16 -1 0 -0.40712898857452923 0 0.91337067320025178</Rotation>
+<Translation>0 -0.32500000000000007 0</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="Link For SIM.SIM-8" uid="Link For SIM.SIM-8" entityUid="Link For SIM.SIM" rigid="true">
+<Transform>
+<Rotation>-0.25321884580737852 0.21116825790464355 0.94408060195170673 0.60725040480749515 0.79437251853993041 -0.014807013529443303 -0.75307845672885398 0.56954391283029759 -0.32938210238086996</Rotation>
+<Translation>-0.4730409358099672 0.49988969445244302 -0.041848565667161865</Translation>
+</Transform>
+<Instance name="HNT1-ST-MS20.SIM-1" uid="HNT1-ST-MS20.SIM-1" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>-0.89669289710148048 -0.4426531918870048 1.2286094138919258e-16 0 -2.7755575615628914e-16 -0.99999999999999978 0.4426531918870048 -0.89669289710148048 2.4888227509497501e-16</Rotation>
+<Translation>0 0.29499999999999993 0</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-005.simulation.SIM-1" uid="P-CKAS-005.simulation.SIM-1" grounded="true" entityUid="P-CKAS-005.simulation.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="E-GYN20_h.SIM-1" uid="E-GYN20_h.SIM-1" entityUid="E-GYN20_h.SIM*:*Default">
+<Transform>
+<Rotation>-0.99985509902791181 -2.2204460492503131e-16 -0.017022953559372611 -3.3306690738754696e-16 1 2.2204460492503131e-16 0.017022953559372556 3.0531133177191805e-16 -0.99985509902791181</Rotation>
+<Translation>0 0.37200000000000011 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>0.23042153896675083 -0.97309090756218353 1.080347930628926e-16 0 -1.1102230246251564e-16 -1 0.97309090756218364 0.23042153896675083 0</Rotation>
+<Translation>0 -0.27900000000000003 0</Translation>
+</Transform>
+</Instance>
+<Instance name="F-M20X150Y_Y_joint.SIM-1" uid="F-M20X150Y_Y_joint.SIM-1" entityUid="F-M20X150Y_Y_joint.SIM*:*Default">
+<Transform>
+<Rotation>-0.91337067320025167 4.3188532176390507e-16 -0.40712898857452917 -3.8857805861880469e-16 -1 -1.8905438063227111e-16 -0.40712898857452917 0 0.91337067320025167</Rotation>
+<Translation>0 -0.32500000000000001 0</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="Link For SIM-2.SIM-4" uid="Link For SIM-2.SIM-4" entityUid="Link For SIM-2.SIM" rigid="true">
+<Transform>
+<Rotation>0.78011523698578089 -0.38765536812949741 -0.49106367467264617 0.55297564687353162 0.79437251853993318 0.25137668100546401 0.29263996819884008 -0.46764903223347659 0.83406608351117761</Rotation>
+<Translation>-0.20027854692525343 0.49988969445244624 0.43058975027498925</Translation>
+</Transform>
+<Instance name="E-GYN20_h.SIM-1" uid="E-GYN20_h.SIM-1" entityUid="E-GYN20_h.SIM*:*Default">
+<Transform>
+<Rotation>-0.91337067320025145 -1.6109162502959976e-16 0.40712898857452945 -1.1102230246251564e-16 0.99999999999999989 1.4660491285120936e-16 -0.4071289885745295 0 -0.91337067320025134</Rotation>
+<Translation>0 0.37200000000000011 0</Translation>
+</Transform>
+</Instance>
+<Instance name="P-CKAS-005.simulation.SIM-1" uid="P-CKAS-005.simulation.SIM-1" grounded="true" entityUid="P-CKAS-005.simulation.SIM*:*Default">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Instance>
+<Instance name="F-M20X150Y_Y_joint.SIM-1" uid="F-M20X150Y_Y_joint.SIM-1" entityUid="F-M20X150Y_Y_joint.SIM*:*Default">
+<Transform>
+<Rotation>0.99985509902791192 3.6081845769670335e-16 -0.017022953559372337 3.6082248300317597e-16 -1 0 -0.017022953559372337 0 -0.99985509902791192</Rotation>
+<Translation>0 -0.32500000000000001 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-2" uid="HNT1-ST-MS20.SIM-2" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>0.23042153896675091 -0.97309090756218342 1.0199600273280092e-16 0 -1.1796119636642291e-16 -0.99999999999999978 0.97309090756218353 0.23042153896675091 0</Rotation>
+<Translation>0 -0.27900000000000003 0</Translation>
+</Transform>
+</Instance>
+<Instance name="HNT1-ST-MS20.SIM-1" uid="HNT1-ST-MS20.SIM-1" entityUid="HNT1-ST-MS20.SIM*:*Default">
+<Transform>
+<Rotation>-0.89669289710148059 -0.44265319188700486 1.732694748715055e-16 -1.1102230246251565e-16 -1.6653345369377338e-16 -0.99999999999999989 0.44265319188700486 -0.89669289710148048 1.0018498850130787e-16</Rotation>
+<Translation>0 0.29500000000000004 0</Translation>
+</Transform>
+</Instance>
+</Instance>
+</InstanceTree>
+<Constraints>
+<Coincident name="Coincident2">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0 0.086999999999999994 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-1</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident3">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.46851003678824688 0.078 -0.54758621600467472</Position>
+<Axis>-0.650111519869364 0 0.75983880641432455</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-1</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.125 0.014999999999999999 -0.14000000000000001</Position>
+<Axis>-1 0 1.6653345369377348e-16</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident4">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0 0.086999999999999994 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-2</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident5">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.70847859221637033 0.078 -0.13194848578424567</Position>
+<Axis>-0.98309546907073897 0 0.18309368829258957</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-2</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.125 0.014999999999999999 -0.14000000000000004</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident6">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0 0.086999999999999994 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-4</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident7">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.23996855542812415 0.078 0.67953470178893893</Position>
+<Axis>-0.3329839492013783 0 -0.94293249470694041</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-4</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.125 0.015000000000000027 -0.13999999999999999</Position>
+<Axis>-1.0000000000000002 0 1.1102230246251565e-16</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident8">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0 0.086999999999999994 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-6</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident9">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.2399685554281322 0.078 0.67953470178893782</Position>
+<Axis>0.33298394920138868 0 -0.94293249470693674</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-6</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.125 0.014999999999999999 -0.14000000000000001</Position>
+<Axis>-1.0000000000000002 0 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident10">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0 0.086999999999999994 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-8</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident11">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.70847859221636555 0.078 -0.1319484857842631</Position>
+<Axis>0.98309546907073442 0 0.18309368829261408</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-8</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.12499999999999989 0.014999999999999999 -0.13999999999999996</Position>
+<Axis>-1.0000000000000002 0 1.3877787807814457e-16</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident12">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0 0.086999999999999994 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-10</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident13">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.46851003678823444 0.078 -0.54758621600468782</Position>
+<Axis>0.65011151986934501 0 0.75983880641434109</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-10</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.12500000000000011 0.015000000000000013 -0.14000000000000001</Position>
+<Axis>-1 0 1.1102230246251565e-16</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric90">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.39168257099921733 0.086999999999999994 -0.64622084734903573</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-10</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.10000000000000009 0.014999999999999986 0.1225</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric91">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.52170487497309181 0.086999999999999994 -0.79818860863190044</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-10</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0.10000000000000009 0.014999999999999999 0.12249999999999994</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric92">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.95210404957312633 0.086999999999999994 -0.05271537068893193</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-8</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0.10000000000000009 0.014999999999999999 -0.12249999999999994</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric93">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.75548495575897912 0.086999999999999994 -0.016096633030413532</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-8</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.099999999999999978 0.014999999999999999 -0.12249999999999997</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric94">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.57784307857073203 0.086999999999999994 -0.48694352498104154</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-1</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.099999999999999978 0.015000000000000013 0.1225</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric95">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.70786538254460341 0.086999999999999994 -0.6389112862639077</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-1</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0.10000000000000009 0.014999999999999999 0.1225</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric96">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.75548495575897923 0.086999999999999994 -0.016096633030402818</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-2</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.10000000000000009 0.014999999999999999 0.12250000000000001</Position>
+<Axis>0 1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric97">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.95210404957312678 0.086999999999999994 -0.052715370688931916</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-2</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0.099999999999999978 0.015000000000000013 0.12250000000000008</Position>
+<Axis>0 1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric98">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.4303991746000348 0.086999999999999994 0.85090397932083151</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-4</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0.10000000000000009 0.015000000000000013 -0.1225</Position>
+<Axis>0 1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric99">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>0.36380238475975885 0.086999999999999994 0.6623174803794436</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-4</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.099999999999999978 0.015000000000000027 -0.12249999999999997</Position>
+<Axis>0 1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric100">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.19938071339683389 0.086999999999999994 0.93248504687516931</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-6</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>0.10000000000000009 0.015000000000000013 -0.12250000000000003</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric101">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-001.SIM-1</Uid>
+</InstancePath>
+<Position>-0.1327839235565583 0.086999999999999994 0.7438985479337813</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-6</Uid>
+<Uid>P-CKAS-002.SIM-1</Uid>
+</InstancePath>
+<Position>-0.10000000000000009 0.015000000000000013 -0.12250000000000003</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Concentric name="Concentric128">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-2</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518199 -0.4750498756759996 0.041797888473158268</Position>
+<Axis>-0.78571205633510111 -0.36461282011909324 -0.49971397412366664</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-1</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>-0.15000000000000002 0 -0.020000999999999935</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident112">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-2</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518199 -0.4750498756759996 0.041797888473158268</Position>
+<Axis>-0.78571205633510111 -0.36461282011909324 -0.49971397412366664</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-1</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0.020000000000000129</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric132">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-1</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518199 -0.47504987567599943 0.041797888473158157</Position>
+<Axis>-0.78571205633510111 -0.36461282011909313 -0.4997139741236668</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-2</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>-0.15000000000000002 0 -0.020000999999999935</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident115">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-1</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518199 -0.47504987567599943 0.041797888473158157</Position>
+<Axis>-0.78571205633510111 -0.36461282011909313 -0.4997139741236668</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-2</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0.020000000000000018</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric133">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-10</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518188 -0.47504987567599943 0.041797888473158046</Position>
+<Axis>-0.78571205633510122 -0.36461282011909324 -0.49971397412366664</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-4</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>-0.15000000000000002 0 -0.020001000000000047</Position>
+<Axis>0 0 1.0000000000000002</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident116">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-10</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518188 -0.47504987567599943 0.041797888473158046</Position>
+<Axis>-0.78571205633510122 -0.36461282011909324 -0.49971397412366664</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-4</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0.019999999999999907</Position>
+<Axis>0 0 1.0000000000000002</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric134">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-8</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518199 -0.47504987567599927 0.041797888473158212</Position>
+<Axis>-0.78571205633510122 -0.36461282011909302 -0.49971397412366669</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-6</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>-0.15000000000000002 0 -0.020001000000000047</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident117">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-8</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518199 -0.47504987567599927 0.041797888473158212</Position>
+<Axis>-0.78571205633510122 -0.36461282011909302 -0.49971397412366669</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-6</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0.019999999999999907</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric135">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-6</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.3480960665551821 -0.47504987567599938 0.041797888473158018</Position>
+<Axis>-0.78571205633510133 -0.36461282011909346 -0.4997139741236668</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-8</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>-0.15000000000000008 0 -0.020000999999999935</Position>
+<Axis>1.1102230246251565e-16 0 1</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident118">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-6</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.3480960665551821 -0.47504987567599938 0.041797888473158018</Position>
+<Axis>-0.78571205633510133 -0.36461282011909346 -0.4997139741236668</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-8</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0.020000000000000018</Position>
+<Axis>1.1102230246251565e-16 0 1</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric136">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-4</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518222 -0.47504987567599954 0.041797888473158185</Position>
+<Axis>-0.78571205633510122 -0.36461282011909329 -0.49971397412366692</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-10</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>-0.15000000000000002 0 -0.020000999999999935</Position>
+<Axis>-1.1102230246251565e-16 0 1.0000000000000002</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident119">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>HG-SR202B_with_gear.SIM-4</Uid>
+<Uid>MAB180-L1-35-114.3-200-M12-82.SIM-1</Uid>
+</InstancePath>
+<Position>-0.34809606655518222 -0.47504987567599954 0.041797888473158185</Position>
+<Axis>-0.78571205633510122 -0.36461282011909329 -0.49971397412366692</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-10</Uid>
+<Uid>P-CKAS-003.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0.020000000000000018</Position>
+<Axis>-1.1102230246251565e-16 0 1.0000000000000002</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric137">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-1</Uid>
+<Uid>HNTL1N-STU-M20_214.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0.020000000000000018</Position>
+<Axis>0 0 -0.99999999999999989</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-1</Uid>
+</InstancePath>
+<Position>0 -0.059999999999999942 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident120">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-1</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>1.1102230246251565e-16 0.012937500000000018 0</Position>
+<Axis>-1.0000000000000002 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric138">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-2</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>0.014000000000000012 0 0</Position>
+<Axis>1 -1.1102230246251565e-16 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-2</Uid>
+</InstancePath>
+<Position>0 -0.059999999999999942 0</Position>
+<Axis>0 1 1.1102230246251565e-16</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident121">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-2</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>-1.1102230246251565e-16 0.012937499999999963 0</Position>
+<Axis>-1 1.1102230246251565e-16 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-2</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 -1.1102230246251565e-16</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric139">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-4</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>0.013999999999999901 0 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-4</Uid>
+</InstancePath>
+<Position>0 -0.059999999999999942 0</Position>
+<Axis>0 0.99999999999999989 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident122">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-4</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>-1.1102230246251565e-16 0.012937499999999991 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-4</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -0.99999999999999989 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric140">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-6</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>0.014000000000000012 0 0</Position>
+<Axis>1 0 1.3877787807814457e-16</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-6</Uid>
+</InstancePath>
+<Position>0 -0.060000000000000053 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident123">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-6</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>1.1102230246251565e-16 0.012937499999999991 0</Position>
+<Axis>-1 0 -1.3877787807814457e-16</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-6</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric141">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-8</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>0.014000000000000012 0 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-8</Uid>
+</InstancePath>
+<Position>0 -0.059999999999999942 0</Position>
+<Axis>0 1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident124">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-8</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>0 0.012937500000000018 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-8</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1.0000000000000002 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric142">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-10</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>0.014000000000000012 0 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-10</Uid>
+</InstancePath>
+<Position>0 -0.059999999999999942 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident125">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>A-CKAS-01 for SIM.SIM-10</Uid>
+<Uid>E-B7204.SIM-2</Uid>
+</InstancePath>
+<Position>0 0.012937500000000018 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-10</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 -1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric144">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-2</Uid>
+</InstancePath>
+<Position>0.015000999999999987 0.040999999999999925 0</Position>
+<Axis>-1 0 -1.6653345369377348e-16</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>Link For SIM.SIM-2</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>0.026700000000000029 0.050000000000000003 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident128">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-2</Uid>
+</InstancePath>
+<Position>0.0099999999999999256 -0.022912878474779186 0</Position>
+<Axis>1 0 1.6653345369377348e-16</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>Link For SIM.SIM-2</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>-0.010000000000000009 0.036418982106625586 -0.013333333333333086</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric149">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-6</Uid>
+</InstancePath>
+<Position>0.015001000000000014 0.040999999999999925 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>Link For SIM.SIM-8</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>0.026700000000000002 0.049999999999999989 -2.2204460492503131e-16</Position>
+<Axis>1.0000000000000002 1.1102230246251565e-16 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident133">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-6</Uid>
+</InstancePath>
+<Position>0.010000000000000009 -0.022912878474779186 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>Link For SIM.SIM-8</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>0.0099999999999999256 0.036418982083429849 0.013333333333332975</Position>
+<Axis>-1.0000000000000002 -1.1102230246251565e-16 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric151">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-10</Uid>
+</InstancePath>
+<Position>0.015000999999999987 0.040999999999999925 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>Link For SIM.SIM-10</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>0.026700000000000002 0.049999999999999989 0</Position>
+<Axis>1.0000000000000002 0 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident135">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-10</Uid>
+</InstancePath>
+<Position>-0.010000000000000037 -0.022912878474779186 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>Link For SIM.SIM-10</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>-0.010000000000000009 0.03641898210662553 -0.013333333333332975</Position>
+<Axis>1.0000000000000002 0 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric159">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-1</Uid>
+</InstancePath>
+<Position>0.015001000000000014 0.040999999999999925 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-1</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>0.026700000000000002 0.050000000000000003 0</Position>
+<Axis>1.0000000000000002 2.2204460492503131e-16 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident150">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-1</Uid>
+</InstancePath>
+<Position>0.010000000000000009 -0.022912878474779186 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-1</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>-0.0099999999999999811 0.03641898210662553 -0.013333333333332975</Position>
+<Axis>1.0000000000000002 2.2204460492503131e-16 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric160">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-4</Uid>
+</InstancePath>
+<Position>0.015000999999999987 0.041000000000000036 0</Position>
+<Axis>-1 0 -1.1102230246251565e-16</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-2</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>0.026699999999999974 0.049999999999999933 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident152">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-4</Uid>
+</InstancePath>
+<Position>-0.0099999999999998979 -0.022912878474779297 0</Position>
+<Axis>-1 0 -1.1102230246251565e-16</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-2</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>-0.010000000000000037 0.036418982106625558 -0.013333333333332975</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="Concentric161">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-8</Uid>
+</InstancePath>
+<Position>0.015000999999999987 0.041000000000000036 0</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-4</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>0.026700000000000057 0.049999999999999961 0</Position>
+<Axis>1 -1.1102230246251565e-16 -1.9428902930940239e-16</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="Coincident154">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>P-CKAS-004.SIM-8</Uid>
+</InstancePath>
+<Position>0.0099999999999999811 -0.022912878474779186 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-4</Uid>
+<Uid>F-M20X150Y_Y_joint.SIM-1</Uid>
+</InstancePath>
+<Position>-0.010000000000000009 0.03641898210662553 -0.013333333333332864</Position>
+<Axis>1 -1.1102230246251565e-16 -1.9428902930940239e-16</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident155">
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>FlatForm_For_SIM.SIM-1</Uid>
+<Uid>E-GYN20_b.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-1</Uid>
+<Uid>E-GYN20_h.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident156">
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>Link For SIM.SIM-2</Uid>
+<Uid>E-GYN20_h.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>FlatForm_For_SIM.SIM-1</Uid>
+<Uid>E-GYN20_b.SIM-2</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident157">
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>FlatForm_For_SIM.SIM-1</Uid>
+<Uid>E-GYN20_b.SIM-3</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-2</Uid>
+<Uid>E-GYN20_h.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident158">
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>Link For SIM.SIM-8</Uid>
+<Uid>E-GYN20_h.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>FlatForm_For_SIM.SIM-1</Uid>
+<Uid>E-GYN20_b.SIM-4</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident159">
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>FlatForm_For_SIM.SIM-1</Uid>
+<Uid>E-GYN20_b.SIM-5</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>Link For SIM-2.SIM-4</Uid>
+<Uid>E-GYN20_h.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="Coincident160">
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>Link For SIM.SIM-10</Uid>
+<Uid>E-GYN20_h.SIM-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="point">
+<InstancePath>
+<Uid>FlatForm_For_SIM.SIM-1</Uid>
+<Uid>E-GYN20_b.SIM-6</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+</ConstraintGeometry>
+</Coincident>
+</Constraints>
+<Frames>
+<Frame name="usethis" uid="usethis">
+<Transform>
+<Rotation>-0.86602540378443815 0.50000000000000089 -3.5247602647366743e-15 -4.0700425753492324e-15 0 1 0.50000000000000078 0.86602540378443837 2.0350212876746197e-15</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Frame>
+</Frames>
+</RootAssembly>
+<Assemblies>
+<Assembly name="HG-SR202B_with_gear.SIM" uid="HG-SR202B_with_gear.SIM" version="127">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="HG-SR202B_with_gear.SIM.SLDASM" type="SolidWorks Assembly"/>
+<Frames>
+</Frames>
+</Assembly>
+<Assembly name="A-CKAS-01 for SIM.SIM" uid="A-CKAS-01 for SIM.SIM" version="155">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="A-CKAS-01 for SIM.SIM.SLDASM" type="SolidWorks Assembly"/>
+<Frames>
+</Frames>
+</Assembly>
+<Assembly name="FlatForm_For_SIM.SIM" uid="FlatForm_For_SIM.SIM" version="109">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="FlatForm_For_SIM.SIM.SLDASM" type="SolidWorks Assembly"/>
+<Frames>
+</Frames>
+</Assembly>
+<Assembly name="Flatform for SIM.SIM" uid="Flatform for SIM.SIM" version="109">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="Flatform for SIM.SIM.SLDASM" type="SolidWorks Assembly"/>
+<Frames>
+</Frames>
+</Assembly>
+<Assembly name="HNT1-ST-MS20 with spring and flat washer.SIM" uid="HNT1-ST-MS20 with spring and flat washer.SIM" version="112">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="HNT1-ST-MS20 with spring and flat washer.SIM.SLDASM" type="SolidWorks Assembly"/>
+<Frames>
+</Frames>
+</Assembly>
+<Assembly name="Link For SIM.SIM" uid="Link For SIM.SIM" version="128">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="Link For SIM.SIM.SLDASM" type="SolidWorks Assembly"/>
+<Frames>
+</Frames>
+</Assembly>
+<Assembly name="Link For SIM-2.SIM" uid="Link For SIM-2.SIM" version="134">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="Link For SIM-2.SIM.SLDASM" type="SolidWorks Assembly"/>
+<Frames>
+</Frames>
+</Assembly>
+</Assemblies>
+<Parts>
+<Part name="E-B7204.SIM" uid="E-B7204.SIM*:*Default" version="103">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="E-B7204.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.016602965727032435</Mass>
+<CenterOfMass>0.0069533031734883375 3.1371972234795193e-10 -1.2685848790200105e-07</CenterOfMass>
+<Inertia>5.5246304361099486e-06 2.9801306021071822e-06 2.9798560977221557e-06 1.0863404627007313e-12 3.6848655030565945e-13 -3.5341062987222257e-12</Inertia>
+</MassProperties>
+<GeometryFile name="E-B7204.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.68627450980392157" g="0.68627450980392157" b="0.68627450980392157" a="1"/>
+<Diffuse r="0.68627450980392157" g="0.68627450980392157" b="0.68627450980392157" a="1"/>
+<Specular r="0.34313725490196079" g="0.34313725490196079" b="0.34313725490196079" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="E-GYN20_b.SIM" uid="E-GYN20_b.SIM*:*Default" version="114">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="E-GYN20_b.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.010711572861909689</Mass>
+<CenterOfMass>1.3463498162031793e-07 0 0</CenterOfMass>
+<Inertia>1.330756605866296e-06 1.3308422159473559e-06 1.8871405125905591e-06 -4.7261450011618224e-13 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="E-GYN20_b.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="E-GYN20_h.SIM" uid="E-GYN20_h.SIM*:*Default" version="122">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="E-GYN20_h.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.039615451740914145</Mass>
+<CenterOfMass>7.991645445832947e-09 -0.029397281606550727 -2.1552895446964871e-07</CenterOfMass>
+<Inertia>3.6336614064937048e-05 6.2863203389101921e-06 3.8794050634290158e-05 2.1007402439593535e-10 7.3798609300590156e-11 1.220234735943321e-10</Inertia>
+</MassProperties>
+<GeometryFile name="E-GYN20_h.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="F-M20X150Y_Y_joint.SIM" uid="F-M20X150Y_Y_joint.SIM*:*Default" version="143">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="F-M20X150Y_Y_joint.SIM.sldprt" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.10280436458654957</Mass>
+<CenterOfMass>-1.1717856708221954e-08 0.020887038153584163 3.6224825639886774e-08</CenterOfMass>
+<Inertia>9.3495908533839129e-05 3.432919353248192e-05 0.00010145538821094895 7.3302775272162249e-11 4.1075951983906648e-12 -9.3399751719058465e-11</Inertia>
+</MassProperties>
+<GeometryFile name="F-M20X150Y_Y_joint.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.59482352941176475" g="0.59482352941176475" b="0.59482352941176475" a="1"/>
+<Specular r="0.66258823529411759" g="0.66258823529411759" b="0.66258823529411759" a="1"/>
+<Emissive r="0.15811764705882353" g="0.15811764705882353" b="0.15811764705882353" a="1"/>
+<Shininess>0.20999999999999999</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="HNT1-ST-MS20.SIM" uid="HNT1-ST-MS20.SIM*:*Default" version="104">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="HNT1-ST-MS20.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.0074149071256872376</Mass>
+<CenterOfMass>0 0 0.0079696417921408125</CenterOfMass>
+<Inertia>8.0702438360593751e-07 8.0702438360593709e-07 1.2999039996107351e-06 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="HNT1-ST-MS20.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="HNTL1N-STU-M20_214.SIM" uid="HNTL1N-STU-M20_214.SIM*:*Default" version="104">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="HNTL1N-STU-M20_214.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.0088342061419723443</Mass>
+<CenterOfMass>0 -5.1075422950297555e-10 0.0095313174812415389</CenterOfMass>
+<Inertia>1.043532904501485e-06 1.0435746621228071e-06 1.5442580712752514e-06 2.6810768560728821e-14 9.5388522704039867e-16 -7.842799470039453e-12</Inertia>
+</MassProperties>
+<GeometryFile name="HNTL1N-STU-M20_214.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Diffuse r="0.75294117647058822" g="0.75294117647058822" b="0.75294117647058822" a="1"/>
+<Specular r="0.37647058823529411" g="0.37647058823529411" b="0.37647058823529411" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="MAB180-L1-35-114.3-200-M12-82.SIM" uid="MAB180-L1-35-114.3-200-M12-82.SIM*:*Default" version="118">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="MAB180-L1-35-114.3-200-M12-82.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>3.9309264326062907</Mass>
+<CenterOfMass>-0.20390916013426655 -0.40840069826307518 0.13346318480217897</CenterOfMass>
+<Inertia>0.023959860769994786 0.027053899897358642 0.026244464059552698 -0.0011090484249384276 -0.0024608068154638191 -0.0017078809757965989</Inertia>
+</MassProperties>
+<GeometryFile name="MAB180-L1-35-114.3-200-M12-82.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-001.SIM" uid="P-CKAS-001.SIM*:*Default" version="185">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-001.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>30.06531593208118</Mass>
+<CenterOfMass>0 0.011434857439376792 0</CenterOfMass>
+<Inertia>9.8505655566154378 19.645148349170523 9.8505655566154591 0 -8.1790560178059309e-15 0</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-001.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="1" g="1" b="0" a="1"/>
+<Diffuse r="1" g="1" b="0" a="1"/>
+<Specular r="0.5" g="0.5" b="0" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+<Frame name="usethis" uid="usethis">
+<Transform>
+<Rotation>-0.8660254037844346 0.50000000000000711 0 1.7457406694215915e-15 3.0237115362774428e-15 1 0.50000000000000711 0.8660254037844346 -3.4914813388431334e-15</Rotation>
+<Translation>0 0 0</Translation>
+</Transform>
+</Frame>
+</Frames>
+</Part>
+<Part name="P-CKAS-002.SIM" uid="P-CKAS-002.SIM*:*Default" version="355">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-002.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>1.5848226445077589</Mass>
+<CenterOfMass>-0.034594886463684395 0.040758353088834916 0</CenterOfMass>
+<Inertia>0.01621321031286508 0.019910068279075835 0.014762568342514056 0 0 0.0037076711040055508</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-002.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.50196078431372548" g="1" b="0.50196078431372548" a="1"/>
+<Diffuse r="0.50196078431372548" g="1" b="0.50196078431372548" a="1"/>
+<Specular r="0.25098039215686274" g="0.5" b="0.25098039215686274" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-003.SIM" uid="P-CKAS-003.SIM*:*Default" version="692">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-003.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.45093593064799437</Mass>
+<CenterOfMass>-0.08294148660507468 -0.0002060542218348642 0</CenterOfMass>
+<Inertia>0.00027919456873098258 0.0017232829287955622 0.0018819796637014185 0 0 -9.8546656463057424e-06</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-003.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-004.SIM" uid="P-CKAS-004.SIM*:*Default" version="956">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-004.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.044622431237703104</Mass>
+<CenterOfMass>-5.4879945013729386e-09 -8.8795196441751462e-05 4.1884738170944125e-09</CenterOfMass>
+<Inertia>4.3170827839732713e-05 3.7700763562213474e-06 4.2455709657646062e-05 -6.6349115123469644e-12 1.4834962713321678e-12 9.1123518598133706e-12</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-004.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-005.simulation.SIM" uid="P-CKAS-005.simulation.SIM*:*Default" version="302">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-005.simulation.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.30200630267666612</Mass>
+<CenterOfMass>0 0 0</CenterOfMass>
+<Inertia>0.009942751062998776 2.2249067865534529e-05 0.0099425473121155881 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-005.simulation.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.75294117647058822" g="0" b="0" a="1"/>
+<Diffuse r="0.75294117647058822" g="0" b="0" a="1"/>
+<Specular r="0.37647058823529411" g="0" b="0" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-006.SIM" uid="P-CKAS-006.SIM*:*Default" version="326">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-006.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.028191729137797363</Mass>
+<CenterOfMass>0 0 0.044277031882020174</CenterOfMass>
+<Inertia>1.8301495312376895e-05 1.8279896492530665e-05 1.5265991228009159e-06 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-006.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-007.SIM" uid="P-CKAS-007.SIM*:*Default" version="545">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-007.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>2.4993154109936584</Mass>
+<CenterOfMass>5.8614992986180354e-05 0.015729809869021904 5.5651190043664914e-05</CenterOfMass>
+<Inertia>0.1255974679035787 0.24923854243429017 0.12560384252304135 -4.9057264040282536e-06 -1.1254907930427385e-05 -5.1669895747788852e-06</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-007.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0" g="0.75294117647058822" b="0" a="1"/>
+<Diffuse r="0" g="0.75294117647058822" b="0" a="1"/>
+<Specular r="0" g="0.37647058823529411" b="0" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+<Frame name="usethis_forsensor" uid="usethis_forsensor">
+<Transform>
+<Rotation>-0.86602540378444159 -0.49999999999999495 0 -1.7457406694215491e-15 3.0237115362774672e-15 -1 0.49999999999999495 -0.86602540378444159 -3.4914813388431334e-15</Rotation>
+<Translation>0 0.055999999999999994 0</Translation>
+</Transform>
+</Frame>
+</Frames>
+</Part>
+<Part name="P-CKAS-008.SIM" uid="P-CKAS-008.SIM*:*Default" version="129">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-008.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.012401122840780349</Mass>
+<CenterOfMass>0 0.0024388964888280903 0</CenterOfMass>
+<Inertia>4.9244353328945647e-06 9.7980873745127882e-06 4.9244353328945664e-06 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-008.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-009.SIM" uid="P-CKAS-009.SIM*:*Default" version="105">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-009.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.004712388980384688</Mass>
+<CenterOfMass>0 0 0</CenterOfMass>
+<Inertia>4.3943027242087235e-07 7.6576320931251205e-07 4.3943027242087235e-07 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-009.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="P-CKAS-010.SIM" uid="P-CKAS-010.SIM*:*Default" version="108">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="P-CKAS-010.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.0038759399363664064</Mass>
+<CenterOfMass>0 0 0</CenterOfMass>
+<Inertia>3.4616988556672453e-07 5.4699202351970901e-07 3.4616988556672475e-07 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="P-CKAS-010.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="PWF20.SIM" uid="PWF20.SIM*:*Default" version="103">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="PWF20.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.001684679060487527</Mass>
+<CenterOfMass>0 0 0</CenterOfMass>
+<Inertia>3.3630405744982263e-07 1.6941553802027699e-07 1.6941553802027694e-07 0 0 0</Inertia>
+</MassProperties>
+<GeometryFile name="PWF20.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.68627450980392157" g="0.68627450980392157" b="0.68627450980392157" a="1"/>
+<Diffuse r="0.68627450980392157" g="0.68627450980392157" b="0.68627450980392157" a="1"/>
+<Specular r="0.34313725490196079" g="0.34313725490196079" b="0.34313725490196079" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="SLW20.SIM" uid="SLW20.SIM*:*Default" version="103">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="SLW20.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>0.0028704399354371876</Mass>
+<CenterOfMass>0 -5.1666083043331917e-15 -0.00033455251901043896</CenterOfMass>
+<Inertia>5.5654892470236121e-07 2.7773866348925684e-07 2.9125356909595771e-07 0 0 2.7280746890580225e-11</Inertia>
+</MassProperties>
+<GeometryFile name="SLW20.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.68627450980392157" g="0.68627450980392157" b="0.68627450980392157" a="1"/>
+<Diffuse r="0.68627450980392157" g="0.68627450980392157" b="0.68627450980392157" a="1"/>
+<Specular r="0.34313725490196079" g="0.34313725490196079" b="0.34313725490196079" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+<Part name="hg-sr202b.SIM" uid="hg-sr202b.SIM*:*Default" version="118">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<PartFile name="hg-sr202b.SIM.SLDPRT" type="SolidWorks Part"/>
+<MassProperties>
+<Mass>4.3874794669598263</Mass>
+<CenterOfMass>2.7228131807899367e-05 -0.0024037205380381455 -0.073949483824090931</CenterOfMass>
+<Inertia>0.020234284370991302 0.018999327223055609 0.018888745743125178 -4.1610288171363023e-05 5.681333934545832e-06 2.6606093734375539e-05</Inertia>
+</MassProperties>
+<GeometryFile name="hg-sr202b.SIM_Default_sldprt.STEP" type="STEP"/>
+<VisualProperties>
+<Ambient r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Diffuse r="0.792156862745098" g="0.81960784313725488" b="0.93333333333333335" a="1"/>
+<Specular r="0.396078431372549" g="0.40980392156862744" b="0.46666666666666667" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.3125</Shininess>
+</VisualProperties>
+<Frames>
+</Frames>
+</Part>
+</Parts>
+</SimscapeMultibodyImportXML>

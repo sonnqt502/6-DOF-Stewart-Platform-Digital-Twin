@@ -1,0 +1,54 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {section}{\numberline {1}Giới thiệu}{3}{section.1}%
+\contentsline {section}{\numberline {2}Tham số hệ thống và hình học}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Tham số cơ khí}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Phân bố góc và tọa độ 6 khớp đế $A_i$}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Tọa độ 6 khớp bệ $B_i$ (Body Frame)}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Góc định hướng motor $\gamma _i$}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Ma trận quay ZYX và biến đổi tọa độ}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Định nghĩa tư thế}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Khai triển ma trận quay}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Động học ngược (Inverse Kinematics)}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Phương trình vòng kín}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Khai triển phương trình vòng kín}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Giải phương trình IK}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Bù offset sang góc vật lý thực}{8}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Nguyên nhân cần bù offset}{8}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Bước 1 — Bù vị trí home (offset $\pm 90°$)}{9}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Bước 2 — Bù hướng quay driver}{9}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}Bước 3 — Đảo dấu motor lẻ}{9}{subsubsection.4.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.5}Rút gọn toán học}{9}{subsubsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.5}Ví dụ số — tính IK tại home}{9}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Ma trận Jacobian vận tốc}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Mục tiêu và ký hiệu}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Biến đổi Euler rates sang vận tốc góc}{11}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Khai triển từ định nghĩa quay}{11}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Giá trị số tại home}{12}{subsubsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.3}Xây dựng hàng $i$ của Jacobian — Khai triển đầy đủ}{12}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Bước 1: Lấy đạo hàm điều kiện chiều dài}{12}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Bước 2: Tính $\dot B_i'$}{12}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Bước 3: Tính $\dot C_i$}{12}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Bước 4: Thay vào ràng buộc}{12}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Bước 5: Kết quả Jacobian}{13}{subsubsection.5.3.5}%
+\contentsline {subsection}{\numberline {5.4}Gia tốc góc động cơ}{13}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Động lực học bệ động — Phương trình Newton-Euler}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Phương trình Newton — Lực quán tính}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Phương trình Euler — Moment quán tính}{15}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Wrench tổng hợp}{16}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Nguyên lý Công ảo — Tính moment}{16}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Phát biểu và khai triển}{16}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Áp dụng ràng buộc Jacobian}{17}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Phân tích kỳ dị (Singularity)}{17}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Ví dụ số — Moment do bệ tại home với heave $1g$}{17}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Các thành phần moment phụ trợ}{18}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Quán tính rotor và cánh tay quay}{18}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Moment trọng lực cánh tay quay}{18}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Ma sát nhớt}{19}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Thành phần bỏ qua}{19}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Tổng hợp — Công thức và ví dụ số đầy đủ}{19}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Công thức tổng hợp}{19}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Quy trình 9 bước — từng bước với số cụ thể}{19}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Ví dụ số đầy đủ — Một điểm quỹ đạo heave}{20}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Kết luận}{21}{section.10}%
+\contentsline {section}{\numberline {A}Tham số số cụ thể — CKAS W2}{22}{appendix.A}%
+\contentsline {section}{\numberline {B}Mã nguồn MATLAB tham chiếu}{22}{appendix.B}%

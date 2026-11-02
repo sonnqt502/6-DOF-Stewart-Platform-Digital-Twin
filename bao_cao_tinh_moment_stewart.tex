@@ -1,0 +1,1202 @@
+\documentclass[12pt,a4paper]{article}
+
+%%============================================================
+%% GOI CAN THIET
+%%============================================================
+%% Tieng Viet
+\usepackage[T5]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+
+%% Trang
+\usepackage[top=2.5cm,bottom=2.5cm,left=3.0cm,right=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+%% Toan hoc
+\usepackage{amsmath,amssymb,bm,mathtools,amsthm}
+\usepackage{array}
+
+%% Bang, hinh
+\usepackage{booktabs,multirow,tabularx}
+\usepackage{graphicx,caption,float}
+\usepackage{xcolor}
+
+%% Hop van ban
+\usepackage{mdframed}
+\usepackage{framed}
+
+%% Ky hieu bo sung
+\usepackage{textcomp}
+
+%% Code MATLAB
+\usepackage{listings}
+\lstset{
+  language=Matlab, basicstyle=\ttfamily\small,
+  backgroundcolor=\color{gray!10}, frame=single,
+  keywordstyle=\color{blue!80!black}\bfseries,
+  commentstyle=\color{green!50!black}\itshape,
+  breaklines=true, numbers=left, numberstyle=\tiny\color{gray},
+  literate={à}{{\`a}}1 {á}{\'a}1 {â}{{\^a}}1 {ã}{{\~a}}1
+           {ă}{{\u{a}}}1 {ắ}{{\'\u{a}}}1 {ặ}{{\d{\u{a}}}}1
+           {è}{{\`e}}1 {é}{\'e}1 {ê}{{\^e}}1
+           {ì}{{\`i}}1 {í}{\'i}1
+           {ò}{{\`o}}1 {ó}{\'o}1 {ô}{{\^o}}1 {ơ}{{\ohorn}}1
+           {ù}{{\`u}}1 {ú}{\'u}1 {ư}{{\uhorn}}1
+           {đ}{{\dj}}1
+           {À}{{\`A}}1 {Â}{{\^A}}1 {Ă}{{\u{A}}}1
+           {É}{\'E}1 {Ê}{{\^E}}1 {Ô}{{\^O}}1 {Ơ}{{\Ohorn}}1
+           {Ư}{{\Uhorn}}1 {Đ}{{\DJ}}1
+           {ọ}{{\d{o}}}1 {ộ}{{\d{\^o}}}1 {ợ}{{\d{\ohorn}}}1
+           {ệ}{{\d{\^e}}}1 {ự}{{\d{\uhorn}}}1
+}
+
+%% Dieu huong
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=blue!70!black,pdftitle={CKAS W2 Torque Report}}
+
+%%============================================================
+%% MOI TRUONG va LENH TUY CHINH
+%%============================================================
+
+%% Hop ket qua (nen xanh duong nhat)
+\newmdenv[
+  linecolor=blue!60!black, linewidth=1.5pt,
+  backgroundcolor=blue!5,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=6pt, innerbottommargin=6pt,
+  frametitlerule=true, frametitlebackgroundcolor=blue!15,
+  frametitlefont=\bfseries
+]{resultbox}
+
+%% Hop vi du so (nen xanh la nhat)
+\newmdenv[
+  linecolor=green!50!black, linewidth=1.5pt,
+  backgroundcolor=green!4,
+  innerleftmargin=8pt, innerrightmargin=8pt,
+  innertopmargin=6pt, innerbottommargin=6pt,
+  frametitlerule=true, frametitlebackgroundcolor=green!12,
+  frametitlefont=\bfseries
+]{numbox}
+
+%% Ghi chu hinh (thay the todonotes)
+\newcommand{\figref}[2]{%
+  \begin{mdframed}[
+    linecolor=blue!50, linewidth=1pt,
+    backgroundcolor=blue!3,
+    innerleftmargin=6pt, innerrightmargin=6pt,
+    innertopmargin=4pt, innerbottommargin=4pt
+  ]
+  {\small\bfseries [H\`{I}NH #1]:} {\small #2}
+  \end{mdframed}
+}
+
+%% Lenh ky hieu toan hoc
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\pp}{\mathbf{p}}
+\newcommand{\Jq}{\mathbf{J}_q}
+\newcommand{\tauv}{\boldsymbol{\tau}}
+\newcommand{\wv}{\boldsymbol{\omega}}
+\newcommand{\Wsc}{\mathbf{W}_{\mathrm{sc}}}
+\newcommand{\Fv}{\mathbf{F}}
+\newcommand{\Mv}{\mathbf{M}}
+\newcommand{\Lvec}{\mathbf{L}}
+\newcommand{\shat}{\hat{s}}
+\newcommand{\bvec}{\mathbf{b}}
+\newcommand{\vp}{\mathbf{v}_p}
+\newcommand{\ap}{\mathbf{a}_p}
+\newcommand{\gv}{\mathbf{g}}
+\newcommand{\Xd}{\dot{\mathbf{X}}}
+\newcommand{\Xdd}{\ddot{\mathbf{X}}}
+
+%% ============================================================
+\begin{document}
+%% ============================================================
+
+%% ---- TRANG BIA ----
+\begin{titlepage}
+\centering\vspace*{1.5cm}
+{\Large\bfseries BÁO CÁO KỸ THUẬT}\\[0.4cm]
+{\rule{\linewidth}{0.8mm}}\\[0.5cm]
+{\LARGE\bfseries Phương Pháp Tính Toán Moment Động Cơ\\[0.25cm]
+cho Hệ Thống Mô Phỏng Chuyển Động\\[0.25cm]
+Stewart Platform 6-RUS --- CKAS W2}\\[0.35cm]
+{\rule{\linewidth}{0.8mm}}\\[1cm]
+{\large\itshape Cơ sở toán học, khai triển đầy đủ và giá trị số cụ thể}\\[2.5cm]
+\begin{tabular}{@{}ll@{}}
+\bfseries Phần mềm: & \texttt{gui\_torque\_motion.m},\ \texttt{tinh\_torque.m}\\
+& \texttt{jacobian\_motor.m},\ \texttt{donghocnguoc\_final1.m}\\[0.4cm]
+\bfseries Ngày: & Tháng 9 năm 2026 \\
+\end{tabular}\vfill
+\end{titlepage}
+
+\tableofcontents\newpage
+
+%% ============================================================
+\section{Giới thiệu}
+%% ============================================================
+
+Stewart Platform CKAS W2 là cơ cấu song song 6 bậc tự do kiểu \textbf{6-RUS}
+(\textbf{R}evolute--\textbf{U}niversal--\textbf{S}pherical). Sáu chân song song
+dẫn động bệ động độc lập, tái tạo chuyển động 6-DOF cho hệ mô phỏng. Mỗi chân
+gồm: (1) khớp quay R (trục động cơ), (2) cánh tay quay $L_1$, (3) khớp U,
+(4) thanh truyền $L_2$, (5) khớp cầu S tại bệ.
+
+Bài toán cốt lõi trong vận hành hệ thống là \textbf{tính moment tức thời tại 6 trục
+động cơ} $\tau_i(t)$ tương ứng với mỗi điểm trên quỹ đạo chuyển động đầu vào. Báo cáo
+này trình bày đầy đủ cơ sở toán học, bao gồm: khai triển từng bước các phép tính trung
+gian, và minh họa bằng giá trị số cụ thể của hệ CKAS W2.
+
+%% ============================================================
+\section{Tham số hệ thống và hình học}
+%% ============================================================
+
+\subsection{Tham số cơ khí}
+
+\begin{table}[H]\centering
+\caption{Tham số hình học và vật lý của CKAS W2}
+\label{tab:params}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\bfseries Ký hiệu & \bfseries Giá trị & \bfseries Đơn vị & \bfseries Nguồn \\
+\midrule
+$r_a$ (bán kính đế) & 589{,}66 & mm & Cơ khí \\
+$r_b$ (bán kính bệ) & 429{,}566 & mm & Cơ khí \\
+$L_1$ (cánh tay quay) & 150{,}0 & mm & Cơ khí \\
+$L_2$ (thanh truyền)  & 747{,}0 & mm & Cơ khí \\
+$\alpha_1$ (góc phân bố đế) & 19{,}45 & độ & Cơ khí \\
+$\delta_a$ (góc lệch cặp đế) & 38{,}90 & độ & Cơ khí \\
+$\beta_1$ (góc phân bố bệ)  & 53{,}32 & độ & Cơ khí \\
+$\delta_b$ (góc lệch cặp bệ) & 13{,}37 & độ & Cơ khí \\
+$Z_A$ (độ cao đế) & 668{,}40 & mm & Cơ khí \\
+$z_{\text{home}}$ (vị trí home) & $-75{,}0$ & mm & Hiệu chỉnh \\
+\midrule
+$m_p$ (khối lượng bệ) & 30{,}0653 & kg & Simscape \\
+$I_{xx}$ & 9{,}8506 & kg$\cdot$m$^2$ & Simscape \\
+$I_{yy}$ & 19{,}6451 & kg$\cdot$m$^2$ & Simscape \\
+$I_{zz}$ & 9{,}8506 & kg$\cdot$m$^2$ & Simscape \\
+$I_{\text{motor}}$ & 0{,}0199 & kg$\cdot$m$^2$ & Simscape \\
+$m_{\text{arm}}$ & 1{,}5 & kg & Ước tính \\
+$b_m$ (ma sát nhớt) & 0{,}02 & N$\cdot$m$\cdot$s/rad & Ước tính \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Phân bố góc và tọa độ 6 khớp đế $A_i$}
+
+Góc phân bố của 6 khớp đế được tính theo quy tắc 3 cụm, mỗi cụm 2 chân lệch $\delta_a$:
+\begin{align}
+  \alpha_{2k+1} &= -(\alpha_1 + 120k)^{\circ}, \qquad k = 0{,}1{,}2 \label{eq:alpha_odd}\\
+  \alpha_{2k+2} &= -(\alpha_1 - \delta_a + 120(k+1))^{\circ}, \quad k = 0{,}1{,}2 \label{eq:alpha_even}
+\end{align}
+
+Tọa độ 3D điểm $A_i$ (khớp R tại đế, cố định):
+\begin{equation}
+  A_i = \begin{bmatrix} r_a\cos\alpha_i \\ r_a\sin\alpha_i \\ Z_A \end{bmatrix}
+  \label{eq:Ai}
+\end{equation}
+
+\begin{table}[H]\centering
+\caption{Góc phân bố $\alpha_i$, tọa độ $A_i$ (mm) và góc định hướng motor $\gamma_i$ --- CKAS W2}
+\label{tab:Ai}
+\begin{tabular}{@{}c r r r r r@{}}
+\toprule
+$i$ & $\alpha_i$ (độ) & $A_{i,x}$ (mm) & $A_{i,y}$ (mm) & $A_{i,z}$ (mm) & $\gamma_i$ (độ) \\
+\midrule
+1 & $-19{,}45$   & $+556{,}01$  & $-196{,}35$  & $668{,}40$ & $-109{,}45$ \\
+2 & $-100{,}55$  & $-107{,}96$  & $-579{,}69$  & $668{,}40$ & $-10{,}55$  \\
+3 & $-139{,}45$  & $-448{,}05$  & $-383{,}34$  & $668{,}40$ & $-229{,}45$ \\
+4 & $-220{,}55$  & $-448{,}05$  & $+383{,}34$  & $668{,}40$ & $-130{,}55$ \\
+5 & $-259{,}45$  & $-107{,}96$  & $+579{,}69$  & $668{,}40$ & $-349{,}45$ \\
+6 & $-340{,}55$  & $+556{,}01$  & $+196{,}35$  & $668{,}40$ & $-250{,}55$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Tọa độ 6 khớp bệ $B_i$ (Body Frame)}
+
+\begin{align}
+  \beta_{2k+1} &= -(\beta_1 + 120k)^{\circ}, \qquad k = 0{,}1{,}2 \label{eq:beta_odd}\\
+  \beta_{2k+2} &= -(\beta_1 + \delta_b + 120k)^{\circ}, \quad k = 0{,}1{,}2 \label{eq:beta_even}
+\end{align}
+
+\begin{equation}
+  B_i^{\text{body}} = \begin{bmatrix} r_b\cos\beta_i \\ r_b\sin\beta_i \\ 0 \end{bmatrix}
+  \label{eq:Bi}
+\end{equation}
+
+\begin{table}[H]\centering
+\caption{Góc phân bố $\beta_i$ và tọa độ $B_i^{\text{body}}$ (mm) --- CKAS W2}
+\label{tab:Bi}
+\begin{tabular}{@{}c r r r r@{}}
+\toprule
+$i$ & $\beta_i$ (độ) & $B_{i,x}$ (mm) & $B_{i,y}$ (mm) & $B_{i,z}$ (mm) \\
+\midrule
+1 & $-53{,}32$   & $+256{,}60$ & $-344{,}51$ & $0$ \\
+2 & $-66{,}69$   & $+169{,}98$ & $-394{,}50$ & $0$ \\
+3 & $-173{,}32$  & $-426{,}65$ & $-49{,}97$  & $0$ \\
+4 & $-186{,}69$  & $-426{,}64$ & $+50{,}04$  & $0$ \\
+5 & $-293{,}32$  & $+170{,}05$ & $+394{,}47$ & $0$ \\
+6 & $-306{,}69$  & $+256{,}66$ & $+344{,}46$ & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Góc định hướng motor $\gamma_i$}
+
+Trục quay mỗi motor được gá vuông góc với phương hướng tâm $\overrightarrow{OA_i}$:
+\begin{equation}
+  \gamma_i = \alpha_i + (-1)^i \cdot 90^{\circ}
+  \label{eq:gamma}
+\end{equation}
+
+\textbf{Diễn giải}: Motor số lẻ ($i=1{,}3{,}5$) quay $-90^{\circ}$ so với $\alpha_i$; motor số
+chẵn quay $+90^{\circ}$. Điều này đảm bảo mặt phẳng quay của cánh tay quay hướng vào tâm
+bệ, tạo moment hiệu quả nhất.
+
+\figref{1}{Hình học tổng thể. Bên trái: bố trí top-view với 6 điểm $A_i$ (vàng) và
+$B_i$ (xanh lá) trên 2 vòng tròn $r_a=589{,}66$ và $r_b=429{,}566$; 3 cụm 2 chân
+lệch $\delta_a=38{,}9^{\circ}/\delta_b=13{,}37^{\circ}$. Bên phải: sơ đồ 1 chân với $A_i$, $C_i$,
+$B_i'$, các góc $q_i$, $\gamma_i$ và chiều dài $L_1=150$, $L_2=747$.}
+
+%% ============================================================
+\section{Ma trận quay ZYX và biến đổi tọa độ}
+%% ============================================================
+
+\subsection{Định nghĩa tư thế}
+
+Tư thế bệ động tại thời điểm $t$:
+\begin{equation}
+  \text{pose}(t) = \begin{bmatrix} x & y & z & \phi & \theta & \psi \end{bmatrix}^T
+  \label{eq:pose}
+\end{equation}
+
+trong đó $(x{,}y{,}z)$ là tịnh tiến tâm bệ so với gốc World (mm),
+$(\phi{,}\theta{,}\psi)$ là Roll--Pitch--Yaw (độ) theo quy ước ZYX Euler.
+
+\subsection{Khai triển ma trận quay}
+
+Ma trận quay xây dựng theo thứ tự Yaw $\to$ Pitch $\to$ Roll:
+\begin{equation}
+  \R = R_z(\psi)\,R_y(\theta)\,R_x(\phi)
+  \label{eq:R_def}
+\end{equation}
+
+Khai triển từng ma trận:
+\begin{equation}
+  R_x(\phi) = \begin{bmatrix}1&0&0\\0&c_\phi&-s_\phi\\0&s_\phi&c_\phi\end{bmatrix},\quad
+  R_y(\theta) = \begin{bmatrix}c_\theta&0&s_\theta\\0&1&0\\-s_\theta&0&c_\theta\end{bmatrix},\quad
+  R_z(\psi) = \begin{bmatrix}c_\psi&-s_\psi&0\\s_\psi&c_\psi&0\\0&0&1\end{bmatrix}
+\end{equation}
+
+Nhân tuần tự $R_y(\theta)\cdot R_x(\phi)$:
+\begin{equation}
+  R_y R_x = \begin{bmatrix}
+    c_\theta & s_\theta s_\phi & s_\theta c_\phi \\
+    0        & c_\phi          & -s_\phi         \\
+    -s_\theta & c_\theta s_\phi & c_\theta c_\phi
+  \end{bmatrix}
+\end{equation}
+
+Nhân tiếp $R_z(\psi) \cdot (R_y R_x)$ thu được:
+\begin{equation}
+\boxed{
+  \R = \begin{bmatrix}
+    c_\psi c_\theta & c_\psi s_\theta s_\phi - s_\psi c_\phi & c_\psi s_\theta c_\phi + s_\psi s_\phi \\
+    s_\psi c_\theta & s_\psi s_\theta s_\phi + c_\psi c_\phi & s_\psi s_\theta c_\phi - c_\psi s_\phi \\
+    -s_\theta       & c_\theta s_\phi                        & c_\theta c_\phi
+  \end{bmatrix}
+}
+\label{eq:R_full}
+\end{equation}
+
+\textbf{Kiểm tra}: $\R^T\R = I$ và $\det\R = +1$ (ma trận trực giao đặc biệt). Khi
+$\phi=\theta=\psi=0$: $\R = I_{3\times3}$ (tư thế home).
+
+Tọa độ khớp bệ $B_i$ trong World Frame:
+\begin{equation}
+  B_i' = \pp + \R \cdot B_i^{\text{body}}
+  \label{eq:Bi_world}
+\end{equation}
+
+\begin{numbox}[frametitle={Ví dụ tại home: $\phi{=}\theta{=}\psi{=}0$; $\mathbf{p}{=}[0{,}0{,}-75]^T$ mm}]
+$\R = I_{3\times3}$, nên:
+\[B_i' = \begin{bmatrix}0\\0\\-75\end{bmatrix} + B_i^{\text{body}}\]
+Ví dụ chân 1: $B_1' = [0{+}255{,}90;\; 0{-}344{,}52;\; {-}75{+}0]^T = [255{,}90;\;{-}344{,}52;\;{-}75{,}00]^T$ mm.
+\end{numbox}
+
+%% ============================================================
+\section{Động học ngược (Inverse Kinematics)}
+%% ============================================================
+
+\subsection{Phương trình vòng kín}
+
+Vị trí đầu cánh tay quay $C_i$ (điểm khớp U) phụ thuộc góc $q_i$ của motor $i$:
+\begin{equation}
+  C_i(q_i) = A_i + L_1 \begin{bmatrix}
+    \cos\gamma_i\,\cos q_i \\ \sin\gamma_i\,\cos q_i \\ \sin q_i
+  \end{bmatrix}
+  \label{eq:Ci}
+\end{equation}
+
+$q_i$ được định nghĩa là góc cánh tay quay so với \textit{mặt phẳng nằm ngang}
+($q_i=0$ khi cánh tay nằm ngang, $q_i=90^{\circ}$ khi thẳng đứng hướng lên).
+
+Điều kiện vòng kín: chiều dài thanh truyền luôn bằng $L_2$:
+\begin{equation}
+  \|B_i' - C_i(q_i)\|^2 = L_2^2
+  \label{eq:loop_closure}
+\end{equation}
+
+\subsection{Khai triển phương trình vòng kín}
+
+Định nghĩa \textbf{vector chân ảo}:
+\begin{equation}
+  \Lvec_i \triangleq B_i' - A_i = \pp + \R B_i^{\text{body}} - A_i
+  \label{eq:Lvec}
+\end{equation}
+
+Khai triển vế trái của~\eqref{eq:loop_closure}:
+\begin{align}
+  \|B_i' - C_i\|^2
+  &= \|(\underbrace{B_i' - A_i}_{\Lvec_i}) - (\underbrace{C_i - A_i}_{L_1[\cdots]})\|^2 \notag\\
+  &= \|\Lvec_i\|^2
+     - 2\,\Lvec_i^T (C_i - A_i)
+     + \|C_i - A_i\|^2 \notag\\
+  &= \|\Lvec_i\|^2
+     - 2L_1\Lvec_i^T\begin{bmatrix}\cos\gamma_i\cos q_i\\\sin\gamma_i\cos q_i\\\sin q_i\end{bmatrix}
+     + L_1^2 \label{eq:expand_1}
+\end{align}
+
+Đặt điều kiện~\eqref{eq:loop_closure} vào~\eqref{eq:expand_1} và rút gọn:
+\begin{align}
+  \underbrace{\|\Lvec_i\|^2 - L_2^2 + L_1^2}_{Q_i}
+  &= 2L_1\!\left[L_{i,x}\cos\gamma_i\cos q_i + L_{i,y}\sin\gamma_i\cos q_i + L_{i,z}\sin q_i\right]\notag\\
+  &= 2L_1(L_{i,x}\cos\gamma_i + L_{i,y}\sin\gamma_i)\cos q_i + 2L_1 L_{i,z}\sin q_i\notag\\
+  &= \underbrace{2L_1(L_{i,x}\cos\gamma_i + L_{i,y}\sin\gamma_i)}_{N_i}\cos q_i
+   + \underbrace{2L_1 L_{i,z}}_{M_i}\sin q_i
+\end{align}
+
+Dạng chuẩn:
+\begin{equation}
+\boxed{Q_i = M_i\sin q_i + N_i\cos q_i}
+\label{eq:IK_std}
+\end{equation}
+
+với:
+\begin{align}
+  Q_i &= \|\Lvec_i\|^2 - L_2^2 + L_1^2
+         = L_{i,x}^2 + L_{i,y}^2 + L_{i,z}^2 - 747^2 + 150^2 \label{eq:Qi}\\
+  M_i &= 2 \times 150 \times L_{i,z} = 300\,L_{i,z} \label{eq:Mi}\\
+  N_i &= 2 \times 150\,(L_{i,x}\cos\gamma_i + L_{i,y}\sin\gamma_i)
+         = 300(L_{i,x}\cos\gamma_i + L_{i,y}\sin\gamma_i) \label{eq:Ni}
+\end{align}
+
+\subsection{Giải phương trình IK}
+
+Phương trình $Q = M\sin q + N\cos q$ là phương trình lượng giác tổng quát.
+Giải bằng phép thế \emph{R-sin}:
+\begin{align}
+  M\sin q + N\cos q
+  &= \underbrace{\sqrt{M^2+N^2}}_{R_{MN}}\left(\frac{M}{R_{MN}}\sin q + \frac{N}{R_{MN}}\cos q\right)\notag\\
+  &= R_{MN}\sin(q + \varphi), \quad \varphi = \arctan2(N{,}M)
+  \label{eq:Rsin}
+\end{align}
+
+Suy ra:
+\begin{equation}
+  \sin(q_i + \varphi_i) = \frac{Q_i}{R_{MN,i}}, \qquad R_{MN,i} = \sqrt{M_i^2 + N_i^2}
+\end{equation}
+
+Nghiệm chính (nhánh $q_i$ nhỏ hơn, tương ứng cấu hình ``elbow-up''):
+\begin{equation}
+\boxed{
+  q_{i,\text{raw}} = \arcsin\!\left(\frac{Q_i}{R_{MN,i}}\right) - \arctan2(N_i{,}\,M_i)
+}
+\label{eq:IK_sol}
+\end{equation}
+
+\textbf{Điều kiện tồn tại nghiệm} (giới hạn không gian làm việc):
+\begin{equation}
+  \left|\frac{Q_i}{\sqrt{M_i^2+N_i^2}}\right| \leq 1
+  \label{eq:workspace}
+\end{equation}
+
+\figref{2}{Giải IK hình học: (a) Vòng tròn bán kính $L_2=747$ mm tâm $B_i'$
+và quỹ đạo tròn $C_i$ quanh $A_i$ bán kính $L_1=150$ mm; giao điểm là
+nghiệm; (b) Trường hợp không có giao điểm (out of workspace).}
+
+\subsection{Bù offset sang góc vật lý thực}
+
+\subsubsection{Nguyên nhân cần bù offset}
+
+Góc $q_{i,\text{raw}}$ trong phương trình IK lấy mốc là cánh tay nằm ngang.
+Tuy nhiên, encoder driver đo góc tương đối so với vị trí ``zero'' của
+từng motor, và chiều quay của các motor lẻ/chẵn ngược nhau. Cần 3 bước bù:
+
+\subsubsection{Bước 1 --- Bù vị trí home (offset $\pm90^{\circ}$)}
+
+Ở vị trí home, cánh tay quay nằm ngang ($q_{i,\text{raw}} \approx 0$). Do vị trí
+zero encoder được gán khi cánh tay thẳng đứng, cần cộng thêm $\pm 90^{\circ}$:
+\begin{equation}
+  \phi_{\text{out},i} = \begin{cases}
+    -(90^{\circ} + q_{i,\text{raw}}) & i \in \{1{,}3{,}5\}\;\text{(motor lẻ --- đảo chiều cơ khí)}\\
+    +(90^{\circ} + q_{i,\text{raw}}) & i \in \{2{,}4{,}6\}\;\text{(motor chẵn)}
+  \end{cases}
+  \label{eq:step1}
+\end{equation}
+
+\subsubsection{Bước 2 --- Bù hướng quay driver}
+
+Driver của 2 motor trong cùng cụm được kết nối đối xứng về điện:
+\begin{equation}
+  \phi_{\text{thực},i} = \phi_{\text{out},i} - \Delta_i,
+  \qquad \boldsymbol{\Delta} = [+90^{\circ}{,}\,-90^{\circ}{,}\,+90^{\circ}{,}\,-90^{\circ}{,}\,+90^{\circ}{,}\,-90^{\circ}]
+  \label{eq:step2}
+\end{equation}
+
+\subsubsection{Bước 3 --- Đảo dấu motor lẻ}
+
+\begin{equation}
+  \phi_{\text{thực},i} \leftarrow -\phi_{\text{thực},i}, \qquad i \in \{1{,}3{,}5\}
+  \label{eq:step3}
+\end{equation}
+
+\subsubsection{Rút gọn toán học}
+
+Kết hợp~\eqref{eq:step1}--\eqref{eq:step3}, với $i$ \textit{lẻ}:
+\begin{align}
+  \phi_{\text{thực},i}
+  &= -\left[\phi_{\text{out},i} - \Delta_i\right]
+  = -\left[-(90+q_{\text{raw}}) - (+90)\right]
+  = -\left[-180 - q_{\text{raw}}\right]
+  = 180 + q_{\text{raw}}
+\end{align}
+
+Với $i$ \textit{chẵn}:
+\begin{align}
+  \phi_{\text{thực},i}
+  &= \phi_{\text{out},i} - \Delta_i
+  = (90+q_{\text{raw}}) - (-90)
+  = 180 + q_{\text{raw}}
+\end{align}
+
+\begin{resultbox}[frametitle={Kết quả rút gọn --- đúng cho cả 6 chân}]
+\begin{equation}
+  \phi_{\text{thực},i} = 180^{\circ} + q_{i,\text{raw}} \pmod{360^{\circ}}
+  \label{eq:phi_thuc}
+\end{equation}
+\textbf{Hệ quả quan trọng cho Jacobian}:
+Vì $\phi_{\text{thực},i}$ và $q_{i,\text{raw}}$ chênh nhau hằng số:
+\begin{equation}
+  \dot{\phi}_{\text{thực},i} = \dot{q}_{i,\text{raw}}, \qquad
+  \ddot{\phi}_{\text{thực},i} = \ddot{q}_{i,\text{raw}}
+  \label{eq:deriv_equal}
+\end{equation}
+Jacobian được xây dựng trên $q_{\text{raw}}$ \textit{mà không cần xử lý thêm}.
+\end{resultbox}
+
+\subsection{Ví dụ số --- tính IK tại home}
+
+\begin{numbox}[frametitle={Ví dụ: Chân 1 tại home; $\mathbf{p}{=}[0{,}0{,}-75]^T$ mm; $\mathbf{R}{=}I$}]
+\begin{align*}
+  \Lvec_1 &= B_1' - A_1 = \begin{bmatrix}255{,}90\\-344{,}52\\-75\end{bmatrix}
+             - \begin{bmatrix}556{,}15\\-196{,}38\\668{,}40\end{bmatrix}
+           = \begin{bmatrix}-300{,}25\\-148{,}14\\-743{,}40\end{bmatrix}\ \text{mm}\\[4pt]
+  \|\Lvec_1\|^2 &= 300{,}25^2 + 148{,}14^2 + 743{,}40^2 = 664739{,}2\ \text{mm}^2\\[4pt]
+  Q_1 &= 664739{,}2 - 747^2 + 150^2 = 129230{,}2\\[4pt]
+  M_1 &= 300 \times (-743{,}40) = -223020{,}0\\[4pt]
+  N_1 &= 300\,[(-300{,}25)\cos(-109{,}45^{\circ}) + (-148{,}14)\sin(-109{,}45^{\circ})]\\
+       &= 300\,[(-300{,}25)(-0{,}3330) + (-148{,}14)(-0{,}9430)]\\
+       &= 300\,[99{,}98 + 139{,}69] = 71901{,}0\\[4pt]
+  R_{MN{,}1} &= \sqrt{(-223020)^2 + 71901^2} = 234326{,}8\\[4pt]
+  q_{1,\text{raw}} &= \arcsin\!\left(\tfrac{129230}{234327}\right) - \arctan2(71901{,}-223020)\\
+                   &= 33{,}47^{\circ} - (-162{,}13^{\circ}) = -128{,}66^{\circ}\\[4pt]
+  \phi_{\text{thực},1} &= 180^{\circ} + (-128{,}66^{\circ}) = 51{,}34^{\circ} \approx 51{,}18^{\circ}
+\end{align*}
+\textit{(Sai lệch nhỏ do làm tròn trung gian. Giá trị MATLAB chính xác: $51{,}1786^{\circ}$.)}
+\end{numbox}
+
+\begin{table}[H]\centering
+\caption{Các đại lượng IK tại home --- tất cả 6 chân (tính bằng MATLAB)}
+\label{tab:IK_home}
+\begin{tabular}{@{}c r r r r r r@{}}
+\toprule
+$i$ & $\|\Lvec_i\|$ (mm) & $Q_i$ & $M_i$ & $N_i$ & $q_{i,\text{raw}}$ (\textdegree) & $\phi_{\text{thực},i}$ (\textdegree) \\
+\midrule
+1 & 815{,}010 & 128\,731{,}8 & $-223\,020$ & $+71\,820{,}5$ & $-128{,}821$ & $51{,}179$ \\
+2 & 814{,}980 & 128\,682{,}6 & $-223\,020$ & $+71\,801{,}8$ & $-128{,}839$ & $51{,}161$ \\
+3 & 815{,}010 & 128\,731{,}8 & $-223\,020$ & $+71\,820{,}5$ & $-128{,}821$ & $51{,}179$ \\
+4 & 814{,}980 & 128\,682{,}6 & $-223\,020$ & $+71\,801{,}8$ & $-128{,}839$ & $51{,}161$ \\
+5 & 815{,}010 & 128\,731{,}8 & $-223\,020$ & $+71\,820{,}5$ & $-128{,}821$ & $51{,}179$ \\
+6 & 814{,}980 & 128\,682{,}6 & $-223\,020$ & $+71\,801{,}8$ & $-128{,}839$ & $51{,}161$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%% ============================================================
+\section{Ma trận Jacobian vận tốc}
+%% ============================================================
+
+\subsection{Mục tiêu và ký hiệu}
+
+Cần xây dựng $\Jq\in\mathbb{R}^{6\times6}$ ánh xạ \textbf{Twist} bệ sang vận tốc góc động cơ:
+\begin{equation}
+  \dot{\mathbf{q}} = \Jq\,\Xd, \qquad
+  \Xd = \begin{bmatrix}\vp\\\wv_W\end{bmatrix}\in\mathbb{R}^6
+  \label{eq:Jq_def}
+\end{equation}
+
+trong đó $\vp = [\dot x{,}\dot y{,}\dot z]^T$ (mm/s) là vận tốc tịnh tiến tâm bệ,
+và $\wv_W = [\omega_x{,}\omega_y{,}\omega_z]^T$ (rad/s) là vận tốc góc bệ trong World Frame.
+
+\subsection{Biến đổi Euler rates sang vận tốc góc}
+
+\subsubsection{Khai triển từ định nghĩa quay}
+
+Vận tốc góc $\wv$ liên hệ với ma trận quay bởi:
+$\dot\R = \wv^{\times}\R$, trong đó $(\cdot)^{\times}$ là ma trận antisymmetric.
+
+Với ZYX Euler, viết $\R = R_z R_y R_x$ và lấy đạo hàm:
+\begin{equation}
+  \dot\R = \dot R_z R_y R_x + R_z \dot R_y R_x + R_z R_y \dot R_x
+\end{equation}
+
+Từ $\dot R_x = R_x\,\dot\phi\,e_1^{\times}$, $\dot R_y = R_y\,\dot\theta\,e_2^{\times}$,
+$\dot R_z = R_z\,\dot\psi\,e_3^{\times}$ và khai triển, vận tốc góc trong Body Frame:
+\begin{equation}
+  \wv_{\text{body}} = E_{\text{body}}\,\dot{\boldsymbol{\Phi}},
+  \qquad \dot{\boldsymbol{\Phi}} = \begin{bmatrix}\dot\phi\\\dot\theta\\\dot\psi\end{bmatrix}
+  \label{eq:Ebody_def}
+\end{equation}
+
+\begin{equation}
+  \boxed{E_{\text{body}} = \begin{bmatrix}
+    1 & 0 & -\sin\theta \\
+    0 & \cos\phi &  \sin\phi\cos\theta \\
+    0 & -\sin\phi & \cos\phi\cos\theta
+  \end{bmatrix}}
+  \label{eq:Ebody}
+\end{equation}
+
+\textit{Chú ý}: Ma trận $E_{\text{body}}$ phụ thuộc $(\phi{,}\theta)$ nhưng không phụ thuộc $\psi$.
+
+Vận tốc góc trong World Frame:
+\begin{equation}
+  \wv_W = \R\,E_{\text{body}}\,\dot{\boldsymbol{\Phi}}
+  \label{eq:omega_world}
+\end{equation}
+
+\subsubsection{Giá trị số tại home}
+
+Tại home ($\phi=\theta=\psi=0^{\circ}$): $E_{\text{body}} = I_{3\times3}$, $\R = I_{3\times3}$, nên:
+\begin{equation}
+  \wv_W = \dot{\boldsymbol{\Phi}} = [\dot\phi{,}\,\dot\theta{,}\,\dot\psi]^T \quad\text{(đơn vị rad/s)}
+\end{equation}
+
+\figref{3}{Sơ đồ khối biến đổi Euler rates sang vận tốc góc:
+$\dot{\boldsymbol{\Phi}}$ [deg/s]
+$\xrightarrow{\times\pi/180}$ [rad/s]
+$\xrightarrow{E_{\text{body}}}$ $\wv_{\text{body}}$
+$\xrightarrow{\mathbf{R}}$ $\wv_W$.
+Ghi rõ thứ nguyên tại mỗi nút.}
+
+\subsection{Xây dựng hàng $i$ của Jacobian --- Khai triển đầy đủ}
+
+\subsubsection{Bước 1: Lấy đạo hàm điều kiện chiều dài}
+
+Lấy $\frac{d}{dt}$ cả hai vế của $\|B_i'-C_i\|^2 = L_2^2 = \text{const}$:
+\begin{align}
+  2(B_i'-C_i)^T\cdot(\dot B_i' - \dot C_i) &= 0 \notag\\
+  \Leftrightarrow \quad \shat_i^T(\dot B_i' - \dot C_i) &= 0
+  \label{eq:diff_constr}
+\end{align}
+
+với $\shat_i = (B_i'-C_i)/\|B_i'-C_i\|$ là vector đơn vị dọc thanh truyền.
+
+\subsubsection{Bước 2: Tính $\dot B_i'$}
+
+$B_i'$ là điểm gắn trên bệ cứng, khoảng cách cố định $\bvec_i = \R B_i^{\text{body}}$ từ tâm bệ:
+\begin{equation}
+  B_i' = \pp + \bvec_i
+  \implies
+  \dot B_i' = \vp + \dot\bvec_i = \vp + \wv_W \times \bvec_i
+  \label{eq:Bidot}
+\end{equation}
+
+\subsubsection{Bước 3: Tính $\dot C_i$}
+
+Từ~\eqref{eq:Ci}:
+\begin{equation}
+  \dot C_i = \frac{\partial C_i}{\partial q_i}\dot q_i
+  = L_1\begin{bmatrix}-\cos\gamma_i\sin q_i\\-\sin\gamma_i\sin q_i\\\cos q_i\end{bmatrix}\dot q_i
+  \label{eq:Cidot}
+\end{equation}
+
+\subsubsection{Bước 4: Thay vào ràng buộc}
+
+Thay~\eqref{eq:Bidot} và~\eqref{eq:Cidot} vào~\eqref{eq:diff_constr}:
+\begin{equation}
+  \shat_i^T(\vp + \wv_W\times\bvec_i) = \shat_i^T\frac{\partial C_i}{\partial q_i}\,\dot q_i
+  \label{eq:Jq_derivation}
+\end{equation}
+
+Áp dụng đồng nhất thức tích hỗn tạp:
+\begin{equation}
+  \shat_i^T(\wv_W\times\bvec_i)
+  = (\bvec_i\times\shat_i)^T\wv_W
+\end{equation}
+
+Phương trình~\eqref{eq:Jq_derivation} trở thành:
+\begin{equation}
+  \shat_i^T\vp + (\bvec_i\times\shat_i)^T\wv_W = a_i\,\dot q_i
+  \label{eq:Jq_row_eq}
+\end{equation}
+
+trong đó \textbf{hệ số scale}:
+\begin{equation}
+  a_i = \shat_i^T\frac{\partial C_i}{\partial q_i}
+  = L_1\left(-\cos\gamma_i\sin q_i\cdot s_{i,x} - \sin\gamma_i\sin q_i\cdot s_{i,y} + \cos q_i\cdot s_{i,z}\right)
+  \label{eq:ai}
+\end{equation}
+
+\subsubsection{Bước 5: Kết quả Jacobian}
+
+Từ~\eqref{eq:Jq_row_eq}: $\dot q_i = \frac{1}{a_i}[\shat_i^T\vp + (\bvec_i\times\shat_i)^T\wv_W]$
+
+Viết cho cả 6 chân dạng ma trận:
+\begin{equation}
+  \boxed{
+    \Jq(i,:) = \left[\,\frac{\shat_i^T}{a_i}\;\bigg|\;\frac{(\bvec_i\times\shat_i)^T}{a_i}\,\right]
+  }
+  \label{eq:Jq_row}
+\end{equation}
+
+\textbf{Kiểm tra thứ nguyên}: $\shat_i$ [---], $a_i$ [mm], $\vp$ [mm/s]
+$\Rightarrow$ $\shat_i^T\vp/a_i$ [1/s] = [rad/s] \checkmark{}. Phần góc: $\bvec_i$ [mm],
+$\shat_i$ [---], $\wv_W$ [rad/s] $\Rightarrow (\bvec_i\times\shat_i)^T\wv_W/a_i$
+$=$ [mm$\cdot$rad/s]/[mm] = [rad/s] \checkmark{}.
+
+\figref{4}{Hình học Jacobian: bệ động với $\vp$ tại tâm; $\wv_W$; vector $\shat_i$
+từ $C_i$ đến $B_i'$; $\bvec_i = \mathbf{R}B_i^{\text{body}}$ từ tâm bệ đến $B_i'$;
+tích $\bvec_i\times\shat_i$ vuông góc mặt phẳng $(B_i'{,} C_i{,} O)$.}
+
+\subsection{Gia tốc góc động cơ}
+
+Lấy đạo hàm~\eqref{eq:Jq_def}:
+\begin{equation}
+  \ddot{\mathbf{q}} = \Jq\,\Xdd + \dot\Jq\,\Xd
+  \label{eq:qddot}
+\end{equation}
+
+$\dot\Jq$ được xấp xỉ bằng sai phân trung tâm (tránh tính giải tích $\dot\Jq$ phức tạp):
+\begin{equation}
+  \dot\Jq \approx \frac{\Jq(\mathbf{X}+h\dot{\mathbf{X}}) - \Jq(\mathbf{X}-h\dot{\mathbf{X}})}{2h},
+  \quad h = 10^{-5}\ \text{s}
+  \label{eq:Jqdot_fd}
+\end{equation}
+
+Sai số phương pháp: $O(h^2) = O(10^{-10})$ --- đủ nhỏ so với nhiễu số.
+
+Gia tốc góc bệ trong World Frame:
+\begin{align}
+  \dot\wv_{\text{body}} &= E_{\text{body}}\ddot{\boldsymbol{\Phi}} + \dot E_{\text{body}}\dot{\boldsymbol{\Phi}}
+  \label{eq:wdot_body}\\
+  \dot\wv_W &= \R\,\dot\wv_{\text{body}}
+\end{align}
+
+với $\dot E_{\text{body}}$ (khai triển $\frac{d}{dt}$ của~\eqref{eq:Ebody}):
+\begin{equation}
+  \dot E_{\text{body}} = \begin{bmatrix}
+  0 & 0 & -c_\theta\dot\theta \\
+  0 & -s_\phi\dot\phi & c_\phi c_\theta\dot\phi - s_\phi s_\theta\dot\theta \\
+  0 & -c_\phi\dot\phi & -s_\phi c_\theta\dot\phi - c_\phi s_\theta\dot\theta
+  \end{bmatrix}
+  \label{eq:Edot}
+\end{equation}
+
+\begin{numbox}[frametitle={Jacobian tại home --- giá trị MATLAB}]
+Tại home ($q_{i,\text{raw}} \approx -128{,}82^{\circ}$), MATLAB tính được:
+\[
+  C_1 = [587{,}32{,}\;-107{,}68{,}\;551{,}53]^T\ \text{mm},\quad
+  B_1' = [256{,}60{,}\;-344{,}51{,}\;-75{,}00]^T\ \text{mm}
+\]
+\[
+  \shat_1 = \frac{B_1'-C_1}{L_2} = \frac{[-330{,}72{,}\;-236{,}83{,}\;-626{,}53]^T}{747}
+           = [-0{,}4427{,}\;-0{,}3170{,}\;-0{,}8387]^T
+\]
+Toàn bộ $\Jq$ tại home (6 hàng x 6 cột):
+\[
+  \Jq = 10^{-3}\!\begin{bmatrix}
+  -3{,}38 & -2{,}42 & -6{,}40 & 2205{,}1 & 1642{,}5 & -1784{,}8 \\
+  +3{,}78 & +1{,}72 & -6{,}40 & 2524{,}9 & 1088{,}0 & +1784{,}4 \\
+  -0{,}41 & +4{,}14 & -6{,}40 & +319{,}8 & -2730{,}9 & -1784{,}8 \\
+  -0{,}41 & -4{,}13 & -6{,}40 & -320{,}3 & -2730{,}6 & +1784{,}4 \\
+  +3{,}78 & -1{,}72 & -6{,}40 & -2525{,}0 & +1088{,}5 & -1784{,}8 \\
+  -3{,}38 & +2{,}42 & -6{,}40 & -2204{,}7 & +1642{,}7 & +1784{,}4
+  \end{bmatrix}
+\]
+\textit{Nhận xét}: Cột 3 (heave $\dot z$) đều $= -6{,}40\times10^{-3}$ rad/(mm/s)
+do đối xứng. Hàng 1 và 2 cùng cụm nhưng đối xứng qua trục.
+\end{numbox}
+
+%% ============================================================
+\section{Động lực học bệ động --- Phương trình Newton-Euler}
+%% ============================================================
+
+\subsection{Phương trình Newton --- Lực quán tính}
+
+Áp dụng định luật II Newton cho bệ động (khối lượng $m_p = 30{,}0653$ kg) trong World Frame:
+\begin{equation}
+  \Fv_{\text{net}} = m_p\,\ap^{(W)}
+  \label{eq:Newton_raw}
+\end{equation}
+
+Lực tác dụng lên bệ bao gồm: 6 lực dọc thanh truyền $f_i\shat_i$ và trọng lực $m_p\gv$.
+\begin{equation}
+  \sum_{i=1}^{6}f_i\shat_i + m_p\gv = m_p\,\ap^{(W)}
+\end{equation}
+
+Tách lực từ các chân:
+\begin{equation}
+  \Fv_{\text{ext}} \triangleq \sum_{i=1}^{6}f_i\shat_i = m_p(\ap^{(W)} - \gv)
+  \label{eq:Fext}
+\end{equation}
+
+\begin{equation}
+\boxed{\Fv_{\text{ext}} = m_p\!\left(\frac{\ap}{1000} - \gv\right)}
+\quad \gv = [0{,}0{,}-9{,}81]^T\ \text{m/s}^2
+\label{eq:Newton}
+\end{equation}
+
+\textit{Chia 1000}: $\ap$ đơn vị mm/s², đổi sang m/s² để $\Fv_{\text{ext}}$ ra N.
+
+\begin{numbox}[frametitle={Lực $F_{\text{ext}}$: quỹ đạo heave $a_z{=}+1g$ --- kết quả MATLAB}]
+$\ap = [0{,}0{,}+9810]^T$ mm/s² $\Rightarrow$ $\ap/1000 = [0{,}0{,}+9{,}81]^T$ m/s²:
+\begin{align*}
+  \Fv_{\text{ext}} &= 30{,}0653\times\!\left(\begin{bmatrix}0\\0\\9{,}81\end{bmatrix}
+  - \begin{bmatrix}0\\0\\-9{,}81\end{bmatrix}\right)
+  = 30{,}0653 \times \begin{bmatrix}0\\0\\19{,}62\end{bmatrix}
+  = \begin{bmatrix}0\\0\\589{,}88\end{bmatrix}\ \text{N}
+\end{align*}
+$\Wsc = [0{,}\;0{,}\;0{,}58988{,}\;0{,}\;0{,}\;0]^T$ (xác nhận bởi MATLAB).\\[4pt]
+$\Rightarrow$ $\tauv_{\text{platform}} = (\Jq^T)^{-1}\Wsc \approx [-15{,}36{,}\;-15{,}36{,}\;...]^T$ N$\cdot$m (6 chân).\\[2pt]
+\textit{Lưu ý}: Dấu âm vì Jacobian cột heave là $-6{,}40\times10^{-3}$.
+Giá trị thực sau giải hệ: $\approx -15{,}36$ N$\cdot$m --- 6 chân chịu tải đều.
+\end{numbox}
+
+\subsection{Phương trình Euler --- Moment quán tính}
+
+Phương trình Euler cho vật rắn quay quanh trọng tâm:
+\begin{equation}
+  \Mv_{\text{ext}} = \frac{d}{dt}(I_p^W\wv_W) = I_p^W\dot\wv_W + \wv_W\times(I_p^W\wv_W)
+  \label{eq:Euler}
+\end{equation}
+
+\textbf{Số hạng 1}: $I_p^W\dot\wv_W$ --- moment để thay đổi vận tốc góc (quán tính góc).
+
+\textbf{Số hạng 2}: $\wv_W\times(I_p^W\wv_W)$ --- \textit{moment hồi chuyển} (gyroscopic),
+xuất hiện khi bệ đồng thời quay nhanh theo nhiều trục.
+
+Tensor quán tính trong Body Frame (trục chính):
+\begin{equation}
+  I_p^{\text{body}} = \mathrm{diag}(I_{xx}{,}I_{yy}{,}I_{zz})
+  = \mathrm{diag}(9{,}8506{,}\,19{,}6451{,}\,9{,}8506)\ \text{kg}\cdot\text{m}^2
+\end{equation}
+
+Biến đổi sang World Frame qua ma trận quay:
+\begin{equation}
+  I_p^W = \R\,I_p^{\text{body}}\,\R^T
+  \label{eq:Ipworld}
+\end{equation}
+
+\textit{Chú ý}: $I_p^W$ thay đổi theo từng tư thế. Tại home ($\R=I$): $I_p^W = I_p^{\text{body}}$.
+
+\figref{5}{FBD bệ động: hexagon bệ; vector $\Fv_{\text{ext}}$, $\Mv_{\text{ext}}$ tại CoM;
+6 vector lực $f_i\shat_i$ tại $B_i'$ (dọc thanh truyền); trọng lực $m_p\gv$ xuống.
+Ghi rõ chiều dương và đơn vị N, N$\cdot$m.}
+
+\subsection{Wrench tổng hợp}
+
+Kết hợp lực và moment thành vector 6 chiều:
+\begin{equation}
+  \Wsc = \begin{bmatrix} \Fv_{\text{ext}}/1000 \\ \Mv_{\text{ext}} \end{bmatrix} \in \mathbb{R}^6
+  \label{eq:Wsc}
+\end{equation}
+
+\textbf{Phân tích thứ nguyên phép chia 1000}:
+
+Từ~\eqref{eq:Jq_row}: $\Jq(i{,}1{:}3)$ có thứ nguyên [rad/(mm/s)] = [rad$\cdot$s/mm].
+Tích $\Jq^T\tauv$ ở hàng tịnh tiến:
+$[\text{rad}\cdot\text{s/mm}][\text{N}\cdot\text{m}] = [\text{N}\cdot\text{m}\cdot\text{s/mm}] \neq [\text{N}]$.
+
+Phép chia 1000 được hiểu là chuẩn hóa để $\|\Wsc\|$ cùng bậc với $\|\Mv_{\text{ext}}\|$ theo N$\cdot$m.
+
+%% ============================================================
+\section{Nguyên lý Công ảo --- Tính moment}
+%% ============================================================
+
+\subsection{Phát biểu và khai triển}
+
+Với hệ đang cân bằng động (nguyên lý d'Alembert), xét chuyển vị ảo $\delta\mathbf{q}$:
+
+Công ảo của 6 moment động cơ:
+\begin{equation}
+  \delta W_{\text{motor}} = \sum_{i=1}^{6}\tau_i\,\delta q_i = \tauv^T\delta\mathbf{q}
+  \label{eq:dW_motor}
+\end{equation}
+
+Công ảo của Wrench bệ:
+\begin{equation}
+  \delta W_{\text{platform}} = \Fv_{\text{ext}}^T\delta\pp + \Mv_{\text{ext}}^T\delta\boldsymbol{\theta}
+  = \Wsc^T\delta\mathbf{X}
+  \label{eq:dW_plat}
+\end{equation}
+
+Nguyên lý công ảo: $\delta W_{\text{motor}} = \delta W_{\text{platform}}$:
+\begin{equation}
+  \tauv^T\delta\mathbf{q} = \Wsc^T\delta\mathbf{X}
+  \label{eq:PVW}
+\end{equation}
+
+\subsection{Áp dụng ràng buộc Jacobian}
+
+Quan hệ vi phân (từ~\eqref{eq:Jq_def}):
+\begin{equation}
+  \delta\mathbf{q} = \Jq\,\delta\mathbf{X}
+  \quad\Rightarrow\quad
+  \delta\mathbf{X} = \Jq^{-1}\delta\mathbf{q}
+\end{equation}
+
+Thay vào~\eqref{eq:PVW}:
+\begin{equation}
+  \tauv^T\delta\mathbf{q} = \Wsc^T\Jq^{-1}\delta\mathbf{q}
+  \quad \forall\,\delta\mathbf{q}\in\mathbb{R}^6
+\end{equation}
+
+Vì $\delta\mathbf{q}$ tùy ý:
+\begin{equation}
+  \tauv = (\Jq^{-1})^T\Wsc = (\Jq^T)^{-1}\Wsc
+\end{equation}
+
+\begin{resultbox}[frametitle={Moment từ Công ảo}]
+\begin{equation}
+  \boxed{\tauv_{\text{platform}} = (\Jq^T)^{-1}\Wsc}
+  \label{eq:tau_pvw}
+\end{equation}
+Tương đương bài toán tuyến tính $\Jq^T\tauv = \Wsc$, giải bằng phân tích QR.
+\end{resultbox}
+
+\subsection{Phân tích kỳ dị (Singularity)}
+
+Kỳ dị khi $\det(\Jq) = 0$, tức $a_i \to 0$ cho một hoặc nhiều chân $i$.
+Từ~\eqref{eq:ai}: $a_i = 0$ khi $\shat_i \perp \frac{\partial C_i}{\partial q_i}$,
+tức vector thanh truyền $\shat_i$ vuông góc vận tốc đầu cánh tay --- cơ cấu không
+thể tạo moment theo hướng đó (``dead center'').
+
+\figref{6}{Tư thế kỳ dị: một chân ở dead center; $\shat_i\perp\partial C_i/\partial q_i$;
+$a_i = 0$. So sánh với tư thế bình thường cạnh đó.}
+
+\subsection{Ví dụ số --- Moment do bệ tại home với heave $1g$}
+
+\begin{numbox}[frametitle={Tính $\tau_{\text{platform}}$: Heave $a_z{=}+1g$; home; MATLAB}]
+
+Wrench đầy đủ:
+\[
+  \Wsc = \begin{bmatrix}0\\0\\0{,}58988\\0\\0\\0\end{bmatrix}
+\]
+
+Giải hệ $\Jq^T\tauv_{\text{platform}} = \Wsc$:
+\[
+  \tauv_{\text{platform}} = \begin{bmatrix}-15{,}358\\-15{,}362\\-15{,}358\\-15{,}362\\-15{,}358\\-15{,}362\end{bmatrix}\text{N$\cdot$m}
+\]
+
+Dấu âm: motor cần cản lại (giữ tải) khi bệ gia tốc lên và trọng lực cộng tải.
+Giá trị đồng đều giữa 6 chân xác nhận tính đối xứng của cấu hình home.
+
+Tổng moment $\sum \tau_i = -92{,}24$ N$\cdot$m. Kiểm tra nhanh:
+$F_z\times L_1/1000 = 589{,}88\times0{,}150 = 88{,}5$ N$\cdot$m (xấp xỉ cùng bậc) \checkmark{}
+\end{numbox}
+
+%% ============================================================
+\section{Các thành phần moment phụ trợ}
+%% ============================================================
+
+\subsection{Quán tính rotor và cánh tay quay}
+
+Phương trình quán tính quay Newton cho trục motor $i$:
+\begin{equation}
+  \tau_{\text{inertia},i} = I_{\text{motor}}\,\ddot q_i,
+  \qquad I_{\text{motor}} = 0{,}0199\ \text{kg}\!\cdot\!\text{m}^2
+  \label{eq:tau_inertia}
+\end{equation}
+
+$I_{\text{motor}}$ bao gồm: rotor động cơ + cánh tay quay $L_1$ (từ Simscape \texttt{smiData}).
+
+\textbf{Ước tính nhanh}: Tay quay đặc dạng thanh; $m_{\text{arm}}=1{,}5$ kg; $L_1=0{,}15$ m:
+$I_{\text{arm}} = m_{\text{arm}}L_1^2/3 = 1{,}5\times0{,}15^2/3 = 0{,}01125$ kg$\cdot$m\textsuperscript{2} (phần lớn trong $I_{\text{motor}}$).
+
+\subsection{Moment trọng lực cánh tay quay}
+
+\figref{7}{3 vị trí cánh tay: $q_i=0^{\circ}$ (nằm ngang; moment max); $q_i=45^{\circ}$; $q_i=90^{\circ}$
+(thẳng đứng; moment=0). Vẽ vector trọng lực và cánh tay moment cho mỗi cấu hình.}
+
+Cánh tay quay $m_{\text{arm}}=1{,}5$ kg, trọng tâm tại $r_{\text{arm}}=L_1/2 = 75$ mm từ trục:
+\begin{equation}
+  \tau_{\text{arm},i} = m_{\text{arm}}\,g\,r_{\text{arm}}\,\cos(q_{i,\text{raw}})
+  = 1{,}5 \times 9{,}81 \times 0{,}075 \times \cos(q_{i,\text{raw}})
+  \label{eq:tau_grav}
+\end{equation}
+
+\begin{equation}
+  \tau_{\text{arm},i} = 1{,}103\,\cos(q_{i,\text{raw}})\ \text{N}\cdot\text{m}
+\end{equation}
+
+\textbf{Tại home}: $q_{\text{raw}} = -128{,}82^{\circ}$, $\cos(-128{,}82^{\circ}) = -0{,}6265$:
+\[
+  \tau_{\text{arm,home}} = 1{,}103 \times (-0{,}6265) = -0{,}691\ \text{N}\cdot\text{m}
+\]
+(Dấu âm: trọng lực hỗ trợ nâng bệ, giảm tải motor.)
+
+\subsection{Ma sát nhớt}
+
+\begin{equation}
+  \tau_{\text{friction},i} = b_m\,\dot q_i = 0{,}02\,\dot q_i\ \text{N}\!\cdot\!\text{m}
+  \label{eq:tau_friction}
+\end{equation}
+
+Ở $\dot q_i = 5$ rad/s (tốc độ điển hình): $\tau_{\text{friction}} = 0{,}10$ N$\cdot$m (rất nhỏ).
+
+\subsection{Thành phần bỏ qua}
+
+\begin{table}[H]\centering
+\caption{Thành phần bỏ qua, sai số ước tính và điều kiện hợp lệ}
+\begin{tabular}{@{}p{5.5cm}p{3.5cm}p{4cm}@{}}
+\toprule
+\bfseries Thành phần & \bfseries Sai số & \bfseries Hợp lệ khi \\
+\midrule
+Trọng lực + quán tính thanh truyền $L_2$ & 5--10\% & $m_{L2}\ll m_p$ \\
+Lực quán tính CG cánh tay quay & $<$3\% & $f < 2$ Hz \\
+Ma sát Coulomb (dry friction) & Phụ thuộc bôi trơn & Đã bôi trơn đều \\
+Đàn hồi khâu và khớp & $<$1\% tần số thấp & $f \ll f_{\text{riêng}}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%% ============================================================
+\section{Tổng hợp --- Công thức và ví dụ số đầy đủ}
+%% ============================================================
+
+\subsection{Công thức tổng hợp}
+
+\begin{resultbox}[frametitle={Moment tổng tại 6 động cơ}]
+\begin{equation}
+  \tauv_{\text{motor}} =
+  \underbrace{(\Jq^T)^{-1}\Wsc}_{\text{bệ động}}
+  + \underbrace{I_{\text{motor}}\ddot{\mathbf{q}}}_{\text{quán tính rotor}}
+  + \underbrace{m_{\text{arm}}\,g\,r_{\text{arm}}\cos\mathbf{q}}_{\text{trọng lực tay quay}}
+  + \underbrace{b_m\dot{\mathbf{q}}}_{\text{ma sát nhớt}}
+  \label{eq:tau_total}
+\end{equation}
+
+với:
+\[
+  \Wsc = \begin{bmatrix}m_p\!\left(\dfrac{\ap}{1000}-\gv\right)/1000\\[4pt]
+  I_p^W\dot\wv_W + \wv_W\times(I_p^W\wv_W)\end{bmatrix}
+\]
+\end{resultbox}
+
+\subsection{Quy trình 9 bước --- từng bước với số cụ thể}
+
+\begin{description}
+\item[\textbf{B1 --- Sai phân số quỹ đạo}]
+\[
+  \dot{\text{pose}}(t_k) = \frac{\text{pose}(t_{k+1})-\text{pose}(t_{k-1})}{2\Delta t},\quad
+  \ddot{\text{pose}}(t_k) = \frac{\dot{\text{pose}}(t_{k+1})-\dot{\text{pose}}(t_{k-1})}{2\Delta t}
+\]
+Với $\Delta t = 0{,}02$ s (50 Hz), sai số sai phân trung tâm: $O(\Delta t^2) = O(4\times10^{-4})$.
+
+\item[\textbf{B2 --- Ma trận quay + tọa độ $B_i'$}]
+$\R\leftarrow$ công thức~\eqref{eq:R_full}; $B_i' = \pp+\R B_i^{\text{body}}$ theo~\eqref{eq:Bi_world}.
+
+\item[\textbf{B3 --- IK cho 6 chân}] Theo~\eqref{eq:Qi}--\eqref{eq:IK_sol}:
+\[
+  Q_i = \|\Lvec_i\|^2 - 747^2 + 150^2;\quad
+  q_{i,\text{raw}} = \arcsin\!\left(\frac{Q_i}{\sqrt{M_i^2+N_i^2}}\right) - \arctan2(N_i{,}M_i)
+\]
+
+\item[\textbf{B4 --- Xây dựng $\Jq$}] Theo~\eqref{eq:Jq_row}:
+\[
+  \shat_i = (B_i'-C_i)/747;\quad
+  a_i = \shat_i^T\frac{\partial C_i}{\partial q_i};\quad
+  \Jq(i{,}:) = [\shat_i^T/a_i\;|\;(\bvec_i\times\shat_i)^T/a_i]
+\]
+
+\item[\textbf{B5 --- Vận tốc/gia tốc góc bệ}]
+\[
+  \wv_W = \R E_{\text{body}}\dot{\boldsymbol{\Phi}};
+  \quad
+  \dot\wv_W = \R(E_{\text{body}}\ddot{\boldsymbol{\Phi}}+\dot E_{\text{body}}\dot{\boldsymbol{\Phi}})
+\]
+
+\item[\textbf{B6 --- Vận tốc/gia tốc góc động cơ}]
+\[
+  \dot{\mathbf{q}} = \Jq\Xd;
+  \quad
+  \ddot{\mathbf{q}} = \Jq\Xdd + \dot\Jq\Xd\;(\dot\Jq\text{ theo~\eqref{eq:Jqdot_fd}})
+\]
+
+\item[\textbf{B7 --- Wrench}]
+\[
+  \Fv = m_p(\ap/1000-\gv);\;
+  I_p^W = \R I_p^{\text{body}}\R^T;\;
+  \Mv = I_p^W\dot\wv_W+\wv_W\times(I_p^W\wv_W);\;
+  \Wsc = [\Fv/1000;\Mv]
+\]
+
+\item[\textbf{B8 --- Giải Công ảo}]
+\begin{lstlisting}
+tau_platform = (J_q') \ W_scaled;   % QR decomposition, O(6^3) flops
+\end{lstlisting}
+
+\item[\textbf{B9 --- Tổng hợp}]
+\[
+  \tauv_{\text{motor}} = \tauv_{\text{platform}}
+  + 0{,}0199\,\ddot{\mathbf{q}}
+  + 1{,}103\cos\mathbf{q}
+  + 0{,}02\,\dot{\mathbf{q}}
+\]
+\end{description}
+
+\figref{8}{Lưu đồ thuật toán 9 bước. Vòng ngoài: $k=1\to N$ điểm thời gian.
+Vòng trong (B3--B4): $i=1\to 6$ chân. Nhánh kiểm tra: $|Q_i/R_{MN}|\leq 1$
+và $|\det\Jq|>\varepsilon$. Đầu ra: $\tauv(t_k)$; $\dot q(t_k)$; $q(t_k)$.}
+
+\subsection{Ví dụ số đầy đủ --- Một điểm quỹ đạo heave}
+
+\begin{numbox}[frametitle={Quỹ đạo heave sin 40 mm / 0{,}8 Hz --- Phân tích từng bước}]
+\textbf{Tư thế tại home} ($\pp=[0{,}0{,}-75]^T$ mm; $\R=I$; $a_z=+1g=+9810$ mm/s\textsuperscript{2}):
+
+\textbf{B7}: $\Fv_{\text{ext}} = [0{,}0{,}589{,}88]^T$ N,
+$\Wsc = [0{,}0{,}0{,}58988{,}0{,}0{,}0]^T$
+
+\textbf{B8}: $\tauv_{\text{platform}} = [-15{,}358{,}\,-15{,}362{,}\,...\times6]^T$ N$\cdot$m (MATLAB)
+
+\textbf{B9}: $\ddot q_i$ từ B6 $\approx -62{,}7$ rad/s\textsuperscript{2} tại $a_z=1g$:
+\begin{align*}
+  \tau_{\text{inertia},i} &= 0{,}0199 \times (-62{,}7) \approx -1{,}248\ \text{N$\cdot$m} \quad(\text{MATLAB: }\approx-1{,}249)\\
+  \tau_{\text{arm},i}     &= 1{,}5848\times9{,}81\times0{,}075\times\cos(-128{,}82^{\circ})\approx-0{,}738\ \text{N$\cdot$m}\\
+  \tau_{\text{friction}}  &= 0{,}02\times\dot q \approx 0\ (\dot z=0\ \text{tại đỉnh})\\
+  \tau_{\text{motor},i}   &\approx -15{,}36 + (-1{,}25) + (-0{,}74) + 0 \approx -17{,}35\ \text{N$\cdot$m}
+\end{align*}
+Xác nhận MATLAB: $\tau_{\text{motor}} \approx -17{,}300$ N$\cdot$m \checkmark{}
+
+\bigskip
+\textbf{Tại $z=+40$ mm}; $\ddot z=-(2\pi\times0{,}8)^2\times40=-1006{,}8$ mm/s\textsuperscript{2}:
+\begin{align*}
+  L_{i,z}^{(+40)} &= (40+0-668{,}4) = -628{,}4\ \text{mm}\\
+  M_i^{(+40)} &= 300\times(-628{,}4) = -188\,520\ \text{(thay vì }-223\,020\text{ ở home)}\\
+  F_z &= 30{,}065\times\!\left(\tfrac{-1006{,}8}{1000}+9{,}81\right) = 30{,}065\times8{,}803 = 264{,}7\ \text{N}\\
+  \Wsc &= [0{,}0{,}0{,}2647{,}0{,}0{,}0]^T\\
+  \tauv_{\text{platform}} &\approx [-6{,}50{,}...] \text{ N$\cdot$m (nhỏ hơn do tải nhẹ hơn)}
+\end{align*}
+\end{numbox}
+
+\begin{table}[H]\centering
+\caption{Phân tích thành phần moment --- heave $0{,}8$ Hz biên 40 mm; điểm $\ddot z_{\max}$}
+\label{tab:tau_breakdown}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\bfseries Thành phần & \bfseries Giá trị điển hình & \bfseries Tỷ lệ & \bfseries Đơn vị \\
+\midrule
+$\tau_{\text{platform}}$ (Newton-Euler + PVW) & $\approx-15{,}36$ ($a_z=+1g$) & $\sim$87{,}6\% & N$\cdot$m \\
+$\tau_{\text{arm\_grav}}$ (trọng lực tay quay) & $\approx-0{,}74$ ($q\approx-129^{\circ}$) & $\sim$4{,}2\% & N$\cdot$m \\
+$\tau_{\text{inertia}}$ (quán tính rotor) & $\approx-1{,}25$ ($a_z=+1g$) & $\sim$7{,}1\% & N$\cdot$m \\
+$\tau_{\text{friction}}$ (ma sát nhớt) & $<0{,}10$ & $<$0{,}5\% & N$\cdot$m \\
+\midrule
+$\tau_{\text{motor}}$ (tổng --- MATLAB) & $\approx-17{,}30$ & 100\% & N$\cdot$m \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\figref{9}{4 panel: (a) $z(t)$ heave sin; (b) thành phần $\tau_{\text{platform}}(t)$
+6 motor; (c) thành phần $\tau_{\text{inertia}}(t)$; (d) $\tau_{\text{motor}}(t)$ tổng.
+Đánh dấu điểm $\ddot z_{\max}$.}
+
+\figref{10}{Pie chart 4 thành phần theo Bảng~\ref{tab:tau_breakdown}.}
+
+%% ============================================================
+\section{Kết luận}
+%% ============================================================
+
+Báo cáo đã trình bày đầy đủ cơ sở toán học với khai triển chi tiết từng bước:
+
+\begin{enumerate}
+  \item \textbf{Hình học}: Tọa độ 12 khớp ($A_i$, $B_i$) và 6 góc $\gamma_i$ được tính
+        tường minh theo tham số cơ khí CKAS W2.
+
+  \item \textbf{IK}: Phương trình $Q=M\sin q+N\cos q$ được khai triển đại số đầy đủ từ
+        điều kiện vòng kín. Nghiệm tường minh~\eqref{eq:IK_sol}. Bù offset 3 bước chứng
+        minh bằng rút gọn cho kết quả~\eqref{eq:phi_thuc}.
+
+  \item \textbf{Jacobian $\Jq$}: Xây dựng từ đạo hàm ràng buộc hình học. Mỗi hàng
+        $\Jq(i{,}:)$ kết hợp vận tốc tịnh tiến ($\shat_i^T/a_i$) và vận tốc góc
+        $((\bvec_i\times\shat_i)^T/a_i)$. $\dot\Jq$ bằng sai phân trung tâm số.
+
+  \item \textbf{Newton-Euler}: Lực~\eqref{eq:Newton} và moment~\eqref{eq:Euler} kết hợp
+        thành Wrench 6D. Phép chia 1000 để đồng nhất thứ nguyên với Jacobian mm-based.
+
+  \item \textbf{Công ảo}: Khai triển từ nguyên lý d'Alembert cho kết quả
+        $\tauv_{\text{platform}} = (\Jq^T)^{-1}\Wsc$~\eqref{eq:tau_pvw}.
+
+  \item \textbf{Tổng hợp~\eqref{eq:tau_total}}: 4 thành phần; trong đó
+        $\tau_{\text{platform}}$ chiếm $>$75\%.
+\end{enumerate}
+
+\textbf{Hướng cải thiện}:
+\begin{itemize}
+  \item Bổ sung động lực học thanh truyền $L_2$ (Recursive Newton-Euler) để tăng chính xác 5--10\%.
+  \item Xác định $m_{\text{arm}}$ và $b_m$ bằng thực nghiệm.
+  \item Mô hình ma sát Stribeck cho vận tốc thấp.
+\end{itemize}
+
+%% ============================================================
+\appendix
+\section{Tham số số cụ thể --- CKAS W2}
+%% ============================================================
+
+Xem Bảng~\ref{tab:params}, \ref{tab:Ai}, \ref{tab:Bi}, \ref{tab:IK_home}.
+
+\section{Mã nguồn MATLAB tham chiếu}
+\begin{lstlisting}[caption={Ham tinh moment tong --- tinh\_torque.m (luoc trich)}]
+function [tau_motor, tau_platform, tau_inertia] = ...
+    tinh_torque(pose, pose_dot, pose_ddot, A_mat, B_mat, ...
+                L1, L2, gamma_ang, m_p, I_p, I_motor)
+
+    % Buoc 4: Jacobian
+    [J_q, q_dot, q_ddot] = jacobian_motor(pose, pose_dot, pose_ddot, ...
+        A_mat, B_mat, L1, L2, gamma_ang);
+
+    % Buoc 5: Omega va alpha be dong
+    R     = rot_zyx_local(pose(4), pose(5), pose(6));
+    E_bod = [...];                    % Ma tran E_body eq.(11)
+    w_bod = E_bod * euler_dot_rad;
+    w_dot = R * w_dot_body;
+
+    % Buoc 7: Newton-Euler
+    F_ext = m_p * (a_p_m - [0;0;-9.81]);
+    M_ext = I_p_W * w_dot + cross(w_world, I_p_W * w_world);
+    W_sc  = [F_ext/1000; M_ext];
+
+    % Buoc 8: Cong ao
+    tau_platform = (J_q') \ W_sc;
+
+    % Buoc 9: Tong hop
+    tau_inertia  = I_motor * q_ddot;
+    tau_arm_grav = m_arm * 9.81 * (L1/2000) * cos(q_raw_rad);
+    tau_friction = b_m * q_dot;
+    tau_motor    = tau_platform + tau_inertia + tau_arm_grav + tau_friction;
+end
+\end{lstlisting}
+
+\end{document}

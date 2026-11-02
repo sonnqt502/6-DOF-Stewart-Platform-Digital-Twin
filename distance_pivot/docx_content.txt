@@ -1,0 +1,223 @@
+Tìm khoảng cách giữa 2 điểm trên cùng vật rắn dựa trên gia tốc góc và vận tốc góc và chênh lệch gia tốc tuyến tính. Áp dụng vào bài toán tìm Offset Centre_Z0 của Ckas.
+Tìm khoảng cách giữa 2 điểm trên cùng vật rắn dựa trên tín hiệu gia tốc tuyến tính, gia tốc góc và vận tốc góc
+
+Xét 3 điểm OAB nằm trên cùng một vật rắn quay quanh O với vận tốc góc  và gia tốc góc .
+Gia tốc tổng hợp tại các điểm gồm hai thành phần là gia tốc tiếp tuyến  và gia tốc hướng tâm 
+Ta có :
+
+
+Với :
+
+
+
+
+
+
+Lại có :
+Thành phần tiếp tuyến : 		
+
+
+Thành phần hướng tâm 
+
+PT lúc này trở thành 
+
+hay
+ (1)
+Đặt 
+
+
+
+Tuy nhiên, ma trận M bị suy biến khi vật rắn chỉ thực hiện chuyển động quay đơn trục. Do thành phần hiệu gia tốc dọc theo trục quay sẽ bằng 0, không mang thông tin về khoảng cách. Điều này làm mất đi một phương trình độc lập, khiến ta không thể xác định được thành phần khoảng cách dọc theo chính trục quay đó.
+
+
+
+Áp dụng vào bài toán tìm vị trí Tâm quay của Ckas
+Yêu cầu bài toán và các giả thiết.
+
+
+Gọi P là vị trí của Pivot, I là vị trí của IMU và M là tâm của Motion Platform tại vị trí Home. Coi I,H,MF,P là các điểm trên cùng một vật rắn
+Sửa hệ tọa độ toàn cục.
+Mọi đại lượng tọa độ, góc, vận tốc góc, gia tốc góc, gia tốc tuyến tính được xác định trong hệ tọa độ MFxyz.
+Điểm P có tọa độ 
+Điểm I có tọa độ  .
+Sử dụng cảm biến IMU để lấy tín hiệu gia tốc (có ảnh hưởng bởi gia tốc trọng trường), vận tốc góc và các góc nghiêng.
+Sử dụng chương trình mô phỏng Dashboard_Stewart3.m để mô phỏng tín hiệu của điểm H và P.
+Yêu cầu: Xác định khoảng cách từ IMU đến Pivot thực tế tại . 
+
+Thực trạng
+Vấn đề 1. Điều kiện mô phỏng.
+Do ở hiện tại, việc thực hiện một quỹ đạo chuyển động có cả 3 thành phần quay Yaw-Pitch-Roll ở Ckas và mô phỏng lại chuyển động đấy trên Matlab còn nhiều khó khăn, ta chỉ có thể thực hiện lần lượt từng chuyển động quay riêng biệt để xác định đủ cả 3 thành phần của .
+Vấn đề 2. Nhiễu.
+Trong điều kiện vận hành thực tế, tín hiệu thu thập được không bao giờ là tín hiệu lý tưởng. Mô hình toán học thực tế có chứa các thành phần nhiễu (noise) lồng ghép, dẫn đến
+
+
+Trong đó,  và  là ma trận nhiễu.
+
+Sự hiện diện của các thành phần nhiễu này gây ra các tác động tiêu cực đến quá trình giải tích và kết quả: 
+Sự khuếch đại nhiễu thông qua phép vi phân số học. Gia tốc góc không được đo trực tiếp mà phải xấp xỉ thông qua phép đạo hàm bậc nhất theo thời gian của tín hiệu vận tốc góc . Việc thực hiện đạo hàm làm khuếch đại nhiễu và ảnh hưởng của nhiễu đến kết quả.
+
+
+Vấn đề 3.Sai số gá đặt.
+
+Khi IMU bị gắn nghiêng lệch, trọng lực (g) sẽ lọt nhầm vào các trục đo gia tốc, và vận tốc quay (Roll) bị rò rỉ (cross-talk) sang trục khác (Pitch/Yaw). Khi đó Pivot và Head đang ở 2 hệ quy chiếu lệch nhau.
+Cụ thể góc lệch
+
+Theo giả thuyết hệ tọa độ Ixyz song song với Mfxyz và trùng với Hxyz, tuy nhiên việc gá đặt chính xác IMU theo giả thiết là rất khó khăn. Do đó chấp nhận việc gá đặt cảm biến IMU ban đầu có sai số lớn và cần offset lại dữ liệu của IMU trước khi tính toán. 
+
+Giải pháp.
+
+3.1. Đo lường độc lập.
+Thực hiện các phép đo tách biệt trên quỹ đạo thuần Pitch để xác định ( và thuẩn Roll để xác định ( Từ đó tổng hợp lại vecto .
+- Khi chỉ quay quanh X ( Roll) ta có :
+
+
+Khai triển phương trình (1) ta được: 
+
+
+
+
+- Khi chỉ quay quanh Y (Pitch) ta có: 
+
+
+Khai triển phương trình (1) ta được: 
+
+
+3.2. Sử dụng thuật toán PCA để chỉnh lại hệ tọa độ của IMU.
+Thuật toán PCA (Phân tích thành phần chính) giải quyết bài toán bù trừ sai lệch hệ quy chiếu (Misalignment Calibration) bằng phương pháp Phân tích Trị Riêng (Eigenvalue Decomposition) trên Ma trận Hiệp phương sai của tín hiệu động học. ( Tìm hiểu kĩ các phương trình, phương pháp, ký hiệu, viết lại thuật toán, trích dẫn đầy đủ )
+Ta sử dụng thuật toán PCA để tìm ra trục mà hệ thống đang quay theo, kết hợp với gia tốc trọng trường tại thời điểm  để xác định được trục , theo quy tắc tam diện thuận ta xác định được Hệ tọa độ Hxyz và độ lệch giữa 2 hệ trục tọa độ Ixyz và Hxyz. Sử dụng ma trận xoay R để biến đổi hệ quy chiếu Ixyz về Hxyz đúng với giả thiết 
+
+
+3.3. Xử lý nhiễu bằng bộ lọc Low-Pass Filter rồi bù biên độ và pha.
+Chạy FFT để tìm tần số chuyển động của hệ. Qua đó xác định tần số cắt phù hợp.
+(viết phương trình khuếch đại nhiễu sau vi phân )
+
+Sử dụng bộ lọc thông thấp Low-Pass Filter trên tín hiệu vận tốc góc và gia tốc tuyến tính trước khi thực hiện phép vi phân số học để hạn chế sự khuếch đại của nhiễu tần số cao. 
+Trước khi lọc:
+
+Sau khi lọc:
+
+Tuy nhiên sử dụng bộ lọc này khiến tín hiệu bị trễ pha, đỉnh của gia tốc đo được bằng IMU sau khi đi qua bộ lọc và đỉnh của Gia tốc tính toán không còn chung một thời điểm. Điều này khiến phương trình  bị sai lệch.
+Vì thế nên ta cần bù pha và biên độ lại cho tín hiệu: 
+Tính độ lệch pha:
+
+        Độ giảm biên độ:
+
+Để bù lại tín hiệu ban đầu ta dịch tất cả tín hiệu đi một khoảng 
+Và bù lại cho biên độ một khoảng bằng đúng bằng 
+
+
+
+
+3.3. Xử lý tín hiệu bằng Bình phương tối thiểu (Least Squares).
+Do cảm biến tại có thể bị nhiễu hay bị sai lệch do các nguyên nhân nêu ở trên, việc chỉ áp dụng các đại lượng đo được tại một thời điểm để giải phương trình sẽ khiến kết quả không đáng tin cậy. Do đó phương pháp Least Squares (LS) là cần thiết để kết quả thuyết phục và chính xác hơn.
+Xét PT: 
+
+Do chỉ xét riêng các trường hợp Thuần Pitch hoặc Thuần Roll sẽ khiến không thể xác định giá trị  và  tương ứng, ta coi khi thực hiện chuyển động thuần Pitch, khi thực hiện chuyển động thuần Roll.
+Tại mỗi thời điểm  ta thu được một ma trận , một ma trận . Xếp chồng các giá trị này lại với nhau thu được 
+; 
+Nhân cả hai vế với  ta được:
+
+Hay 
+
+Quy trình thực nghiệm
+Thực hiện đo dữ liệu
+4.1.1: Đo dữ liệu IMU
+B1:Gá đặt IMU
+IMU được đặt chính giữa đầu hình nhân,(Thêm ảnh IMU trong hình nhân) ta tiến hành gá đặt hình nhân lên trên bệ mô phỏng lái Ckas. (Chuẩn kích thước =10cm)( Làm lại phần này- lấy rõ chuẩn đo-hỏi ý kiến thầy về chuẩn đo nào dễ lấy nhất)
+
+Khoảng cách từ IMU đến tựa đầu của lưng ghế là 23cm.
+Khoảng cách từ IMU đến mặt ghế là 67 cm.
+
+
+
+
+
+
+
+
+
+B2. Khởi động Ckas.
+B3.Đưa Ckas về vị trí Neutral và và sử dụng lệnh Centre_z0=0 để đưa Pivot về tâm của vị trí [0 0 0].
+B4.Thực hiện chuyển động Roll với biên độ X, tần số ft=X, thời gian thu dữ liệu >= Y(s), tần số lấy mẫu là fs=Z(Hz).
+B5. Dừng chuyển động, đưa Ckas lại vị trí Neutral.
+B6. Giảm Centre_z0 đi -D rồi thực hiện lại từ B4. 
+B7. Lưu file dữ liệu ở thu mục do_IMU với tên file có dạng <loaichuyendong>_<X>_<Y>_<Z>_<-D*time>.csv
+4.1.2. Đo dữ liệu Mô phỏng
+- 	B1.Set Pivot có tọa độ tương ứng Central_z0=0.
+B2. Tái hiện quỹ đạo chuyển động quay Roll  với biên độ X, tần số ft=X , thời gian thu dữ liệu = Y(s), tần số lấy mẫu là fs=D(Hz).
+B3. Xuất quỹ đạo Pivot 15 tham số ở folder do_Sim với tên file có dạng:Pivot_ <loaichuyendong>_<X>_<Y>_<Z>_<-D*time>.csv
+
+
+
+
+
+
+Xử lý dữ liệu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lấy định dạng của File export của Dashboard_Stewart3.m làm chuẩn: 
+<t> ~M[ <x> <y> <z> <yaw> <pitch> <roll>[ <axi> <ayi> <azi> <axg> <ayg> <azg> <ωz> <ωy> <ωx>]] 
+)
+
+	<x> <y> <z> là tọa độ trong hệ tọa độ toàn cục (World Frame)(mm)
+<yaw> <pitch> <roll> là các góc Euler (độ)
+<axi> <ayi> <azi> là gia tốc quán tính (không bao gồm gia tốc trọng trường) (m/s^2)
+<axg> <ayg> <azg> là gia tốc trọng trường tác động đến đối tượng (m/s^2)
+<ωz> <ωy> <ωx> là vận tốc góc (rad/s)
+B1: Đưa dữ liệu thu được từ IMU về chuẩn định dạng bằng merge_file_imu_dash.py với các giá trị <x> <y> <z> và <axg> <ayg> <azg> đặt tên là IMU<loaichuyendong>_<X>_<Y>_<Z>_<-D*time>.csv ở folder distance_pivot
+B2. Nhập file dữ liệu của Pivot và IMU vào chương trình Motion_calibration2.m
+B3.Sử dụng chức năng Alignment để biến đổi hệ tọa độ của IMU về hệ tọa độ của Motion Platform.
+B4. Đạo hàm tín hiệu vận tốc góc của IMU để có được gia tốc góc  bằng chức năng Derivative.
+B5.Đồng bộ hóa thời gian và nội suy tin hiệu sau khi đồng bộ hóa bằng Sync&Interp.
+B6. Sử dụng Filter&Comp để chạy FFT và nhập tần số cắt  của bộ lọc LPF. Chức năng này sẽ tự bù biên độ và pha cho tín hiệu sau lọc.
+B7. Chạy Math Engine để tính toán khoảng cách giữa IMU và Pivot, ghi lại kết quả ở bảng bên dưới 
+
+4.3.  Xác định cánh tay đòn.
+ 			
+Ta thu được bảng các giá trị
+
+
+Thay và  vào hệ mô phỏng để so sánh tín hiệu gia tốc 
+Giải thích sai số, vẽ biểu đồ sai số.
+Centre_z0=0 
+
+Centre_z0=-100
+
+
+Centre_z0=-200
+
+centre_z0=-300
+
+
+Co-and draw
+visio
+
+
+
+
+
+

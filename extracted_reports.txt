@@ -1,0 +1,527 @@
+--- BAOCAOTUAN9 ---
+Chương 1: TỔNG QUAN
+1.1 Robot Stewart Platform
+Stewart Platform (hay còn gọi là cơ cấu song song 6 bậc tự do - 6-DOF Parallel Robot) là một loại robot song song bao gồm một bàn máy (top platform) được kết nối với đế (base) thông qua 6 chân (actuators) có thể thay đổi chiều dài.
+Khác với các cánh tay robot công nghiệp thông thường (robot nối tiếp - Serial Robot), nơi các khớp được xếp chồng lên nhau thành một chuỗi, Stewart Platform chia sẻ tải trọng đồng đều lên tất cả các chân. Điều này tạo ra một cấu trúc cực kỳ vững chắc và chính xác.
+Cơ cấu Stewart Platform có các ưu điểm nổi bật khi so sánh với các dòng robot cánh tay phổ biến trong các nhà máy:
+Độ cứng vững cao (High Rigidity): Vì tải trọng được phân bố trên 6 chân thay vì dồn vào một trục đơn lẻ, robot này rất ổn định và ít bị rung lắc dưới tải trọng lớn.
+Khả năng chịu tải cực tốt: Tỷ lệ tải trọng trên trọng lượng (payload-to-weight ratio) của Stewart Platform vượt xa robot nối tiếp. Nó có thể nâng được vật nặng hơn trọng lượng bản thân nhiều lần.
+Độ chính xác vị trí cao: Các sai số tại các khớp không bị cộng dồn như ở robot nối tiếp.
+Phản ứng động học nhanh: Nhờ cấu trúc nhẹ nhưng cứng, nó có khả năng mô phỏng các dao động tần số cao hoặc các chuyển động ngặt nghèo rất tốt.
+Tuy nhiên cơ cấu này cũng có những nhược điểm:
+Không gian làm việc hạn chế (Small Workspace): Đây là điểm yếu lớn nhất. Trong khi robot cánh tay có thể vươn xa, Stewart Platform chỉ có thể di chuyển trong một phạm vi hẹp bao quanh vị trí trung tâm.
+Tính toán động học phức tạp: Việc giải bài toán động học thuận (tính vị trí bàn máy dựa trên chiều dài chân) cực kỳ khó khăn và đòi hỏi thuật toán phức tạp, thường phải sử dụng các phương pháp lặp.
+Giới hạn góc quay: Các chân có thể va chạm vào nhau hoặc chạm vào giới hạn vật lý của khớp cầu, khiến các góc nghiêng (pitch/roll) bị hạn chế đáng kể.
+Hiện nay, nhu cầu về các hệ thống mô phỏng (Flight Simulator, Driving Simulator) đang tăng cao để phục vụ đào tạo và nghiên cứu hành vi người dùng. Cơ cấu Stewart Platform truyền thống (UPS) sử dụng xi-lanh điện tuy phổ biến nhưng chi phí linh kiện rất cao. Cấu trúc RUS (Revolute-Universal-Spherical) nổi lên như một giải pháp thay thế tối ưu, vừa đảm bảo 6 bậc tự do (6-DOF), vừa phù hợp với điều kiện chế tạo thực tế.
+Stewart platform RUS (6-RUS) là một dạng cơ cấu Stewart sử dụng các bộ truyền động quay (rotary actuators). Tên gọi "RUS" đại diện cho trình tự các khớp nối trên mỗi trong 6 chân của rô-bốt:
+R (Revolute joint - Khớp quay) Liên kết giữa đế cố định và tay đòn dưới, được điều khiển chuyển động quay bởi một động cơ điện.
+U (Universal joint - Khớp các-đăng): Liên kết giữa tay đòn dưới và tay đòn trên.
+S (Spherical joint - Khớp cầu): Liên kết giữa tay đòn trên và bệ chuyển động.
+Đặc điểm nổi bật của cơ cấu dạng 6-RUS là việc sử dụng động cơ quay kết hợp hộp số cố định tại phần đế đem lại sự đơn giản trong mô phỏng, chế tạo và bảo dưỡng. Vì thế Stewart platform RUS (6-RUS) được chọn làm đối tượng nghiên cứu của đề tài này.
+1.2 Đối tượng và phạm vi nghiên cứu
+Đối tượng nghiên cứu:
+Đối tượng nghiên cứu của đồ án là nền tảng robot song song 6 bậc tự do (6-DOF) Stewart Platform sử dụng cấu trúc động học dạng 6-RUS). Cụ thể, các thực thể và mô hình được tập trung giải quyết bao gồm:
+Hệ thống cơ khí phần cứng: Kết cấu cụm bệ tĩnh (Base), bệ động (Platform), và hệ thống 6 chuỗi động học R-U-S truyền động bằng động cơ. Kiểm bền các chi tiết trong các trường hợp tải trọng được đánh giá là cao nhất.
+Mô hình toán học: Phương trình Động học ngược (Inverse Kinematics) để xác định góc quay của động cơ, và bài toán chuyển đổi hệ tọa độ trong không gian 3D.
+Hệ thống Digital Twin: Mô hình mô phỏng chuyển động của hệ thống dựa trên quỹ đạo cho trước, kết hợp kiểm tra giới hạn cơ khí, giới hạn góc quay động cơ và điểm kì dị để kiểm chứng hoạt động của cơ cấu trước khi thực hiện.
+Phạm vi nghiên cứu:
+Để đảm bảo tính khả thi và chiều sâu phân tích của đồ án trong giới hạn thời gian cho phép, nghiên cứu này được giới hạn trong các phạm vi sau:
+Về cơ sở toán học và điều khiển
+Nghiên cứu chỉ tập trung giải quyết trọn vẹn bài toán Động học ngược (Inverse Kinematics) làm cơ sở cốt lõi để tính toán quỹ đạo và điều khiển vị trí bệ động. Dựa trên các chứng minh về tính đa nghiệm phức tạp của robot song song (Merlet, J-P., Parallel Robots, 2006), đồ án không đi sâu vào giải tích cấu trúc bài toán Động học thuận (Forward Kinematics), mà sẽ giả định thông số đầu vào về tọa độ bệ động  là đã biết.
+Về thiết kế và kiểm bền cơ khí
+Hệ thống thiết kế hướng tới ứng dụng mô phỏng lái với tải trọng là khối lượng của người lái và cơ cấu đặt trên Platform 
+Việc kiểm bền và phân tích ứng suất chỉ tập trung vào các chi tiết chịu lực chính yếu: tay đòn kết nối (Links), chốt nối, khớp cầu, khớp các-đăng, tay quay và Platform.
+Phân tích tĩnh tuyến tính (Linear Static Analysis). Lựa chọn này phù hợp với mục tiêu kiểm tra độ bền tĩnh của kết cấu. Phân tích này sẽ không xét đến ảnh hưởng của gia tốc hay tuổi thọ mỏi.
+Điều kiện tải: Chỉ xét trọng lực (Gravity) được kích hoạt theo phương −Z.
+Về mô phỏng và công cụ phần mềm
+Giao diện Digital Twin được thiết lập ở mức độ đồng bộ hóa tín hiệu góc quay động cơ và kết cấu cơ khí để kiểm tra chuyển động cơ bản, chưa đi sâu vào các thuật toán học máy (Machine Learning) để bù sai số hoặc chẩn đoán lỗi phần cứng thời gian thực. Sử dụng Simcape giữa Matlab và SolidWork để kiểm chứng tính toán quỹ đạo lý thuyết và thực tế.
+1.3 Mục tiêu của đồ án
+Mục tiêu tổng quát của đồ án là thiết kế, mô phỏng và xây dựng hệ thống quản lý số cho cơ cấu robot song song 6-RUS Stewart Platform. Các mục tiêu cụ thể bao gồm:
+Thiết kế hoàn chỉnh cấu trúc cơ khí hệ thống 6-RUS đảm bảo khả năng chịu tải tĩnh và chuyển đổi sang Simcape để thực hiện mô phỏng trên Matlab.
+Xây dựng bộ giải thuật động học ngược (Inverse Kinematics) chính xác, làm tiền đề cho việc điều khiển và mô phỏng quỹ đạo bệ động.
+Phát triển mô hình Digital Twin tích hợp trên phần mềm Matlab cho phép giám sát quỹ đạo và cảnh báo an toàn không gian hoạt động theo thời gian thực.
+Chương 2. THIẾT KẾ CẤU TRÚC CƠ KHÍ & KIỂM BỀN
+2.1 Yêu cầu nhiệm vụ
+Thiết kế cơ khí robot song song loại hexapod sử dụng trong mô phỏng hỗ trợ cảm giác chuyển động cho một người sử dụng với các yêu cầu:
+	Khối lượng tối đa người sử dụng: 200kg.
+	Giới hạn chuyển động theo các phương
+X (Surge) : [-243.0,  239.0] mm
+Y (Sway)  : [-253.0,  221.0] mm
+Z (Heave) : [-195.0,   87.0] mm 
+Roll      : [ -13.0,   13.0] độ
+Pitch     : [ -22.0,   11.5] độ
+Yaw       : [ -30.0,   33.5] độ
+2.2. Phân tích cấu trúc hệ thống:
+Cơ cấu Stewart Platform -RUS có 6 bậc tự do được xác định bởi công thức Chebychev-Grübler-Kutzbach:
+Với:
+: số bậc tự do của hệ thống.
+ Tổng số khâu. Cơ cấu gồm 6 khâu tay dài, 6 khâu tay ngắn, 1 platform và 1 đế 
+.
+ Tổng số khớp động. Cơ cấu gồm 6 khớp quay của động cơ, 6 khớp các đăng, 6 khớp cầu. 
+ .
+: Tổng số các bậc tự do của các khớp, 
+(bậc tự do)
+2.3 Tổng thể robot thiết kế
+	Hệ thống này được tính toán thiết kế cho một người sử dụng với giới hạn tải trọng tối đa là 200 kg. Do đặc thù tải trọng ở mức trung bình, phương án chân dẫn động được lựa chọn là sự kết hợp giữa tay quay động cơ và thanh đòn, đi kèm với hệ thống khớp cầu và khớp xoay Y ở hai đầu. Sáu động cơ truyền động được bố trí chiến lược tại các đỉnh của hình lục giác và hướng vào tâm. Cách sắp đặt này không chỉ tối ưu hóa không gian mà còn giúp tăng cường độ ổn định, đảm bảo thiết bị không bị lật khi vận hành ở cường độ cao.
+	Động cơ sắp xếp theo từng cặp đối xứng có chiều quay ngược nhau. Quy ước tại vị trí 0 của động cơ, tất cả các tay quay đều nằm ngang. 
+2.4 Thiết kế chi tiết robot.
+2.4.1 Đế 
+	Nhiệm vụ chính của đế gốm: 
+Làm trụ vững cho cả hệ thống robot.
+Là vị trí lắp đặt động cơ, mạch điều khiển và thiết bị kết nối.
+Cấu tạo là tấm thép dày 6mm được hàn thêm các bệ nâng
+2.4.2 Tay quay ngắn
+Tay quay được gia công từ phôi thép. Ghép nối với trục động cơ bằng hai bulong cố định.
+2.4.3 Trục dài
+Cấu tạo gồm 1 khớp cầu mắt trâu M20 (tên Tiếng Anh là Rod End Bearing) và môt khớp xoay chữ Y gắn ở 2 đầu một thanh thép tròn. Có thể là khớp cầu ren ngoài (SA, SAL) hoặc ren trong (SI, SIL).
+2.4.4 Bệ di động
+Đây là khu vực trung tâm để lắp đặt hệ thống ghế ngồi, màn hình hiển thị cùng các thiết bị ngoại vi phục vụ mô phỏng như vô lăng, cần số và bàn đạp ga. Về mặt kết cấu, khung điều khiển được chế tạo từ các thanh thép hộp kích thước 60x60 mm. Các thành phần này được liên kết bền vững bằng phương pháp hàn cứng, tạo thành một hệ khung chịu lực.
+Liên kết giữa khung điều khiển và khớp cầu được thực hiện thông qua hệ thống bu lông, đai ốc. Để tối ưu hóa phạm vi vận hành của khớp cầu trong quá trình hệ thống chuyển động, việc xác định và cố định vị trí lắp đặt sao cho tạo ra không gian hoạt động lớn nhất là điều cực kỳ quan trọng. Bước căn chỉnh này sẽ được chú trọng xử lý trực tiếp trong giai đoạn gia công và chế tạo thực tế.
+2.4.5 Chốt
+Là chi tiết liên kết giữa tay ngắn và khớp chữ Y của cánh tay đòn, có nhiệm vụ như một khớp xoay giúp tay dài có thể quay quanh trục của chốt.
+2.4.6 Chốt khớp cầu
+Là chi tiết đâm xuyên ra bi mắt trâu của khớp cầu, giúp liên kết giữa bệ di động và cánh tay đòn.
+2.4.7 Khớp cầu 
+Khớp cầu là chi tiết được liên kết với cánh tay đòn và chốt khớp cầu qua liên kết ren M12x1.5.
+Khớp cầu được sử dụng là Universal Joint F-M20X120U với các thông số kích thước như hình vẽ.
+2.4.8 Khớp chữ Y
+Là chi tiết kết hợp với chốt để tạo thành khớp các-đăng, cho phép cánh tay đòn quay quanh trục của chốt. Chốt chữ Y được sử dụng là F-M20X150Y với các thông số như hình vẽ dưới đây.
+2.5 Kiểm bền 
+Trong quá trình thiết kế và chế tạo các hệ thống cơ khí, việc đánh giá khả năng chịu tải và độ bền của các chi tiết là bước quan trọng để đảm bảo độ an toàn và độ tin cậy của sản phẩm.
+Hệ thống mô phỏng lái là một hệ thống động lực học phức tạp, được thiết kế để "làm việc liên tục" và "tái tạo gia tốc, vận tốc" tác động lên người lái. Điều này có nghĩa là trong quá trình vận hành, các chi tiết máy sẽ chịu tác dụng của tải trọng động (lực quán tính) thay đổi liên tục, có khả năng gây ra phá hủy do mỏi (fatigue).
+Tuy nhiên, trước khi tiến hành các phân tích động lực học hoặc phân tích mỏi phức tạp, một bước kiểm nghiệm cơ bản và bắt buộc là phải đảm bảo độ bền tĩnh của kết cấu. Phân tích tĩnh cho phép chúng ta đánh giá khả năng chịu tải của hệ thống dưới tác dụng của các tải trọng thường trực (trọng lượng của người lái và thiết bị) khi hệ thống ở trạng thái đứng yên.
+Phương pháp phân tích số sử dụng phần mềm mô phỏng phần tử hữu hạn (FEM) cho phép đánh giá nhanh chóng các trường hợp tải trọng tĩnh. Trong báo cáo này, hệ thống mô phỏng lái được kiểm bền bằng SolidWorks Simulation với mục tiêu xác định khả năng chịu tải tĩnh và hệ số an toàn tĩnh của các chi tiết chính, so sánh ứng suất von Mises lớn nhất với giới hạn chảy của vật liệu. Kết quả này là cơ sở ban đầu để đánh giá tính hợp lý của thiết kế về độ bền cơ bản
+2.5.1 Mô tả hệ thống và dữ liệu đầu vào
+2.5.1.1 Mô tả hệ thống
+Trong quá trình thiết kế và chế tạo các hệ thống cơ khí, việc đánh giá khả năng chịu tải và độ bền của các chi tiết là bước quan trọng để đảm bảo độ an toàn và độ tin cậy của sản phẩm.
+Hệ thống mô phỏng lái là một hệ thống động lực học phức tạp, được thiết kế để "làm việc liên tục" và "tái tạo gia tốc, vận tốc" tác động lên người lái. Điều này có nghĩa là trong quá trình vận hành, các chi tiết máy sẽ chịu tác dụng của tải trọng động (lực quán tính) thay đổi liên tục, có khả năng gây ra phá hủy do mỏi (fatigue).
+Tuy nhiên, trước khi tiến hành các phân tích động lực học hoặc phân tích mỏi phức tạp, một bước kiểm nghiệm cơ bản và bắt buộc là phải đảm bảo độ bền tĩnh của kết cấu. Phân tích tĩnh cho phép chúng ta đánh giá khả năng chịu tải của hệ thống dưới tác dụng của các tải trọng thường trực (trọng lượng của người lái và thiết bị) khi hệ thống ở trạng thái đứng yên.
+Phương pháp phân tích số sử dụng phần mềm mô phỏng phần tử hữu hạn (FEM) cho phép đánh giá nhanh chóng các trường hợp tải trọng tĩnh. Trong báo cáo này, hệ thống mô phỏng lái được kiểm bền bằng SolidWorks Simulation với mục tiêu xác định khả năng chịu tải tĩnh và hệ số an toàn tĩnh của các chi tiết chính, so sánh ứng suất von Mises lớn nhất với giới hạn chảy của vật liệu. Kết quả này là cơ sở ban đầu để đánh giá tính hợp lý của thiết kế về độ bền cơ bản
+ Hệ thống mô phỏng lái (Driving Simulator System) là một tổ hợp cơ khí được thiết kế nhằm tái tạo cảm giác thực tế của người lái trong quá trình vận hành xe. Điều đó đạt được qua việc tái tạo gia tốc, vận tốc tác động lên tiền đình của người lái bằng cơ cấu chấp hành: Động cơ, cơ cấu truyền động (Tay quay ngắn, tay quay dài, khớp quay, khớp cầu) và platform.
+Platform: Là bệ trên- nơi gắn ghế lái và các module mô phỏng. Platform nhận lực và chuyển động từ cơ cấu chấp hành để đạt gia tốc và vận tốc, góc nghiêng và dao động mong muốn. Đây là khâu bị động, kết nối với các tay dài thông qua khớp cầu.
+Khớp cầu (Spherical Joint): Giúp platform chuyển động linh hoạt, quay tự do theo 3 bậc tự do góc quanh điểm khớp, đồng thời truyền lực mà không tạo mô men dư, tránh ứng suất uốn trên thanh truyền.
+Tay dài (Long link): Truyền lực từ tay ngắn lên platform thông qua khớp cầu. Đây là khâu trung gian chịu nén, uốn do tải gây ra.
+Chốt (Pin): Là liên kết giữa khớp bản lề và tay ngắn, cho phép quay tương đối quanh trục bản lề. Chốt chịu lực cắt và uốn tại điểm nối.
+Khớp bản lề (Revolute Joint): Cho phép tay dài quay quanh trục bản lề, kết hớp khớp quay ở tay ngắn tạo thành 2 bậc quay tự do của tay dài.
+Tay ngắn (Short Link): Là tay quay chủ động được dẫn động bởi động cơ. Khi quay, nó làm thay đổi góc và vị trí đầu tay dài, từ đó điều khiển chuyển động của Platform. Tay ngắn chịu phản lực từ tay dài thông qua chốt liên kết.
+ Tổng quan: Khi động cơ quay, tay quay ngắn quay kết hợp với khớp bản lề đẩy tay dài chuyển động. Đầu trên của tay dài, thông qua khớp cầu, đẩy hoặc kéo platform tạo ra chuyển động mong muốn.
+2.5.1.2 Dữ liệu đầu vào và các giả thiết
+ Hệ thống mô phỏng lái khi hoạt động chịu hai loại tải trọng chính:
+Tải trọng tĩnh: Trọng lực của người lái và các cơ cấu đặt trên Platform .
+Tải trọng động: Lực quán tính sinh ra khi Platform "tái tạo gia tốc"
+ Phạm vi của báo cáo này chỉ tập trung vào việc kiểm nghiệm độ bền của hệ thống dưới tác dụng của Tải trọng tĩnh (1). Mục tiêu là kiểm tra xem hệ thống có đủ cứng vững và bền để chịu được trọng lượng của chính nó và người vận hành khi ở trạng thái đứng yên hay không. Đây là điều kiện tải cơ bản nhất mà kết cấu phải thỏa mãn.
+ Dữ liệu đầu vào: 
+Xét các chi tiết đều được gia công từ thép CT3 với ứng suất chảy tới hạn của vật liệu là 
+Khối lượng của người lái và cơ cấu đặt trên Platform: 
+Khối lượng của Platform:  
+Khối lượng của Tay dài: .
+Khối lượng của Tay ngắn 
+Bỏ qua khối lượng của các khớp và chốt rất nhỏ so với khối lượng của các chi tiết khác.
+Các giả thiết phân tích:
+Loại bài toán: Phân tích tĩnh tuyến tính (Linear Static Analysis). Lựa chọn này phù hợp với mục tiêu kiểm tra độ bền tĩnh của kết cấu. Phân tích này sẽ không xét đến ảnh hưởng của gia tốc hay tuổi thọ mỏi.
+Điều kiện tải: Chỉ xét trọng lực (Gravity) được kích hoạt theo phương −Z.
+Giả thiết tải trọng: Để đơn giản hóa bài toán tĩnh, ta xét trường hợp lý tưởng: coi tải P đặt tại tâm của platform. Do cấu trúc cơ cấu đối xứng, giả thiết này dẫn đến việc các phản lực tại 6 chân đỡ bằng nhau. 
+Các khớp trượt hoặc ổ lăn được mô hình hóa bằng Fixed Hinger, cho phép quay tự do quanh một trục nhưng không dịch chuyển tịnh tiến.
+Vật liệu đàn hồi tuyến tính, bỏ qua biến dạng lớn và ảnh hưởng nhiệt.
+2.5.2 Kiểm bền của Platform
+Platform chịu tải là trọng lượng của người, hệ ghế lái và trọng lượng của chính nó:
+  Coi tải đặt tại tâm của platform. Do vị trí các điểm liên kết của tay dài với platform (điểm  đối xứng với nhau nên các lực  bằng nhau 
+Tại điểm  là điểm đặt các khớp cầu, ta đặt Fixed Hinger tại các điểm , đặt tải  lên bề mặt trên Platform.
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation: 
+Ứng suất của platform là:  và có độ biến dạng lớn nhất tại tâm platform .
+ Hệ số an toàn của chi tiết: 
+2.5.3 Kiểm bền của cụm thanh truyền dài
+Cụm tay quay dài chịu lực tác dụng  là phản lực của lực  và trọng lượng của chính nó  . (.
+                                 .
+ Phân tích lực  thành lực dọc trục  và lực pháp tuyến . Tương tự phân tích  thành  và .
+Do hai đầu của thanh dài đều là khớp cầu và khớp xoay nên chỉ còn chịu thành phần lực dọc trục  và  . Gọi  là tổng hợp lực của chi tiết , ta có:
+Lực dọc trục lớn nhất khi tay dài có phương thẳng đứng tức  hay
+Ta tiến hành kiểm nghiệm trường hợp chi tiết chịu tải lớn nhất:
+Tại đầu dưới của tay dài, ta thiết lập điều kiện biên Fixed Hinge (Bản lề cố định). Ràng buộc này mô phỏng đúng khớp bản lề, cho phép chi tiết quay tự do quanh trục chốt nhưng ngăn cản mọi tịnh tiến.  có điểm đặt lực ở khớp cầu như hình vẽ. 
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Kết quả:
+Ứng suất lớn nhất của cụm tay dài:  và có độ biến dạng lớn nhất điểm tiếp xúc phía trên của khớp cầu: .
+ Hệ số an toàn của chi tiết: .
+2.5.4 Kiểm bền chốt
+Chốt là bộ phận liên kết giữa cụm tay dài và tay ngắn. Chốt có khả năng xoay quanh trục lỗ của tay ngắn nên không có thành phần ứng suất do moment quay gây ra ở chi tiết này. Phân tích lực  do cụm tay dài tác động lên chốt thành hai thành phần  vuông góc với chốt,  dọc trục như hình vẽ.
+Dễ thấy  lớn nhất khi cụm tay dài vuông góc với chốt,  lớn nhất khi cụm tay dài song song với chốt.
+Có khâu tay ngắn là khâu chủ động, ta coi bộ phân liên kết giữa chốt và tay ngắn ở trên chốt là cố định, đặt Fixed Hinger ở vị trí đấy.
+ lớn nhất khi cụm tay dài vuông góc với chốt:
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Kết quả:
+Ứng suất lớn nhất của cụm tay dài:  và có độ biến dạng lớn nhất điểm tiếp xúc với platform của khớp cầu .
+Hệ số an toàn của chi tiết: 
+ lớn nhất khi cụm tay dài song song với chốt:
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Kết quả:
+Ứng suất lớn nhất của cụm tay dài: và có độ biến dạng lớn nhất điểm tiếp xúc với platform của khớp cầu .
+Hệ số an toàn của chi tiết: 
+Qua kết quả mô phỏng, ứng suất lớn nhất trong cả hai trường hợp biên là , cho hệ số an toàn cao . Vì hệ số an toàn này lớn hơn mức yêu cầu rất nhiều, chi tiết được kết luận là có đủ dự trữ độ bền để chịu được tải trọng kết hợp của cả hai thành phần lực trong thực tế làm.
+2.5.5 Kiểm bền tay quay
+Tay ngắn là chi tiết gắn trực tiếp với động cơ, chuyển động quay quanh trục động cơ, liên kết với các chi tiết khác tạo chuyển động cho toàn bộ cơ cấu.
+Có  là phản lực tay ngắn tác động lên chốt.
+ Tay ngắn phải chịu tác dụng của  là lực trực đối của  và trọng lượng của chính nó .
+Phân tích lực  thành 3 lực thành phần,  và  có phương và chiều như hình vẽ. 
+Xét hệ thống ở trạng thái tĩnh, khi đó tay ngắn gắn chặt với trục của động cơ và động cơ khóa cứng do đó coi bộ phận tiếp xúc với trục động cơ là cố định.
+Căn cứ vào giới hạn hoạt động của chi tiết ta kiểm nghiệm độ bền của chi tiết với các trường hợp.
+Tay ngắn vuông với đế và tay dài vuông góc với chốt:
+Khi đó  ,   =,  cùng phương và chiều với  
+Lúc này  và    =
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Ứng suất lớn nhất của tay ngắn:  và có độ biến dạng lớn nhất tại điểm tiếp xúc với chốt .
+Hệ số an toàn của chi tiết: 
+Tay ngắn song song với đế và tay dài song song với chốt:
+Lúc này  và    =
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Ứng suất lớn nhất của tay ngắn:  và có độ biến dạng lớn nhất tại điểm tiếp xúc với chốt: .
+Hệ số an toàn của chi tiết: 
+Tay ngắn vuông góc với đế và cụm chân dài vuông góc với chốt
+Khi đó  và    =.
+Tiến hành mô phỏng bằng SOLIDWORKS Simulation:
+Ứng suất lớn nhất của tay ngắn:  và có độ biến dạng lớn nhất điểm tiếp xúc với chốt: .
+ Hệ số an toàn của chi tiết: 
+ Các trường hợp trên kiểm nghiệm chi tiết chịu tác dụng bởi các lực lớn nhất theo từng phương. Căn cứ vào kết quả mô phỏng ta thấy chi tiết chịu ảnh hưởng nhiều nhất bởi lực uốn dọc trục của chốt với ứng suất lớn nhất là:  và hệ số an toàn .
+2.5.6 Kết luận 
+ Báo cáo đã tiến hành phân tích tĩnh tuyến tính cho các chi tiết chính của hệ thống mô phỏng lái. Kết quả mô phỏng (tổng hợp trong Bảng 1) cho thấy sự chênh lệch lớn về độ bền giữa các chi tiết:
+Các chi tiết truyền động bao gồm: Cụm tay dài ( Chốt (), Tay quay ngắn  có hệ số an toàn rất cao, chi tiết platform  ( thấp hơn nhưng cũng vẫn ở mức dư bền lí tưởng.  Các chi tiết này được kết luận là bền, đảm bảo độ cứng vững và khả năng làm việc ổn định tuyệt đối trong điều kiện tải trọng tĩnh đã giả định.
+Kết luận:
+Thiết kế hiện tại của Platform, Cụm tay dài, Chốt, và Tay ngắn là đạt yêu cầu.
+Chương 3: CƠ SỞ TOÁN HỌC & ĐỘNG HỌC
+Chương này sẽ tập trung giải quyết bài toán cốt lõi làm cơ sở cho toàn bộ hệ thống điều khiển: Bài toán Động học ngược (Inverse Kinematics). Kế thừa bộ thông số hình học (chiều dài tay đòn, bán kính bệ) của các chi tiết đã được kiểm bền ở Chương 2, hệ thống tọa độ tổng thể sẽ được thiết lập thông qua các phép biến đổi ma trận thuần nhất và góc Euler. Trọng tâm của nghiên cứu là xây dựng phương trình để tính toánchính xác 6 nghiệm góc quay của động cơ tương ứng với 6 bậc tự do thao tác . Đặc biệt, kết quả giải tích từ phần này sẽ không chỉ dừng lại ở các phương trình rời rạc, mà được ứng dụng trực tiếp để xác định giới hạn cơ khí (Workspace) và thiết lập các tập điểm kỳ dị (Singularity loci) – tiền đề bắt buộc để xây dựng hệ thống cảnh báo an toàn trong Digital Twin tại Chương 4.
+Các ký hiệu sử dụng:
+Hệ tọa độ cố định
+: Hệ tọa độ trên bệ di động.
+ Hệ tọa độ đầu người
+: Vector đại số tọa độ đầu người theo hệ tọa độ cố định.
+ vector đại số tọa độ đầu người so hệ tọa độ trên bệ di động.
+ Hệ tọa độ tâm quay (Pivot)
+: Vector đại số tọa độ tâm quay theo hệ tọa độ cố định.
+ : vector đại số tọa độ tâm quay so hệ tọa độ trên bệ di động.
+𝐴𝑖 là hình chiếu tâm khớp lên trục động cơ 
+𝐵𝑖 là tâm khớp cầu trên bệ di động 
+ là bán kính đường tròn ngoại tiếp các điểm 𝐴𝑖.
+là bán kính đường tròn ngoại tiếp các điểm 𝐵𝑖.
+: Vector đại số tọa độ điểm 𝐴𝑖 trong hệ tọa độ cố định.
+: Vector đại số tọa độ điểm 𝐵𝑖 trong hệ tọa độ di động.
+ : Vector đại số chứa tọa độ điểm 𝐵𝑖 trong hệ tọa độ cố định.
+ Độ cao của P trong hệ tọa độ cố định khi tất cả tay quay đều song song với đế.
+: Độ cao của trục động cơ trong hệ tọa độ cố định.
+: Vector đại số tọa độ điểm P theo hệ tọa độ cố định.
+ : Độ dài chân ảo thứ i ().
+R : ma trận cosin chỉ hướng của hệ tọa độ động với hệ tọa độ cố
+định 
+3.1 Các hệ tọa độ và phép biến đổi
+Với thông số đầu vào là quỹ đạo mong muốn của Platform hoặc Đầu người hoặc Tâm quay, ta cần chuyển quỹ đạo đầu vào thành quỹ đạo của Platform để nhất quán cho việc tính toán góc quay động cơ. Do coi người ngồi, Tâm quay và Platform là một vật rắn đồng nhất, các góc Yaw, Pitch, Roll của cả 3 hệ quy chiếu  là như nhau khi so với hệ quy chiếu cố định  tại mọi vị trí.
+Sử dụng duy nhất một ma trận quay 
+Qua ma trận quay R có thể tính được tọa độ của  và Head thông qua P:
+3.2 Bài toán Động học ngược (Inverse Kinematics):
+Bài toán động học nghịch giúp ta xác định vị trí, chiều dài các chân ảo  và các góc xoay của động cơ để có sự phối hợp giữa các kết cấu cơ khí, điều khiển bệ di động chạy theo quỹ đạo tương ứng với các tín hiệu có được từ MCA giúp người lái có những cảm giác phù hợp với tín hiệu đưa vào từ môi trường thực trong quá trình mô phỏng. Các góc xoay của động cơ tính toán được phải điều khiển bệ di động hoạt động tốt trong không gian làm việc của Robot. Bài toán động học ngược rất quan trọng trong việc kết nối các tín hiệu được tạo ra và kết cấu cơ khí giúp người lái có trải nghiệm tốt nhất.
+Cấu hình cơ khí.
+
+Ta có thể xác định được các :
+Với k=0:2
+)
+Qua đó xác định được tọa độ các điểm  và 
+Với i=1:6:
+Cơ cấu có 6 động cơ được chia thành 3 cụm, 2 động cơ gần nhau nhất là một cụm động cơ.
+Hai động cơ trong cùng một cụm có chiều quay ngược nhau và được thể hiện với góc 
+Các thông số trên là các tham số cần để có thể tính toán phương trình động học ngược của hệ thống 6-RUS.
+Tính góc quay của động cơ.
+Tính chiều dài chân ảo 
+Từ hình vẽ, với mỗi điểm  bất kì ta có:
+Từ 2 PT trên ta thu được:
+Khi xét hệ tọa độ di động . Do phương trình trên được xét trên hệ tọa độ cố định nên 
+Vecto  kí hiệu là 
+Ta biểu diễn lại phương trình có dạng:
+
+Viết dưới dạng ma trận:
+Qua đo tính được chiều dài chân ảo 
+Xác định tọa độ khớp các đăng trên tay quay động cơ.
+Gọi  là điểm tâm của khớp xoay nối giữa chốt nhỏ với cánh tay đòn.  là hình chiếu của điểm  trên trục động cơ.  ;là điểm tâm của khớp cầu nối giữa tay đòn và bệ di động. Có  và  là góc quay động cơ tính từ vị trí song song với mặt phẳng . Xét các điểm , ta có công thức xác định tọa độ điểm  như sau:
+Áp dụng công thức tính khoảng cách giữa hai điểm trong tọa độ Decartes:
+
+Thay  vào phương trình trên ta được:
+Rút gọn phương trình trên ta được:
+Đặt
+Phương trình trở về dạng 
+Đây là phương trình lượng giác bậc nhất đối với  và 
+Phương trình trên sẽ đưa về 
+Với 
+Vậy góc quay của động cơ  được xác định bởi phương trình:
+3.3 Phân tích không gian hoạt động
+Xác định không gian hoạt động của hệ thống mô phỏng lái stewart platform
+Xác định giới hạn động cơ
+Các động cơ có khả năng quay  nhưng do sự ràng buộc về hướng (góc  và chiều quay của động cơ, trong quá trình hoạt động có những điểm kì dị xuất hiện bởi giới hạn cấu hình cơ khí. Do đó ta cần hạn chế vùng hoạt động của góc quay động cơ để đảm bảo an toàn trong sử dụng.
+Bằng cách kiểm tra sơ bộ hoạt động theo các phương, tang hoặc giảm dần đồng thời theo các trục, ta có thể khoanh vùng các giới hạn trên và dưới.
+Xét khi giảm Z tới tọa độ  
+Các góc quay động cơ gặp điểm kì dị tại 
+Xét khi tăng Z tới tọa độ 
+                              Các góc quay động cơ gặp điểm kì dị tại 
+Ta đặt giới hạn góc quay động cơ 
+Ma trận Jacobi kiểm tra điểm kì dị:
+Xây dựng ma trận Jacobi
+Giả sử tâm của Platform có vận tốc tịnh tiến là  và có vận tốc quay là  Do điểm  nằm cách tâm một khoảng  nên vận tốc tổng hợp tại  là:
+Lực và vận tốc mà thanh truyền nhận được chỉ có tác dụng dọc theo trục của chính nó. Bất kì chuyển động vuông góc vào chỉ làm thanh truyền xoay quanh khớp chứ không làm thay đổi độ vươn của cơ cấu.
+Gọi  là vector đơn vị của chân ảo:
+Để lấy phần vận tốc chỉ chạy dọc theo thanh, ta chiếu vận tốc toàn phần lên vetor 
+Vậy  và  là ma trận 6x6. Khi det(J)=0 chính là điểm kì dị.
+Xây dựng chương trình kiểm tra không gian hoạt động
+Tạo vòng lặp để dịch chuyển tâm platform theo X, Y, Z từ -300:300 với step=10.
+Fix Roll, Pitch, Yaw=0.
+Với mỗi vòng lặp tính động học ngược để tính góc quay động cơ  với tọa độ X,Y,Z,Roll,Pitch,Yaw hiện thời. (
+Kiểm tra góc quay động cơ thỏa mãn  và đồng thời kiểm tra kì dị bằng ma trận Jacobi.
+Ghi lại điểm thỏa mãn và vẽ đồ thị.
+Tương tự như vùng hoạt động tịnh tiến an toàn, ta dùng vòng lặp for với các góc roll, pitch, yaw với bước là 2 độ/step. 
+Kết quả:
+X max/min: 250.0 / -230.0 (mm)
+Y max/min: 275.0 / -195.0 (mm)
+Z max/min: 965.0 / 710.0 (mm)
+Với sai số bằng step 
+Roll max/min: 18.0 / -18.0 (deg)
+Pitch max/min: 10.0 / -22.0 (deg)
+Yaw max/min:   38.0 / -26.0 (deg)
+Với sai số bằng step 2 (deg)
+Kiểm tra giới hạn cơ khí.
+ Nhưng do chuyển động của Robot là chuyển động phức tạp 6 bậc tự do, việc giới hạn chỉ chuyển động tịnh tiến hoặc chỉ chuyển động xoay là không đủ chặt chẽ để đảm bảo vùng hoạt động an toàn của cơ cấu (Ví dụ: tại vị trí  nằm trong giới hạn tịnh tiến, [yaw pitch roll] = [10 5 5] nằm trong giới hạn xoay, nhưng kết hợp cả hai lại là điểm nằm ngoài giới hạn vật lý của cơ khí). Do đó, ta xác định một tọa độ có thể thực hiện được hay không bằng cách kiểm tra giới hạn vật lý cơ khí, kiểm tra giới hạn góc quay động cơ và kiểm tra điểm kì dị.
+Trong phương trình xác định góc quay động cơ 
+
+Do độ dài của các khâu là hằng số, nếu một điểm nằm ngoài khả năng với của các cánh tay sẽ khiến . Đây chính là bất phương trình điều kiện kiểm tra giới hạn vật lý cơ khí của cơ cấu.
+Chương 4. XÂY DỰNG DIGITAL TWIN & MÔ PHỎNG
+Mục đích của việc mô phỏng để kiểm chứng quá trình chuyển động và sự an toàn của cơ cấu trước khi thực hiện. Với đầu vào là quỹ đạo của chuyển động đầu người (Head), hệ thống sẽ tính toán ra quỹ đạo của Platform và góc quay của các động cơ. Việc kết hợp mô phỏng Simulink và mô phỏng thuật toán trên Matlab là cần thiết (double check) vì các sai số khi cấu hình cơ khí trong động học ngược.
+Chương trình mô phỏng sẽ đánh giá độ chính xác của thuật toán qua việc so sánh giữa dịch chuyển lý thuyết (Matlab) và dịch chuyển ảo (Simulink).
+4.1 Kiến trục hệ thống
+Dữ liệu cấu hình sẽ được người dùng nhập thủ công hoặc import từ browser để thực hiện cấu hình chuẩn bị mô phỏng (matlab) và lập kế hoạch chuyển động. Sau khi có quỹ đạo dịch chuyển, chương trình sẽ tính toán động học ngược ra góc quay động cơ và kiểm tra qua Safety Check. Nếu tất cả các lớp bảo vệ đều được thông qua thì sẽ tiến hành mô phỏng và tính toán quỹ đạo của Pivot, Platform,Head. Cùng các giá trị góc quay động cơ đấy sẽ được gửi tín hiệu đến Simulink để Simcape thực hiện chính xác các chuyển động đã tính toán và dùng Scope để so sánh với các biểu đồ chuyển động của chương trình Mô phỏng.
+Kết quả được đánh giá là chính xác nếu sai số rất nhỏ (<1%), nếu lớn hơn 1% tức chương trình lỗi và chưa đủ đảm bảo để kiểm nghiệm quỹ đạo.
+4.2 Xây dựng mô hình sử dụng công cụ Matlab Simulink
+Mô hình 3D đã được thiết kế trong môi trường SolidWorks với đầy đủ các
+ràng buộc về ghép nối khớp xoay (Rotational) và khớp cầu (Spherical). Bằng
+công cụ Simscape Multibody Link, ta xuất ra được một tập tin .xml với biểu thị đầy đủ cấu trúc của robot trong môi trường Simulink.
+Để sơ đồ các khối trong môi trường Simulink được đơn giản nhất, ta loại các ràng buộc không cần thiết trong mô hình như ràng buộc (Mate) của khớp nối bulong đai ốc, ràng buộc của các file Solid Part trong một file Solid Assembly con. Điều đó sẽ rút ngắn thời thời gian và sẽ loại bỏ được các khối Block không cần thiết. Để thực hiện được, cần đưa những file Solid Assembly con kia về file Solid Part, loại bỏ những ràng buộc thừa . Rất đơn giản, ta chỉ cần SaveAs file Solid Assembly con sang đuôi .prt hoặc .sldprt.
+Bước 1: Mở file SolidAssem con lên, vào File chọn Save As
+Bước 2: Chọn Save as copy and continue
+Bước 3: Chọn thư mục cần lưu . Ở dòng Save as type chọn Part (*.prt,*sldprt). Cuối cùng nhấn Save.
+Lưu ý: Tất cả các file chuyển đổi phải được Save As ở cùng một thư mục.
+Bước 4: Tạo một file SolidAssem mới từ những file đã chuyển đổi ở trên. Cuối cùng ta có một file mô hình mới nhẹ hơn và sẵn sàng để xuất sang môi trường Simulink
+Tạo file .xml từ mô hình trên Solidworks
+Bước 1: Vào Options → Add-Ins
+Bước 2: Chọn Simscape Multibody Link rồi nhấn OK. Tiếp theo vào Tool → Simscape Multibody Link → Export
+Trong giao diện Matlab, mở folder vừa Export file .xml của mô hình robot trong cửa sổ Curren Folder. Trong cửa sổ Command Window, ta gõ lệnh smimport (‘ Tên .xml file ‘), phần mềm sẽ tự tạo và liên kết các kết cấu cơ khí bằng các khối chắc năng có sẵn trong Simscape Multibody và xuất ra một file Simulink Model chứa mô hình mô phỏng.
+Xây dựng sơ đồ mô phỏng
+Trong môi trường Matlab-Simulink, kết cấu truyền động cơ khí nêu trên sẽ được chuyển thành sơ đồ mô phỏng với các khối và liên kết tương ứng
+Các khối sử dụng trong quá trình mô phỏng.
+Đầu tiên, kích đúp vào mỗi khối Revolute Joint để tạo chân lấy tín hiệu vào ra. Ở thẻ Actuator , ta thiết lập đầu vào là giá trị góc xoay động cơ
+• Torque ( Momen xoắn) : Automatically Computed.
+• Motion ( Chuyển động ) : Provided by Input.
+Ở thẻ Sensing, ta chọn tín hiệu đầu ra đưa ra giá trị góc xoay. Chọn Position
+Tạo một khối Matlab Function tính toán Động học nghịch Robot .Dữ liệu đầu vào được truyền từ các khối “ From workspace” . Đầu ra là các giá trị góc xoay của 6 động cơ tương ứng. Giá trị góc xoay làm đầu vào Input cho góc xoay của mô hình mô phỏng Robot vừa thiết lập.
+4.3 Xây dựng mô hình kiểm nghiệm thuật toán.
+Dashboard_Stewart3.m là giao diện đồ họa (GUI) chạy trên MATLAB, phục vụ việc:
+Mô phỏng 3D (Digital Twin) của Stewart Platform 6 bậc tự do.
+Tạo quỹ đạo chuyển động cho bàn máy, tâm quay (pivot) và đầu người lái.
+Nhập quỹ đạo từ file dữ liệu định dạng (~M).
+Kiểm định an toàn quỹ đạo (tránh kịch cơ khí, góc servo quá giới hạn).
+Xuất file lệnh điều khiển 7 hoặc 15 tham số cho hệ thống mô phỏng Simulink.
+Vẽ biểu đồ đầy đủ 15 tham số quỹ đạo (vị trí, góc, gia tốc dài, vận tốc góc).
+Cách sử dụng:
+B1: Nhập cấu hình cơ khí
+Tất cả tham số đều có đơn vị là milimet và độ.
+r_a: bán kính mặt phẳng đi qua các khớp xoay của tay quay (L1) (Mặt phẳng dưới)
+r_b: bán kính mặt phẳng đi qua các khớp cầu (top platform)
+L1: độ dài tay quay (tay ngắn)
+L2: độ dài tay đòn (tay dài)
+Alpha_1: Góc lắp đặt của động cơ 1 (hợp với trục OX
+Beta_1: Góc định vị khớp cầu 1 ( hợp với trục OX
+Delta_a: Góc giữa hai động cơ trong cùng một cặp. (giữa .
+Delta_b: Góc giữa hai khớp cầu trong cùng một cặp. (giữa .
+Đầu người (X, Y, Z): Tọa độ của đầu người trong hệ tọa độ gắn với mặt phẳng đi qua 6 khớp cầu.
+Người dùng có thể lưu lại cấu hình cơ khí này thành 1 file .mat hoặc có thể import 1 file cấu hình có sẵn để sử dụng.
+B2: Cập nhật cấu hình để xuất ra các tham số cho Simulink 
+Sau khi cập nhật cấu hình GUI sẽ vẽ ra cấu hình cơ khí theo tham số bạn vừa nhập và tính toán các tham số cho Simulink (ma trận tọa độ điểm A và B, chiều dài các tay quay, các góc gamma) 
+Nếu chỉ nhập các cấu hình nhưng chưa bấm cập nhật cấu hình, hệ thống sẽ cảnh báo lỗi 
+B3: Thiết lập Quỹ đạo & Mô phỏng
+Nhập HomeZ: 
+HomeZ là tọa độ của mặt phẳng đi qua 6 khớp cầu khi tất cả động cơ đều song song với mặt phẳng OXY. Mặc định HomeZ=0, người dùng có thể offset tọa độ homeZ theo trục OZ.
+Người dùng có thể thiết lập quỹ đạo theo các lựa chọn:
+Bước 1: Import quỹ đạo
+Quỹ đạo được import là quỹ đạo của đầu người lái, file được import là .csv hoặc .txt với các tham số được định dạng: 
+T ~M[<x> <y> <z> <yaw> <pitch> <roll>[ <axi> <ayi> <azi> <axg> <ayg> <azg> <ωz> <ωy> <ωx>]]
+Với :
+Bước 2: Sinh quỹ đạo
+Người dùng có thể tạo 1 quỹ đạo mẫu: Tịnh tiến Z, Quay quanh Pitch, đường tròn XY, cua chữ S.
+Quỹ đạo được sinh ra dựa trên tâm quay (pivot) được lựa chọn: Đầu người lái, tâm top platform hoặc ở tọa độ bất kì (người dùng nhập ở Pivot (X,Y,Z))
+Sau đó người dùng nhập thời gian mô phỏng (T.Gian(s)) Tần số (Hz), Biên độ dài(mm), Biên độ góc(độ) 
+( Nếu người dùng đã import một quỹ đạo thì hệ thống sẽ lựa chọn quỹ đạo đã được import và bỏ qua các tham số của Sinh quỹ đạo)
+Bước 3:Sau khi hoàn thành các bước trên người dùng có thể ấn Kiểm định & Chạy mô phỏng để hệ thống tính toán quỹ đạo, kiểm định và thực hiện mô phỏng.
+Quỹ đạo sẽ được kiểm tra qua 3 lớp: Giới hạn phần cứng, Giới hạn góc quay động cơ, Kiểm tra điểm kì dị. Nếu quỹ đạo khả thi, GUI sẽ mô phỏng lại chuyển động theo quỹ đạo và gọi simulink để thực hiện mô phỏng trên Simulink (Phải đợi 5-10s để Simulink khởi động). Nếu quỹ đạo vi phạm 1 trong các lớp kiểm tra, hệ thống sẽ báo thông tin về lỗi (loại lỗi, vị trí phạm lỗi, thời điểm vi phạm)
+Figure 7: Lỗi kiểm định quỹ đạo
+B4: Export & vẽ đồ thị
+Figure 8:Export & Vẽ đồ thị
+Người dùng chọn loại đối tượng và định dạng dữ liệu để export. File export có dạng mặc định là .csv. Người dùng có thể chuyển sang các định dạng khác bằng cách chuyển Save as type thành “All Files (*.*) và chuyển đuôi tên file thành đuôi định dạng mong muốn.
+Figure 9: Đổi định dạng export quỹ đạo
+Người dùng có thể vẽ ra đồ thị đầy đủ 15 tham số giống tương đương file import quỹ đạo đầu người. Đây là quỹ đạo của đối tượng xuất được xuất file ( chưa cần xuất file cũng có thể vẽ được biểu đồ tham số).
+Figure 10: Biểu đồ các tham số
+Bước 5: Khi người dùng muốn thiết lập 1 quỹ đạo hay 1 cấu hình khác, người dùng thay đổi các tham số và các file import rồi bấm kiểm định & chạy mô phỏng để thực hiện mô phỏng lại.
+Chương 5: KẾT QUẢ
+Khi thực hiện dao động theo phương Z biên độ 50(mm) với tần số 0.2Hz:
+Kết quả trên Chương trình mô phỏng thuật toán: 
+Kết quả trên Simulink: 
+Biểu đồ giá trị tịnh tiến của Platform:
+Biểu đồ góc quay của Platform:
+Nhận xét thấy tại giá trị đo được trên Simulink có sai số rất nhỏ so với kết quả của chương trình mô phỏng: Góc yaw có sai số 0,005 (deg), tịnh tiến Z có sai số 0,017(mm). Sai lệch này xảy ra do sự làm tròn các tham số trong quá trình nhập Input cấu hình cơ khí.
+Chương 6: PHƯƠNG HƯỚNG PHÁT TRIỂN
+Xây dựng phương trình động lực học để kiểm tra chính xác các giá trị lực và momen tác động lên các chi tiết thay vì xét các trường hợp.
+Kiểm tra gia tốc đầu người theo quỹ đạo từ MPC.
+Xây dựng App trên Simulink thay vì file .m để mô phỏng chuyển nghiệp hơn.
+ Thực hiện tìm tọa độ Pivot thực tế của Ckas
+--- Distance_report ---
+Tìm khoảng cách giữa 2 điểm trên cùng vật rắn dựa trên gia tốc góc và vận tốc góc và chênh lệch gia tốc tuyến tính. Áp dụng vào bài toán tìm Offset Centre_Z0 của Ckas.
+Tìm khoảng cách giữa 2 điểm trên cùng vật rắn dựa trên tín hiệu gia tốc tuyến tính, gia tốc góc và vận tốc góc
+Xét 3 điểm OAB nằm trên cùng một vật rắn quay quanh O với vận tốc góc  và gia tốc góc .
+Gia tốc tổng hợp tại các điểm gồm hai thành phần là gia tốc tiếp tuyến  và gia tốc hướng tâm 
+Ta có :
+Với :
+Lại có :
+Thành phần tiếp tuyến : 		
+Thành phần hướng tâm 
+PT lúc này trở thành 
+hay
+ (1)
+Đặt 
+Tuy nhiên, ma trận M bị suy biến khi vật rắn chỉ thực hiện chuyển động quay đơn trục. Do thành phần hiệu gia tốc dọc theo trục quay sẽ bằng 0, không mang thông tin về khoảng cách. Điều này làm mất đi một phương trình độc lập, khiến ta không thể xác định được thành phần khoảng cách dọc theo chính trục quay đó.
+Áp dụng vào bài toán tìm vị trí Tâm quay của Ckas
+Yêu cầu bài toán và các giả thiết.
+Gọi P là vị trí của Pivot, I là vị trí của IMU và M là tâm của Motion Platform tại vị trí Home. Coi I,H,MF,P là các điểm trên cùng một vật rắn
+Mọi đại lượng tọa độ, góc, vận tốc góc, gia tốc góc, gia tốc tuyến tính được xác định trong hệ tọa độ {MF}.
+Điểm P có tọa độ 
+Điểm I có tọa độ  .
+Sử dụng cảm biến IMU để lấy tín hiệu gia tốc (có ảnh hưởng bởi gia tốc trọng trường), vận tốc góc và các góc nghiêng.
+Sử dụng chương trình mô phỏng Dashboard_Stewart3.m để mô phỏng tín hiệu của điểm H và P.
+Yêu cầu: Xác định khoảng cách từ IMU đến Pivot thực tế tại . 
+Thực trạng
+Vấn đề 1. Điều kiện mô phỏng.
+Do ở hiện tại, việc thực hiện một quỹ đạo chuyển động có cả 3 thành phần quay Yaw-Pitch-Roll ở Ckas và mô phỏng lại chuyển động đấy trên Matlab còn nhiều khó khăn, ta chỉ có thể thực hiện lần lượt từng chuyển động quay riêng biệt để xác định đủ cả 3 thành phần của .
+Vấn đề 2. Nhiễu.
+Trong điều kiện vận hành thực tế, tín hiệu thu thập được không bao giờ là tín hiệu lý tưởng. Mô hình toán học thực tế có chứa các thành phần nhiễu (noise) lồng ghép, dẫn đến
+Trong đó,  và  là ma trận nhiễu.
+Gia tốc góc không được đo trực tiếp mà phải thông qua phép đạo hàm bậc nhất theo thời gian của tín hiệu vận tốc góc . Việc vi phân tín hiệu chứa nhiễu khiến khuếch đại ảnh hưởng của nhiễu đến kết quả.
+Đánh giá nhiễu bằng SNR được
+Với 
+Nhận xét: Biên độ của Nhiễu lớn hơn biên độ của tín hiệu.
+Vấn đề 3.Sai số gá đặt.
+Khi IMU bị gắn nghiêng lệch, trọng lực (g) sẽ lọt nhầm vào các trục đo gia tốc, và vận tốc quay quanh 1 trục bị rò rỉ (cross-talk) sang trục khác. Khi đó Pivot và Head đang ở 2 hệ quy chiếu lệch nhau.
+Theo giả thuyết hệ tọa độ Ixyz song song với MFxyz và trùng với Hxyz, tuy nhiên việc gá đặt chính xác IMU theo giả thiết là rất khó khăn. Do đó chấp nhận việc gá đặt cảm biến IMU ban đầu có sai số lớn và cần chuyển hệ trục tọa độ bằng tính toán trước khi tính toán. 
+Giải pháp.
+3.1. Đo lường độc lập.
+Thực hiện các phép đo tách biệt trên quỹ đạo thuần Pitch để xác định ( và thuẩn Roll để xác định ( Từ đó tổng hợp lại vecto .
+- Khi chỉ quay quanh X ( Roll) ta có :
+Khai triển phương trình (1) ta được: 
+- Khi chỉ quay quanh Y (Pitch) ta có: 
+Khai triển phương trình (1) ta được: 
+ (1)
+- Test thuật toán dựa trên dữ liệu mẫu:
+Cho trước vị trí H là 
+Vị trí P là 
+Kết quả tính được:
+Chuyển động Pitch
+  và 
+Với sai số RMSE(ax)=0.0015, RMSE(ax)=0.0008. Các sai số là do việc làm tròn các chữ số sau dấu phẩy.
+- Chuyển động Roll:
+ và 
+Với sai số RMSE(ax)=0.0015, RMSE(ax)=0.0008. Các sai số là do việc làm tròn các chữ số sau dấu phẩy.
+3.2. Sử dụng PCA để chỉnh lại hệ tọa độ của IMU.
+Thuật toán PCA (Principle Components Analys- Phân tích thành phần chính) giải quyết bài toán bù trừ sai lệch hệ quy chiếu (Misalignment Calibration) bằng phương pháp Phân tích Trị Riêng (Eigenvalue Decomposition) trên Ma trận Hiệp phương sai của tín hiệu động học. 
+Giả sử bạn có ma trận dữ liệu kích thước (với  là số mẫu,  là số biến). Các bước diễn ra như sau:
+Chuẩn hóa trung tâm (Mean Centering):
+Trừ mỗi cột của cho giá trị trung bình của cột đó, để gốc tọa độ dời về trọng tâm.
+Tính Ma trận Hiệp phương sai (Covariance Matrix):
+Đánh giá mức độ biến thiên cùng nhau giữa các biến.
+Tìm Trị riêng và Vector riêng (Eigendecomposition): Giải phương trình đặc trưng để tìm các trị riêng  và vector riêng của ma trận 
+Các vector riêng (Eigenvectors) chính là các trục tọa độ mới (Principal Components - PC). Các vector này trực giao (vuông góc) với nhau.
+Trị riêng (Eigenvalues) cho biết độ lớn của phương sai trên từng trục PC tương ứng.
+Tính Tọa độ PCA (PCA Coordinates):
+Sắp xếp các vector riêng theo thứ tự trị riêng giảm dần. Gom vector riêng quan trọng nhất thành ma trận (kích thước ). Ta thực hiện phép biến đổi sang hệ tọa độ mới:
+Ma trận  thu được (kích thước ) chính là dữ liệu theo sau khi biến đổi hệ tọa độ.
+Ta sử dụng thuật toán PCA để tìm ra trục chuyển động của Ckas.
+ Kết hợp với gia tốc trọng trường để xác định được trục , theo quy tắc tam diện thuận ta xác định được Hệ tọa độ Hxyz và độ lệch giữa 2 hệ trục tọa độ Ixyz và Hxyz. 
+Sử dụng ma trận xoay R để biến đổi hệ quy chiếu Ixyz về Hxyz đúng với giả thiết 
+Dữ liệu sau khi biến đổi hệ tọa độ: (chuyển động Roll)
+3.3. Xử lý nhiễu bằng bộ lọc Low-Pass Filter (Trước khi xử lý số liệu).
+Chạy FFT để tìm tần số chuyển động của hệ. Qua đó xác định tần số cắt phù hợp.
+(viết phương trình khuếch đại nhiễu sau vi phân )
+Sử dụng bộ lọc thông thấp Low-Pass Filter sau khi thu được dữ liệu IMU để hạn chế sự khuếch đại của nhiễu tần số cao. 
+Sử dụng FFT để tìm tần số dao động
+TÍn hiệu trước khi lọc:
+Sau khi lọc:
+3.3. Xử lý tín hiệu bằng Bình phương tối thiểu (Least Squares).
+Do cảm biến có thể bị nhiễu hay bị sai lệch do các nguyên nhân nêu ở trên, việc chỉ áp dụng các đại lượng đo được tại một thời điểm để giải phương trình sẽ khiến kết quả không đáng tin cậy. Do đó phương pháp Least Squares (LS) là cần thiết để kết quả thuyết phục và chính xác hơn.
+Xét PT: 
+Do chỉ xét riêng các trường hợp Thuần Pitch hoặc Thuần Roll sẽ khiến không thể xác định giá trị  và  tương ứng, ta coi khi thực hiện chuyển động thuần Pitch, khi thực hiện chuyển động thuần Roll.
+Tại mỗi thời điểm  ta thu được một ma trận , một ma trận . Xếp chồng các giá trị này lại với nhau thu được 
+; 
+Nhân cả hai vế với  ta được:
+Hay 
+Quy trình thực nghiệm
+Thực hiện đo dữ liệu
+4.1.1: Đo dữ liệu IMU
+B1:Gá đặt IMU
+IMU được đặt chính giữa đầu hình nhân,(Thêm ảnh IMU trong hình nhân) ta tiến hành gá đặt hình nhân lên trên bệ mô phỏng lái Ckas. 
+Khoảng cách từ IMU đến tựa đầu của lưng ghế là 23.13cm.
+Khoảng cách từ IMU đến mép ngoài của ghế là 23.11cm
+Khoảng cách từ IMU đến mặt ghế là 66.67 cm.
+B2. Khởi động Ckas.
+B3.Đưa Ckas về vị trí Neutral và và sử dụng lệnh Centre_z0=0 để đưa Pivot về tâm của vị trí [0 0 0].
+B4.Thực hiện chuyển động Roll với biên độ X, tần số ft=Y, , tần số lấy mẫu là fs=Z(Hz).
+B5. Dừng chuyển động, đưa Ckas lại vị trí Neutral.
+B6. Giảm Centre_z0 đi -D rồi thực hiện lại từ B4. 
+B7. Lưu file dữ liệu ở thu mục do_IMU với tên file có dạng <loaichuyendong>_<X>_<Y>_<Z>_<-D*time>.csv
+4.1.2. Đo dữ liệu Mô phỏng
+B1.Set Pivot có tọa độ tương ứng Central_z0=0.
+B2. Tái hiện quỹ đạo chuyển động quay Roll  với biên độ X, tần số ft=X , thời gian thu dữ liệu = Y(s), tần số lấy mẫu là fs=D(Hz).
+B3. Xuất quỹ đạo Pivot 15 tham số ở folder do_Sim với tên file có dạng:Pivot_ <loaichuyendong>_<X>_<Y>_<Z>_<-D*time>.csv
+Xử lý dữ liệu
+Lấy định dạng của File export của Dashboard_Stewart3.m làm chuẩn: 
+<t> ~M[ <x> <y> <z> <yaw> <pitch> <roll>[ <axi> <ayi> <azi> <axg> <ayg> <azg> <ωz> <ωy> <ωx>]] 
+)
+	<x> <y> <z> là tọa độ trong hệ tọa độ toàn cục (World Frame)(mm)
+<yaw> <pitch> <roll> là các góc Euler (độ)
+<axi> <ayi> <azi> là gia tốc quán tính (không bao gồm gia tốc trọng trường) (m/s^2)
+<axg> <ayg> <azg> là gia tốc trọng trường tác động đến đối tượng (m/s^2)
+<ωz> <ωy> <ωx> là vận tốc góc (rad/s)
+B1. Sử dụng preprocess_imu_pipeline2.py để xử lý tín hiệu từ IMU. Chương trình này sẽ phân tích FFT để tìm tần số cắt cho bộ lọc Lowpass-Filter. Thực hiện lọc tín hiệu bằng Lowpass-Filter.
+B2. Sử dụng phương pháp PCA coordinates để chỉnh lại hệ tọa độ của Imu về hệ tọa độ của Head. Quét dữ liệu ban đầu để xác định vecto gia tốc trọng trường rồi bấm “Thực hiện đo PCA”.
+B3. Cắt dữ liệu và đưa về chuẩn định dạng M-code : Đưa dữ liệu thu được từ IMU về chuẩn định dạng là IMU<loaichuyendong>_<X>_<Y>_<Z>_<-D*time>.csv ở folder data_after_convert
+B4. Nhập file dữ liệu của Pivot và IMU vào chương trình Motion_calibration2.m
+B5. Đạo hàm tín hiệu vận tốc góc của IMU để có được gia tốc góc  bằng chức năng Derivative. Đánh giá ảnh hưởng của nhiễu bằng SNR
+B6.Đồng bộ thời gian và nội suy tin hiệu sau khi đồng bộ bằng Sync&Interp.
+
+B7. Chạy Math Engine để tính toán khoảng cách giữa IMU và Pivot. Sau khi có vector , áp dụng công thức :
+So sánh giữa  và , đánh giá bằng chỉ sổ RMSE và pearson correlation.
+4.3.  Xác định cánh tay đòn.
+ Thực hiện thí nghiệm với cả 2 trường hợp chuyển động hình sin với góc quay quanh trục X và Y.Ta thu được bảng các giá trị.
+Thêm đánh giá phương sai
+Quay quanh trục X (Roll)
+Quay quanh trục Y (Pitch)
+Nhận xét và đánh giá
+1. Đánh giá về Khoảng cách Quy đổi Gốc ()
+Đại lượng quan trọng nhất để đánh giá sự thành công của thuật là khoảng cách gốc  (được tính bằng ). Về mặt lý thuyết, độ dời của pivot đã được biết trước, do đó  phải là một hằng số tuyệt đối trong tất cả các phép thử.
+Ở kịch bản Roll:  dao động trong khoảng từ  mm đến  mm. Giá trị   mm (sai số tương đối ).
+Ở kịch bản Pitch:  dao động trong khoảng từ  mm đến . Giá trị   mm (sai số tương đối  ).
+Ta lấy giá trị   mm của trường hợp chuyển động Pitch làm kết quả cuối cùng vì bao hàm cả kết quả ở kịch bản Roll ở trong đó.
+2. Đánh giá về Các Trục Ngang ( và )
+Giá trị  (trong phép đo Roll): Cột  cho kết quả dao động từ  mm đến  mm.Giá trị   mm (Sai số tương đối 41.84%)
+Giá trị  (trong phép đo Pitch): Cột dao động từ  đến  mm. Giá trị  (Sai số tương đối 7.15%)
+ Xét giá trị  có sai số tương đối lớn 41.84% do có giá trị nhỏ. Nhận thấy sai số tương đối của phép đo  lớn nhưng sai số tuyệt đối nhỏ hơn của phép đo  (16.17<21.57)
+3. Đánh giá Chỉ số Thống kê Sai số (RMSE và Pearson)
+Hệ số tương quan Pearson: Cả hai bảng đều cho hệ số Pearson cực kỳ cao (toàn bộ đều , ở Pitch nhiều phép đo đạt ). Hệ số này tiến sát về  khẳng định rằng tín hiệu gia tốc lý thuyết được sinh ra từ mô hình khớp với tín hiệu gia tốc thực tế đo được.
+Sai số bình phương trung bình quân (RMSE): Các giá trị RMSE đều rất nhỏ (chỉ từ  đến ). 
+Kết luận chung:
+Xác định tọa độ IMU thực tế: Từ bảng dữ liệu kết luận: thực tế của IMU so với điểm Pivot  ban đầu nằm ở vị trí xấp xỉ:  mm,  (mm), và khoảng cách chiều dọc  (mm)
+Khoảng cách từ IMU đến tựa đầu của lưng ghế là 23.13cm.
+Khoảng cách từ IMU đến mép ngoài của ghế là 23.11cm
+Khoảng cách từ IMU đến mặt ghế là 66.67 cm.
+Vậy cần hiệu chỉnh Pivot để trùng với IMU là từ IMU đến tựa đầu của lưng ghế:
+
+Khoảng cách từ IMU đến rìa ngoài của ghế:
+Khoảng cách từ IMU đến mặt ghế:
+(mm)
+Kết quả sai do mặt ghế không thẳng, phải đo góc của mặt ghế, đưa ra ma trận quay hệ tọa độ ghế -> hệ tọa độ toàn cục, để tìm ra vị trí lắp IMU trong {MF} rồi mới tìm vị trí offset 

@@ -1,0 +1,45 @@
+Tìm khoảng cách giữa 2 điểm trên cùng vật rắn dựa trên 
+gia tốc góc và vận tốc góc và chênh lệch 
+gia tốc tuyến tính. Áp dụng vào bài toán tìm 
+Offset Centre_Z0
+ của Ckas.
+Tìm khoảng cách giữa 2 điểm trên cùng vật
+ rắn dựa trên tín hiệu gia tốc tuyến tính, gia tốc góc và vận tốc góc
+Xét 3 điểm OAB nằm trên cùng một vật rắn quay quanh O với vận tốc góc 
+ và gia tốc góc 
+.
+Gia tốc tổng hợp tại các điểm gồm hai thành phần là gia tốc tiếp tuyến 
+ và gia tốc hướng tâm 
+Ta có :
+Với :
+Lại có :
+Thành phần tiếp tuyến : 
+Thành phần hướng tâm 
+PT lúc này trở thành 
+hay
+Đặt 
+Tuy nhiên, ma trận 
+M
+ bị suy biến khi vật rắn chỉ thực hiện chuyển động quay đơn trục
+. D
+o thành phần 
+hiệu 
+gia tốc dọc theo trục quay sẽ bằng 0, không mang thông tin về khoảng cách. Điều này làm mất đi một phương trình độc lập, khiến ta không thể xác định được thành phần khoảng cách dọc theo chính trục quay đó
+.
+Xét PT: 
+Do chỉ xét riêng các trường hợp Thuần Pitch hoặc Thuần Roll sẽ khiến không thể xác định giá trị 
+ và 
+ tương ứng, ta coi 
+khi thực hiện chuyển động thuần Pitch, 
+khi thực hiện chuyển động thuần Roll.
+Tại mỗi thời điểm 
+ ta thu được một ma trận 
+, một ma trận 
+. Xếp chồng các giá trị này
+ lại với nhau thu được 
+;
+ 
+Nhân cả hai vế với 
+ ta được:
+Hay 
+Washout filter-tích hợp vào simulator cho phép bật hoặc tắt
