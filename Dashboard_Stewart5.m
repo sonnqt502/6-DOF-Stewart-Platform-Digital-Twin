@@ -907,7 +907,7 @@ function Dashboard_Stewart5()
              status = get_param(mdl, 'SimulationStatus');
             if ~strcmp(status, 'stopped'), set_param(mdl, 'SimulationCommand', 'stop'); pause(0.5); end
         end
-     %   try sim(mdl); catch ME, uialert(fig, ['Lỗi Simulink: ', ME.message], 'Lỗi'); end
+        try sim(mdl); catch ME, uialert(fig, ['Lỗi Simulink: ', ME.message], 'Lỗi'); end
     end
 
     % ---------------------------------------------------------------------
