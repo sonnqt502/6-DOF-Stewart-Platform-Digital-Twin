@@ -1,543 +1,318 @@
 <h1 align="center">🤖 6-DOF Stewart Platform Digital Twin — CKAS W2</h1>
 
 <p align="center">
-  <b>Đồ án tốt nghiệp</b> — Thiết kế, mô phỏng số và phân tích động lực học<br>
-  Bàn nâng hạ 6 bậc tự do Stewart Platform kiểu <b>RUS</b> ứng dụng trong buồng lái mô phỏng <b>CKAS W2</b>
+  <b>TÀI LIỆU KỸ THUẬT BÀN GIAO ĐỒ ÁN TỐT NGHIỆP</b><br>
+  Thiết kế cấu hình cơ khí và xây dựng chương trình mô phỏng hệ mô phỏng lái CKAS W2 6 bậc tự do<br>
+  <i>(Tất cả thông số và quy trình được đối chiếu và xác minh chuẩn xác theo đồ án tốt nghiệp ĐATN_NQTS.pdf)</i>
 </p>
 
 <p align="center">
-  <img src="docs/platform_diagram.png" width="600" alt="Stewart Platform CKAS W2"/>
+  <img src="docs/platform_diagram.png" width="600" alt="Sơ đồ cấu tạo cơ cấu 6-RUS Stewart Platform CKAS W2"/>
 </p>
 
 ---
 
 ## 📌 Mục lục
 
-- [Tổng quan đồ án](#-tổng-quan-đồ-án)
-- [Tiến độ & Thành tựu](#-tiến-độ--thành-tựu)
-- [Thông số hệ thống](#-thông-số-hệ-thống)
-- [Kiến trúc phần mềm](#-kiến-trúc-phần-mềm)
-- [Chi tiết Input / Output toàn hệ thống](#-chi-tiết-input--output-toàn-hệ-thống)
-- [Catalogue từng file code](#-catalogue-từng-file-code)
-- [Sơ đồ liên kết giữa các function](#-sơ-đồ-liên-kết-giữa-các-function)
-- [Nhánh chuyên đề](#-nhánh-chuyên-đề)
-- [Cài đặt & Chạy nhanh](#-cài-đặt--chạy-nhanh)
+- [1. Giới thiệu tổng quan hệ thống](#1-giới-thiệu-tổng-quan-hệ-thống)
+- [2. Thông số kỹ thuật & Cấu hình cơ khí chuẩn](#2-thông-số-kỹ-thuật--cấu-hình-cơ-khí-chuẩn)
+- [3. Quy trình chuyển đổi CAD từ SolidWorks sang Matlab Simulink](#3-quy-trình-chuyển-đổi-cad-từ-solidworks-sang-matlab-simulink)
+- [4. Cơ sở toán học & Bài toán động học](#4-cơ-sở-toán-học--bài-toán-động-học)
+  - [4.1. Động học ngược (Inverse Kinematics)](#41-động-học-ngược-inverse-kinematics)
+  - [4.2. Động học thuận (Forward Kinematics - Newton Raphson)](#42-động-học-thuận-forward-kinematics---newton-raphson)
+  - [4.3. Kiểm tra không gian hoạt động & 3 lớp an toàn](#43-kiểm-tra-không-gian-hoạt-động--3-lớp-an-toàn)
+- [5. Chương trình mô phỏng & Giao diện Dashboard](#5-chương-trình-mô-phỏng--giao-diện-dashboard)
+- [6. Định dạng dữ liệu lệnh chuyển động (M-Code)](#6-định-dạng-dữ-liệu-lệnh-chuyển-động-m-code)
+- [7. Thí nghiệm thực tế xác định tâm quay ảo (Pivot Point)](#7-thí-nghiệm-thực-tế-xác-định-tâm-quay-ảo-pivot-point)
+- [8. Catalogue toàn bộ file mã nguồn](#8-catalogue-toàn-bộ-file-mã-nguồn)
+- [9. Sơ đồ liên kết các Function](#9-sơ-đồ-liên-kết-các-function)
+- [10. Cấu trúc phân nhánh (Branches) trên GitHub](#10-cấu-trúc-phân-nhánh-branches-trên-github)
 
 ---
 
-## 🎯 Tổng quan đồ án
+## 1. Giới thiệu tổng quan hệ thống
 
-Dự án xây dựng **Digital Twin** hoàn chỉnh cho hệ thống buồng lái mô phỏng chuyển động **CKAS W2**, sử dụng cơ cấu **Stewart Platform 6 bậc tự do** kiểu **RUS** (Revolute – Universal – Spherical joint).
+Hệ thống mô phỏng lái **CKAS W2 6-DOF** là nền tảng bệ động cơ học (Motion Platform) tiêu chuẩn công nghiệp được ứng dụng trong mô phỏng lái xe và huấn luyện thực tế ảo.
 
-| Hạng mục | Mô tả |
-|---|---|
-| **Loại cơ cấu** | 6-RUS Stewart Platform (Rotary Actuator) |
-| **Phần mềm** | MATLAB R2023b, Simscape Multibody, Python 3.11 |
-| **Phương pháp IK** | Hình học giải tích — phương trình vòng kín |
-| **Phương pháp FK** | Newton-Raphson lặp (hội tụ < 100 iter) |
-| **Phương pháp động lực học** | Newton-Euler ngược + Virtual Work |
-| **Mô hình 3D** | Simscape Multibody + VisPy (Python) |
-| **Dữ liệu đầu vào** | M-Code CSV từ bộ điều khiển CKAS (7 hoặc 15 tham số) |
-
-### Mục tiêu đồ án
-
-1. **Giải bài toán động học ngược (IK)** từ pose `[x, y, z, roll, pitch, yaw]` → 6 góc servo
-2. **Giải bài toán động học thuận (FK)** từ 6 góc servo → pose thực tế (Newton-Raphson)
-3. **Tính Jacobian vận tốc** cho cơ cấu RUS → từ đó tính vận tốc và gia tốc khâu
-4. **Tính moment động cơ** (Inverse Dynamics) theo Newton-Euler + Nguyên lý Công ảo
-5. **Mô phỏng Simscape Multibody** để xác minh kết quả lý thuyết
-6. **Dashboard MATLAB** hiển thị real-time 3D + đồ thị + kiểm định an toàn
-7. **Python Viewer** (VisPy) để phát lại mô phỏng độc lập không cần MATLAB
+- **Dạng cơ cấu động học:** Gough-Stewart Platform cấu hình **6-RUS** (Revolute – Universal – Spherical) với cấu trúc phân bố hình học dạng **bán 3-3** (3 cặp động cơ ở đế và 3 cặp khớp cầu ở bàn máy).
+- **Cấu tạo 3 thành phần chính:**
+  1. **Bệ cố định (Base):** Khung đế chịu lực neo cứng xuống sàn, bố trí 6 động cơ servo chia thành 3 cặp đối xứng.
+  2. **Bệ động (Top Platform):** Khung sàn phía trên lắp ghế ngồi, cabin lái; mặt dưới bố trí 6 khớp cầu chia thành 3 cặp.
+  3. **Cụm 6 chân truyền động:** Mỗi chân gồm cánh tay quay ngắn $L_1$ gắn trục động cơ, liên kết qua chốt và khớp chữ Y (Universal Joint) với thanh truyền dài $L_2$, đầu trên gắn vào khớp cầu (Spherical Joint).
+- **Mục tiêu của chương trình mô phỏng:** Kiểm chứng quỹ đạo chuyển động, đánh giá tính an toàn (tránh kịch hành trình, quá tải góc và tránh rơi vào điểm kỳ dị) trước khi gửi lệnh thực thi trên phần cứng CKAS W2 thật.
 
 ---
 
-## ✅ Tiến độ & Thành tựu
+## 2. Thông số kỹ thuật & Cấu hình cơ khí chuẩn
 
-### Đã hoàn thành
+### 2.1. Giới hạn chuyển động của CKAS W2 *(Bảng 1-1, ĐATN)*
 
-| # | Hạng mục | Trạng thái | Ghi chú |
+| Trục chuyển động | Dịch chuyển cho phép | Vận tốc cực đại | Gia tốc cực đại |
 |---|---|---|---|
-| 1 | **Mô hình hình học** (calc_Geometry) | ✅ Hoàn thành | Tính A_i, B_i, γ_i từ 6 tham số đầu vào |
-| 2 | **Động học ngược IK** (donghocnguoc_final1) | ✅ Hoàn thành | Hình học giải tích, 3-layer safety check |
-| 3 | **Jacobian vận tốc** (jacobian_RUS) | ✅ Hoàn thành | Loop closure velocity method |
-| 4 | **Động học thuận FK** (donghocthuan_NR) | ✅ Hoàn thành | Newton-Raphson, dung sai 1e-6° |
-| 5 | **Vận tốc động cơ** (tinh_vel) | ✅ Hoàn thành | Xuất RPM + Jacobian 6×6 |
-| 6 | **Moment động cơ** (tinh_torque) | ✅ Hoàn thành | Newton-Euler đầy đủ, 6 output |
-| 7 | **Jacobian động cơ** (jacobian_motor) | ✅ Hoàn thành | ∂φ/∂x, ∂²φ/∂t² |
-| 8 | **Kiểm định an toàn 3 lớp** (check_pose_safety) | ✅ Hoàn thành | IK + giới hạn servo + kỳ dị |
-| 9 | **Dashboard MATLAB** (Dashboard_Stewart5) | ✅ Hoàn thành | Real-time 3D, 30 FPS, real-time sync |
-| 10 | **Sinh quỹ đạo** (Trajectory_Generator) | ✅ Hoàn thành | 13 loại quỹ đạo, tâm quay ảo |
-| 11 | **Mô hình Simscape** (.slx) | ✅ Hoàn thành | Xác minh kết quả lý thuyết |
-| 12 | **Python 3D Viewer** (sim.py) | ✅ Hoàn thành | VisPy + PyQt5, animation thread |
-| 13 | **Phân tích workspace** | ✅ Hoàn thành | Monte Carlo, giới hạn không gian |
+| **Surge ($X$)** | $\pm 150\text{ mm}$ | $\pm 300\text{ mm/s}$ | $\pm 0.5\text{ G}$ |
+| **Sway ($Y$)** | $\pm 150\text{ mm}$ | $\pm 300\text{ mm/s}$ | $\pm 0.5\text{ G}$ |
+| **Heave ($Z$)** | $\pm 150\text{ mm}$ | $\pm 300\text{ mm/s}$ | $\pm 0.5\text{ G}$ |
+| **Roll ($\phi$)** | $\pm 23^\circ$ | $\pm 40^\circ/\text{s}$ | $\pm 500^\circ/\text{s}^2$ |
+| **Pitch ($\theta$)** | $\pm 22^\circ$ | $\pm 40^\circ/\text{s}$ | $\pm 500^\circ/\text{s}^2$ |
+| **Yaw ($\psi$)** | $\pm 25^\circ$ | $\pm 40^\circ/\text{s}$ | $\pm 500^\circ/\text{s}^2$ |
 
-### Đang phát triển / Mở rộng
+*Tải trọng danh định:* Khối lượng tải $200\text{ kg}$, Moment quán tính tải giới hạn $100\text{ kg}\cdot\text{m}^2$.
 
-| # | Hạng mục | Trạng thái | Kế hoạch |
+### 2.2. Kích thước hình học cơ cấu *(Bảng 3-1, ĐATN)*
+
+| Tham số | Giá trị | Đơn vị | Định nghĩa kỹ thuật trong đồ án |
 |---|---|---|---|
-| 14 | Bộ điều khiển PID / adaptive | 🔄 Chưa bắt đầu | Điều khiển vòng kín |
-| 15 | Xuất M-Code từ dữ liệu IMU thực | 🔄 Một phần | Đã có pipeline xử lý |
-| 16 | Tích hợp hardware-in-loop | 🔄 Chưa bắt đầu | Kết nối ESP32/STM32 |
+| $r_a$ | **589.66** | mm | Bán kính đường tròn ngoại tiếp đi qua tâm của 6 trục động cơ dưới bệ đế ($A_1 \dots A_6$) |
+| $r_b$ | **429.57** (429.566) | mm | Bán kính đường tròn ngoại tiếp đi qua 6 khớp cầu tại mặt dưới bàn máy ($B_1 \dots B_6$) |
+| $L_1$ | **150** | mm | Chiều dài cánh tay quay động cơ (tay ngắn) |
+| $L_2$ | **747** | mm | Chiều dài thanh truyền dẫn động (tay dài) |
+| $\alpha_1$ | **19.45** | độ | Góc lắp đặt của động cơ 1 ($A_1$) hợp với trục $OX$ của bệ đế |
+| $\Delta\alpha$ ($\delta_a$) | **38.9** | độ | Khoảng cách góc giữa hai động cơ trong cùng một cặp ($OA_1$ và $OA_2$) |
+| $\beta_1$ | **53.32** | độ | Góc định vị khớp cầu 1 ($B_1$) hợp với trục $OX$ của bệ động |
+| $\Delta\beta$ ($\delta_b$) | **13.37** (10.0) | độ | Góc kẹp giữa hai khớp cầu liền kề trong cùng một cặp ($OB_2$ và $OB_3$) |
+| $z_A$ ($Z_{\text{home}}$) | **592.4** (hoặc 795.4) | mm | Độ cao của tâm bệ động ở vị trí trung hòa (Neutral Position) |
+| $\gamma_i$ | $\alpha_i + ((-1)^i) \cdot 90^\circ$ | độ | Góc trục quay của động cơ thứ $i$ |
 
 ---
 
-## ⚙️ Thông số hệ thống
+## 3. Quy trình chuyển đổi CAD từ SolidWorks sang Matlab Simulink
 
-### Thông số hình học
+*(Trích xuất chính xác theo Mục 4.1, Trang 60–63 của đồ án ĐATN_NQTS.pdf)*
 
-| Ký hiệu | Giá trị | Đơn vị | Mô tả |
+Để mô hình 3D từ SolidWorks có thể hoạt động chính xác và nhẹ tải trong Simscape Multibody, quy trình chuẩn hóa bao gồm các bước:
+
+```
+  ┌────────────────────────────────────────────────────────┐
+  │ 1. Thiết kế 3D trên SOLIDWORKS                          │
+  │    (Gán đầy đủ khớp Rotational Joint và Spherical Joint)│
+  └──────────────────────────┬─────────────────────────────┘
+                             │
+                             ▼
+  ┌────────────────────────────────────────────────────────┐
+  │ 2. Tinh chỉnh & Tối giản hóa sơ đồ khối:               │
+  │    - Loại bỏ các ràng buộc Mate tĩnh (bu lông, đai ốc) │
+  │    - Mở từng Sub-assembly -> File -> Save As           │
+  │    - Chọn Save as copy and continue                    │
+  │    - Chọn định dạng Part (*.prt, *.sldprt) vào CÙNG 1  │
+  │      thư mục làm việc                                  │
+  │    - Lắp ráp lại thành file SolidAssembly tổng thể mới │
+  └──────────────────────────┬─────────────────────────────┘
+                             │
+                             ▼
+  ┌────────────────────────────────────────────────────────┐
+  │ 3. Xuất file .xml bằng Simscape Multibody Link:        │
+  │    - SolidWorks: Options -> Add-Ins                    │
+  │    - Tích chọn "Simscape Multibody Link" -> OK         │
+  │    - Vào Tools -> Simscape Multibody Link -> Export -> │
+  │      Simscape Multibody...                             │
+  │    - Thu được tệp cấu trúc .xml và các file part hình  │
+  │      học đi kèm (*.STEP)                               │
+  └──────────────────────────┬─────────────────────────────┘
+                             │
+                             ▼
+  ┌────────────────────────────────────────────────────────┐
+  │ 4. Nhập vào MATLAB Simulink:                           │
+  │    - Mở MATLAB Command Window, gõ lệnh:                │
+  │         >> smimport('Tên_file.xml')                    │
+  │    - MATLAB tự động tạo mô hình sơ đồ khối Simulink    │
+  │      (World Frame, Transform, Revolute, Spherical...)  │
+  │    - Trích xuất tín hiệu đo: Bật Sensing trong khối   │
+  └────────────────────────────────────────────────────────┘
+```
+
+> **Ghi chú quan trọng:** Lệnh `smimport` trong MATLAB **chỉ nhận tệp đầu vào là `.xml`** do SolidWorks Simscape Multibody Link xuất ra. Các tệp `.STEP` trong thư mục là tệp hình học phụ trợ được Simscape đọc thông qua file chỉ mục `.xml`, **không thể dùng lệnh `smimport` trực tiếp trên file `.STEP`**.
+
+---
+
+## 4. Cơ sở toán học & Bài toán động học
+
+*(Trích xuất theo Chương 3, Trang 35–44 của đồ án ĐATN_NQTS.pdf)*
+
+### 4.1. Động học ngược (Inverse Kinematics)
+
+Mục đích: Từ tư thế yêu cầu của bệ động $P = [x, y, z, \text{roll } \phi, \text{pitch } \theta, \text{yaw } \psi]^T$, tính ra góc quay $\delta_i$ (hoặc $\phi_i$) của 6 động cơ servo.
+
+1. **Ma trận quay ZYX:**
+   $$R = R_z(\psi) R_y(\theta) R_x(\phi)$$
+
+2. **Tọa độ khớp cầu bệ động trong hệ cố định:**
+   $$B_i = T + R \cdot b_i$$
+
+3. **Vector chân ảo:**
+   $$\vec{L}_i = B_i - A_i = [L_{ix}, L_{iy}, L_{iz}]^T$$
+   $$d_i = \|\vec{L}_i\| = \sqrt{L_{ix}^2 + L_{iy}^2 + L_{iz}^2}$$
+
+4. **Phương trình vòng khép kín:**
+   $$\|B_i - C_i\|^2 = L_2^2 \iff Q_i = M_i \sin\phi_{raw,i} + N_i \cos\phi_{raw,i}$$
+   Trong đó:
+   - $Q_i = d_i^2 - L_2^2 + L_1^2$
+   - $M_i = 2 L_1 L_{iz}$
+   - $N_i = 2 L_1 (L_{ix}\cos\gamma_i + L_{iy}\sin\gamma_i)$
+
+5. **Nghiệm góc động cơ:**
+   $$\phi_{raw,i} = \arcsin\left(\frac{Q_i}{\sqrt{M_i^2 + N_i^2}}\right) - \text{atan2}(N_i, M_i)$$
+
+6. **Bù góc offset servo thực tế:**
+   Quy đổi sang góc thực $\phi_{thuc}$ theo quy ước driver phần cứng CKAS W2:
+   $$\begin{cases}
+   \phi_{step}(1:2:5) = -(90^\circ + \phi_{raw}(1:2:5)) \\
+   \phi_{step}(2:2:6) = +(90^\circ + \phi_{raw}(2:2:6))
+   \end{cases}$$
+   $$\phi_{thuc} = \phi_{step} - [90^\circ, -90^\circ, 90^\circ, -90^\circ, 90^\circ, -90^\circ]$$
+   $$\phi_{thuc}(1:2:5) = -\phi_{thuc}(1:2:5)$$
+
+### 4.2. Động học thuận (Forward Kinematics - Newton Raphson)
+
+Tìm vector vị trí bệ động $X = [x, y, z, \phi, \theta, \psi]^T$ khi biết trước 6 góc quay mục tiêu $\phi_{target}$:
+$$F(X) = \text{IK}(X) - \phi_{target} = 0$$
+
+Lặp theo công thức:
+$$X_{k+1} = X_k - J^\dagger(X_k) \cdot F(X_k)$$
+- Dừng khi sai số lớn nhất $\max |\Delta\phi| < 10^{-6}$ độ.
+
+### 4.3. Kiểm tra không gian hoạt động & 3 lớp an toàn
+
+*(Mục 3.3 trang 42–44 & Bước 3 trang 62 của đồ án)*
+
+Trước khi cho cơ cấu chuyển động, quỹ đạo bắt buộc phải vượt qua **3 lớp gác cổng**:
+
+1. **Lớp 1 — Giới hạn kích thước vật lý (Tầm với):**
+   $$\left|\frac{Q_i}{\sqrt{M_i^2 + N_i^2}}\right| \le 1$$
+   Nếu $|arg| > 1$, điểm yêu cầu vượt quá chiều dài sải tay của cơ cấu, hàm IK trả về `NaN`.
+2. **Lớp 2 — Giới hạn góc quay động cơ:**
+   $$\phi_{min} \le \phi_i \le \phi_{max} \quad (\text{mặc định: } -50^\circ \le \phi_i \le 90^\circ)$$
+   Ngăn chặn cánh tay quay $L_1$ va đập vào khung bệ đế hoặc vượt ngưỡng hành trình servo.
+3. **Lớp 3 — Giới hạn điểm kỳ dị (Singularity):**
+   $$\left|\det(J)\right| > 10^{-3}$$
+   Tính định thức của ma trận Jacobian vận tốc $J$. Nếu $\det(J) \to 0$, cơ cấu rơi vào cấu hình kỳ dị mất bậc tự do, lực dọc trục tăng vọt gây nguy cơ cong gãy thanh truyền.
+
+---
+
+## 5. Chương trình mô phỏng & Giao diện Dashboard
+
+*(Chương 4, Trang 56–64 của đồ án ĐATN_NQTS.pdf)*
+
+Chương trình giao diện chính **`Dashboard_Stewart5.m`** (phát triển hoàn thiện từ `dashboard_stewart3.m` trong đồ án) tích hợp đầy đủ quy trình 5 bước:
+
+- **Bước 1: Nhập cấu hình cơ khí:** Cho phép nhập $r_a, r_b, L_1, L_2, \alpha_1, \beta_1, \delta_a, \delta_b$, HomeZ. Hỗ trợ **Lưu cấu hình (.mat)** và **Import cấu hình (.mat)**.
+- **Bước 2: Cập nhật cấu hình:** Vẽ mô hình 3D tĩnh, tính tọa độ ma trận điểm $A$, điểm $B$, góc $\gamma$ và đồng bộ biến sang Simulink Workspace.
+- **Bước 3: Thiết lập Quỹ đạo:**
+  - *Lựa chọn A - Import file quỹ đạo:* Hỗ trợ file `.csv` hoặc `.txt` theo chuẩn M-Code của CKAS.
+  - *Lựa chọn B - Sinh quỹ đạo mẫu:* Tịnh tiến Heave Z, quay Roll, quay Pitch, đường tròn XY, cua chữ S; lựa chọn tâm quay (Tâm bệ động, Đỉnh đầu người lái, hoặc Tọa độ bất kỳ).
+- **Bước 4: Kiểm định an toàn & Chạy mô phỏng:** Tự động chạy qua 3 lớp an toàn. Nếu đạt, kích hoạt chạy mô phỏng 3D trên GUI đồng thời gọi mô hình Simulink (`Final_CKASForSIM30_11_SIM.slx`) để đối chiếu nghiệm số.
+- **Bước 5: Export dữ liệu & Vẽ đồ thị:** Xuất file kết quả 15 tham số, vẽ các đồ thị chuyển động động học, động lực học và biểu đồ góc quay động cơ.
+
+---
+
+## 6. Định dạng dữ liệu lệnh chuyển động (M-Code)
+
+*(Bảng 4-2, Trang 62 và Mục 1.4.4, Trang 10–11 của đồ án)*
+
+Lệnh chuyển động bệ động tuân thủ cấu trúc lệnh công nghiệp của CKAS W2:
+
+### Cú pháp tổng quát:
+```text
+~M[<x> <y> <z> <yaw> <pitch> <roll> [<axi> <ayi> <azi> <axg> <ayg> <azg> <wz> <wy> <wx>]]
+```
+
+| Tham số | Kiểu | Đơn vị | Ý nghĩa kỹ thuật |
 |---|---|---|---|
-| `ra` | 589.66 | mm | Bán kính vòng tròn phân bố khớp đế |
-| `rb` | 429.566 | mm | Bán kính vòng tròn phân bố khớp bàn máy |
-| `L1` | 150 | mm | Chiều dài tay quay servo (servo arm) |
-| `L2` | 747 | mm | Chiều dài thanh nối (connecting rod) |
-| `α₁` | 19.45 | ° | Góc phân bố cặp khớp đầu tiên ở đế |
-| `δ_a` | 38.9 | ° | Góc lệch giữa 2 khớp trong mỗi cặp ở đế |
-| `β₁` | 53.32 | ° | Góc phân bố cặp khớp đầu tiên ở bàn máy |
-| `δ_b` | 10.0 | ° | Góc lệch giữa 2 khớp trong mỗi cặp ở bàn máy |
-| `Z_base` | 795.4−202+75 | mm | Độ cao mặt phẳng đế (hệ tọa độ thế giới) |
+| `<x>`, `<y>`, `<z>` | Float | mm | Tọa độ tịnh tiến bệ động so với vị trí trung hòa (Tiến, Phải, Xuống) |
+| `<yaw>`, `<pitch>`, `<roll>` | Float | độ | Góc xoay Euler theo thứ tự Z - Y - X |
+| `<axi>`, `<ayi>`, `<azi>` | Float | m/s² | Gia tốc quán tính trong hệ trục bệ động (không gồm trọng lực) |
+| `<axg>`, `<ayg>`, `<azg>` | Float | m/s² | Hình chiếu gia tốc trọng trường trên hệ bệ động |
+| `<wz>`, `<wy>`, `<wx>` | Float | rad/s | Vận tốc góc theo các trục yaw, pitch, roll |
 
-### Thông số servo & giới hạn an toàn
+- **File 7 tham số:** Chứa $[t, x, y, z, \text{roll}, \text{pitch}, \text{yaw}]$ phục vụ bài toán động học.
+- **File 15 tham số:** Bổ sung vận tốc góc và gia tốc dài phục vụ tính toán động lực học quán tính.
 
-| Thông số | Giá trị | Đơn vị |
+---
+
+## 7. Thí nghiệm thực tế xác định tâm quay ảo (Pivot Point)
+
+*(Chương 5, Trang 67–84 của đồ án ĐATN_NQTS.pdf)*
+
+Để giải quyết bài toán bù gia tốc quán tính lên đầu phi công, vị trí tâm quay ảo $P$ được xác định thông qua thực nghiệm với cảm biến IMU:
+
+1. **Phương pháp đo lường độc lập:**
+   - Thực hiện chuyển động quay thuần Pitch quanh trục $Y$ để xác định tọa độ khoảng cách $(r_x, r_z)$.
+   - Thực hiện chuyển động quay thuần Roll quanh trục $X$ để xác định tọa độ khoảng cách $(r_y, r_z)$.
+2. **Xử lý tín hiệu thực nghiệm:**
+   - **Lọc nhiễu tần số cao:** Phân tích phổ FFT và áp dụng bộ lọc thông thấp (LPF) để làm mượt tín hiệu gia tốc và vận tốc góc.
+   - **Hiệu chỉnh sai số gá đặt:** Sử dụng thuật toán Phân tích thành phần chính (PCA) để xoay hệ trục tọa độ của cảm biến IMU về song song hoàn toàn với hệ tọa độ bàn máy, triệt tiêu hiện tượng rò rỉ kênh tín hiệu (crosstalk).
+
+---
+
+## 8. Catalogue toàn bộ file mã nguồn
+
+| Tên file | Phân loại | Input | Output | Chức năng chi tiết theo ĐATN |
+|---|---|---|---|---|
+| [`calc_Geometry.m`](calc_Geometry.m) | Hình học | $r_a, r_b, \alpha_1, \beta_1, \delta_a, \delta_b$ | `A_mat, B_mat, gamma_ang` | Tính tọa độ 3D của 6 khớp đế, 6 khớp bàn và góc $\gamma$ gá động cơ *(Bảng 3-1)* |
+| [`donghocnguoc_final1.m`](donghocnguoc_final1.m) | IK Core | `pose`, hình học | `phi_out` [1×6] | Giải động học ngược ra góc servo thực tế có bù offset; trả về `NaN` nếu quá tầm với |
+| [`donghocthuan_NR.m`](donghocthuan_NR.m) | FK Core | `phi_target`, `pose_guess`, hình học | `pose_out, iter, err` | Giải động học thuận bằng thuật toán Newton-Raphson |
+| [`check_pose_safety.m`](check_pose_safety.m) | An toàn | `pose`, hình học | `is_safe, error_msg, phi_out` | Cổng kiểm tra 3 lớp an toàn: tầm với cơ học, góc quay servo, kỳ dị ma trận |
+| [`jacobian_RUS.m`](jacobian_RUS.m) | Vận tốc | `pose, pose_dot`, hình học | `J, theta_dot` | Ma trận Jacobian liên kết vận tốc Cartesian và vận tốc góc tay quay |
+| [`tinh_torque.m`](tinh_torque.m) | Động lực học | `pose, pose_dot, pose_ddot`, khối lượng | `tau_motor, F_joint, f_rod` | Tính toán moment động cơ servo và lực kéo/nén trong thanh truyền |
+| [`tinh_vel.m`](tinh_vel.m) | Vận tốc | `pose, vel`, hình học | `motor_vel_rpm, J_v, phi_thuc` | Tính tốc độ quay của 6 động cơ theo đơn vị vòng/phút (RPM) |
+| [`Final_CKASForSIM30_11_SIM.slx`](Final_CKASForSIM30_11_SIM.slx) | Mô phỏng | Góc 6 servo `phi(t)` | Tọa độ bệ động 3D, moment | Mô hình vật lý Simscape Multibody được tạo từ `smimport` file CAD |
+| [`Dashboard_Stewart5.m`](Dashboard_Stewart5.m) | Giao diện | Người dùng thao tác | 3D animation, đồ thị | Trung tâm điều khiển và giám sát mô phỏng tích hợp 5 bước của đồ án |
+| [`Trajectory_Generator.m`](Trajectory_Generator.m) | Sinh quỹ đạo | Biên độ, tần số, pivot | File CSV quỹ đạo | Công cụ tạo quỹ đạo mẫu (Heave, Pitch, Roll, Circle XY, S-curve) |
+| [`sim.py`](sim.py) | Python 3D | File CSV M-Code | Cửa sổ 3D VisPy | Bộ mô phỏng 3D độc lập bằng Python hỗ trợ kiểm tra nhanh quỹ đạo |
+
+---
+
+## 9. Sơ đồ liên kết các Function
+
+```text
+                             ┌──────────────────────┐
+                             │  Dashboard_Stewart5  │
+                             │ (Giao diện chính GUI)│
+                             └──────────┬───────────┘
+                                        │
+                         ┌──────────────┴──────────────┐
+                         ▼                             ▼
+              ┌─────────────────────┐       ┌──────────────────────┐
+              │    calc_Geometry    │       │ Trajectory_Generator │
+              │ ra,rb,α,β,da,db     │       │ (Sinh quỹ đạo mẫu)   │
+              └──────────┬──────────┘       └──────────┬───────────┘
+                         │                             │
+                         │ [A_mat, B_mat, gamma_ang]   │ pose [x,y,z,R,P,Y]
+                         ▼                             ▼
+              ┌───────────────────────────────────────────────┐
+              │               check_pose_safety               │
+              │  (Kiểm tra 3 lớp: Tầm với -> Góc -> Kỳ dị)    │
+              └──────┬────────────────────────────────┬───────┘
+                     │ Gọi IK                         │ Gọi định thức J
+                     ▼                                ▼
+       ┌───────────────────────────┐     ┌────────────────────────────┐
+       │   donghocnguoc_final1     │     │  kiem_tra_ki_di_optimized  │
+       │   (Giải góc servo thực)   │     │  (det(J) > 1e-3)           │
+       └─────────────┬─────────────┘     └────────────────────────────┘
+                     │ phi_out
+                     ├───────────────────────────────┐
+                     ▼                               ▼
+       ┌───────────────────────────┐   ┌──────────────────────────────┐
+       │     donghocthuan_NR       │   │         tinh_torque          │
+       │  (Newton-Raphson FK)      │   │  (Moment động cơ & lực rod)  │
+       └───────────────────────────┘   └─────────────┬────────────────┘
+                                                     │
+                                                     ▼
+                                       ┌──────────────────────────────┐
+                                       │ Final_CKASForSIM30_11_SIM.slx│
+                                       │ (Simscape Multibody Model)   │
+                                       └──────────────────────────────┘
+```
+
+---
+
+## 10. Cấu trúc phân nhánh (Branches) trên GitHub
+
+Repository được phân chia thành **4 nhánh chuyên đề** song song với nhánh `main`:
+
+| Nhánh | Thư mục & Tài liệu tương ứng | Nội dung kỹ thuật bàn giao |
 |---|---|---|
-| Giới hạn góc servo min | −50 | ° |
-| Giới hạn góc servo max | +90 | ° |
-| Ngưỡng kỳ dị `abs(det(J))` | > 1×10⁻³ | — |
-| Khối lượng bàn máy `m_p` | 30.065 | kg |
-| Quán tính `I_xx = I_zz` | 9.85 | kg·m² |
-| Quán tính `I_yy` | 19.65 | kg·m² |
-| Khối lượng tay quay `m_arm` | 1.585 | kg |
-
-### Không gian làm việc (Workspace)
-
-| DOF | Phạm vi | Đơn vị |
-|---|---|---|
-| Surge (X) | ±80 | mm |
-| Sway (Y) | ±80 | mm |
-| Heave (Z) | +650 ÷ +950 | mm |
-| Roll | ±20 | ° |
-| Pitch | ±20 | ° |
-| Yaw | ±15 | ° |
-
----
-
-## 🏗️ Kiến trúc phần mềm
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    INPUT LAYER                              │
-│  config.json │ Platform_Command.csv │ Motor_Angles.csv      │
-│  (cấu hình)  │  (quỹ đạo M-Code)   │  (đo thực tế)         │
-└──────┬───────────────┬──────────────────────┬───────────────┘
-       │               │                      │
-       ▼               ▼                      ▼
-┌──────────────┐ ┌───────────────────┐ ┌──────────────────┐
-│calc_Geometry │ │Trajectory_Generator│ │  donghocthuan_NR │
-│  A_i,B_i,γ_i│ │  sinh quỹ đạo    │ │  FK (góc→pose)   │
-└──────┬───────┘ └────────┬──────────┘ └────────┬─────────┘
-       │                  │                     │
-       └────────┬─────────┘                     │
-                ▼                               │
-┌───────────────────────────────────┐           │
-│       KINEMATICS LAYER            │           │
-│  donghocnguoc_final1 (IK)         │◄──────────┘
-│  jacobian_RUS (Jacobian J)        │
-│  check_pose_safety (3-layer)      │
-└──────┬────────────────────────────┘
-       │
-       ▼
-┌───────────────────────────────────┐
-│       DYNAMICS LAYER              │
-│  tinh_vel   (RPM động cơ)         │
-│  jacobian_motor (∂φ/∂x)          │
-│  tinh_torque (τ Newton-Euler)     │
-└──────┬────────────────────────────┘
-       │
-       ▼
-┌───────────────────────────────────────────────────────────┐
-│                   VISUALIZATION LAYER                     │
-│  Dashboard_Stewart5.m (MATLAB App)  │  sim.py (Python)   │
-│  - 3D real-time (30 FPS)            │  - VisPy + PyQt5   │
-│  - 6 đồ thị góc, RPM, torque        │  - Animation thread│
-│  - Safety check hiển thị trực quan  │  - M-Code parser   │
-└───────────────────────────────────────────────────────────┘
-```
-
----
-
-## 📥📤 Chi tiết Input / Output toàn hệ thống
-
-### Luồng dữ liệu chính (Pipeline IK)
-
-```
-pose [x,y,z,R,P,Y]  ──►  IK  ──►  phi_out [φ₁..φ₆]  ──►  Servo Driver
-        (mm, °)              (°)              (°)
-```
-
-### Luồng dữ liệu ngược (Pipeline FK)
-
-```
-phi_measured [φ₁..φ₆]  ──►  FK (NR)  ──►  pose_out [x,y,z,R,P,Y]
-        (°)                  (~iter)             (mm, °)
-```
-
-### Luồng tính động lực học
-
-```
-pose + pose_dot + pose_ddot  ──►  tinh_torque  ──►  τ [N·m] × 6 động cơ
-        (mm, °, °/s, °/s²)                           + F_joint [N] × 6 khớp
-```
-
----
-
-## 📚 Catalogue từng file code
-
-### Nhóm 1 — Hình học (Geometry)
-
-#### `calc_Geometry.m`
-> Tính toán cấu hình hình học tĩnh của Stewart Platform — **hàm khởi đầu bắt buộc gọi trước tất cả**.
-
-| | Chi tiết |
-|---|---|
-| **Input** | `ra` (mm), `rb` (mm), `alpha1` (°), `beta1` (°), `d_a` (°), `d_b` (°) |
-| **Output** | `A_mat` [3×6 mm], `B_mat` [3×6 mm], `gamma_ang` [1×6 °] |
-| **Phụ thuộc** | Không |
-| **Gọi bởi** | `Dashboard_Stewart5`, `Trajectory_Generator`, tất cả hàm kinematics |
-| **Chú ý** | Comment "Đừng sửa file này" — đây là file chuẩn tham chiếu |
-
-#### `tinhvitriA.m`
-| | Chi tiết |
-|---|---|
-| **Input** | `ra` (mm), `alpha1` (°), `d_a` (°) |
-| **Output** | `A` [3×6 mm], `alpha` [1×6 °] |
-| **Chú ý** | Phiên bản độc lập (không tích hợp B và gamma). Z cứng = −593.4 mm |
-
-#### `tinhvitriB.m`
-| | Chi tiết |
-|---|---|
-| **Input** | `rb` (mm), `beta1` (°), `d_b` (°) |
-| **Output** | `B` [3×6 mm] |
-
-#### `tinhgamma.m`
-| | Chi tiết |
-|---|---|
-| **Input** | `alpha1` (°), `d_a` (°) |
-| **Output** | `g` [1×6 °] — góc gá motor |
-
-#### `matranquay.m`
-| | Chi tiết |
-|---|---|
-| **Input** | `roll` (°), `pitch` (°), `yaw` (°) |
-| **Output** | `R` [3×3] — ma trận quay ZYX |
-| **Phụ thuộc** | Không |
-
----
-
-### Nhóm 2 — Động học ngược (Inverse Kinematics)
-
-#### `donghocnguoc_final1.m` ⭐ CORE
-> Hàm IK chính thức, đồng bộ với Dashboard_Stewart5. Trả về góc servo **sau offset** sẵn sàng gửi driver.
-
-| | Chi tiết |
-|---|---|
-| **Input** | `pose` [1×6: x,y,z,roll,pitch,yaw] (mm,°), `A_mat` [3×6], `B_mat` [3×6], `L1` (mm), `L2` (mm), `gamma_ang` [1×6 °] |
-| **Output** | `phi_out` [1×6 °] — góc servo thực (`phi_thuc`). Trả về `NaN` nếu không khả thi |
-| **Phụ thuộc** | Không (tự tính) |
-| **Gọi bởi** | `check_pose_safety`, `donghocthuan_NR`, `Dashboard_Stewart5`, `jacobian_RUS` |
-| **Công thức** | `Q/(√(M²+N²)) = sin(α+φ)` → `φ_raw = asin(Q/√(M²+N²)) - atan2(N,M)` |
-| **Offset** | Khớp lẻ: `-(90+φ_raw) − 90`, đảo dấu. Khớp chẵn: `(90+φ_raw) + 90` |
-
-#### `check_pose_safety.m` ⭐ SAFETY GATE
-> Cổng kiểm định 3 lớp — gọi trước mọi lệnh di chuyển.
-
-| | Chi tiết |
-|---|---|
-| **Input** | `pose` [1×6], `A_mat`, `B_mat`, `L1`, `L2`, `gamma_ang` |
-| **Output** | `is_safe` (bool), `error_msg` (string), `phi_out` [1×6 °] |
-| **Lớp 1** | IK → NaN? → reject |
-| **Lớp 2** | `phi_out` ∈ [−60°, +100°]? → reject nếu ngoài |
-| **Lớp 3** | `abs(det(J)) > 1e-3`? → reject nếu kỳ dị |
-| **Phụ thuộc** | `donghocnguoc_final1`, `kiem_tra_ki_di_optimized` |
-
-#### `kiem_tra_ki_di_optimized.m`
-| | Chi tiết |
-|---|---|
-| **Input** | `pose` [1×6], `A_mat` [3×6], `B_mat` [3×6] |
-| **Output** | `is_singular` (bool), `detJ` (scalar) |
-| **Chú ý** | Tính det(J) xấp xỉ nhanh (không cần L1, L2 đầy đủ) |
-
----
-
-### Nhóm 3 — Động học thuận (Forward Kinematics)
-
-#### `donghocthuan_NR.m` ⭐ CORE
-> Giải FK bằng Newton-Raphson. Gọi IK lặp để tìm pose thỏa mãn góc đặt.
-
-| | Chi tiết |
-|---|---|
-| **Input** | `phi_target` [1×6 °], `pose_guess` [1×6], `A_mat`, `B_mat`, `L1`, `L2`, `gamma_ang` |
-| **Output** | `pose_out` [1×6], `iter` (số vòng lặp), `err` (°, sai số cuối) |
-| **Dung sai** | 1×10⁻⁶ ° |
-| **Max iter** | 100 |
-| **Phụ thuộc** | `donghocnguoc_final1`, `jacobian_RUS` |
-| **Gọi bởi** | `run_forward_kinematics`, `test_donghocthuan` |
-
----
-
-### Nhóm 4 — Jacobian & Vận tốc
-
-#### `jacobian_RUS.m` ⭐ CORE
-> Jacobian vận tốc 6×6 theo phương pháp Loop Closure Velocity.
-
-| | Chi tiết |
-|---|---|
-| **Input** | `pose` [1×6], `pose_dot` [1×6 mm/s, °/s], `A_mat`, `B_mat`, `L1`, `L2`, `gamma_ang` |
-| **Output** | `J` [6×6] — `φ̇_raw(rad/s) = J · [v_p; ω_p]`, `theta_dot` [6×1 °/s] |
-| **Phụ thuộc** | `donghocnguoc_raw` (lấy phi_raw) |
-| **Gọi bởi** | `donghocthuan_NR`, `tinh_torque`, `jacobian_motor` |
-
-#### `tinh_vel.m`
-> Tính vận tốc động cơ theo RPM từ Jacobian.
-
-| | Chi tiết |
-|---|---|
-| **Input** | `pose` [1×6], `vel` [1×6 mm/s, °/s], `A`, `B`, `L1`, `L2`, `gamma_ang` |
-| **Output** | `motor_vel_rpm` [1×6 RPM], `J_v` [6×6], `phi_thuc` [1×6 °] |
-
-#### `jacobian_motor.m`
-| | Chi tiết |
-|---|---|
-| **Input** | `pose`, `pose_dot`, `pose_ddot`, `A_mat`, `B_mat`, `L1`, `L2`, `gamma_ang` |
-| **Output** | `J_q` [6×6], `q_dot` [6×1 rad/s], `q_ddot` [6×1 rad/s²] |
-| **Gọi bởi** | `tinh_torque` |
-
-#### `jacobi.m`
-| | Chi tiết |
-|---|---|
-| **Chú ý** | Phiên bản Jacobian gốc/tham khảo — không dùng trong pipeline chính |
-
----
-
-### Nhóm 5 — Động lực học (Dynamics)
-
-#### `tinh_torque.m` ⭐ CORE
-> Tính đầy đủ moment động cơ và lực khớp theo Newton-Euler ngược.
-
-| | Chi tiết |
-|---|---|
-| **Input** | `pose` [1×6 mm,°], `pose_dot` [1×6 mm/s,°/s], `pose_ddot` [1×6 mm/s²,°/s²], `A_mat`, `B_mat`, `L1`, `L2`, `gamma_ang`, `m_platform` (kg), `I_platform` [1×3 kg·m²], `I_rotor` (kg·m²), `m_arm` (kg), `m_rod` (kg) |
-| **Output** | `tau_motor` [6×1 N·m], `tau_platform` [6×1 N·m], `tau_inertia` [6×1 N·m], `F_joint_Ci` [3×6 N], `F_joint_Bi` [3×6 N], `f_rod` [6×1 N] |
-| **Phụ thuộc** | `jacobian_motor`, `load_simscape_params` |
-| **Gọi bởi** | `gui_torque_motion`, `test_tinh_torque` |
-| **Mặc định** | Tự nạp từ `load_simscape_params` nếu thiếu tham số |
-
----
-
-### Nhóm 6 — Giao diện (GUI / Dashboard)
-
-#### `Dashboard_Stewart5.m` ⭐ ENTRY POINT
-> Giao diện tổng hợp — điểm vào chính của toàn bộ hệ thống.
-
-| | Chi tiết |
-|---|---|
-| **Input (nội bộ)** | Người dùng nhập tham số trên GUI; đọc `config.json`; nạp file CSV M-Code |
-| **Output** | Hiển thị 3D real-time, 6 đồ thị góc/RPM/torque, trạng thái an toàn |
-| **Pipeline** | `calc_Geometry` → `donghocnguoc_final1` × N điểm → `tinh_vel` → `tinh_torque` → animation |
-| **FPS** | ~30 FPS (tính `step = max(1, round(1/30/dt))`) |
-| **Real-time sync** | `tic`/`toc` + `pause()` động |
-| **Phụ thuộc** | Toàn bộ Nhóm 1-5 |
-
-#### `Trajectory_Generator.m`
-> Sinh và xuất quỹ đạo theo 13 kiểu chuyển động.
-
-| | Chi tiết |
-|---|---|
-| **Input** | Tham số GUI: loại quỹ đạo, biên độ, tần số, thời gian, tâm quay Pivot |
-| **Output** | File CSV 7-cột `[t, x, y, z, roll, pitch, yaw]` |
-| **Loại quỹ đạo** | Surge, Sway, Heave, Roll, Pitch, Yaw, Circle XY, Roll+Pitch, Z+Pitch, Spiral, S-curve |
-| **Pivot** | Tâm bàn máy / Đỉnh đầu người / Custom tọa độ |
-
-#### `gui_motor_angle.m`
-> Hiển thị đồ thị 6 góc động cơ theo thời gian từ file CSV.
-
-#### `gui_torque_motion.m`
-> Hiển thị phân bố moment 6 động cơ theo quỹ đạo.
-
-#### `motion_calibration_gui.m`
-> GUI hiệu chỉnh mapping giữa quỹ đạo đầu vào và phản hồi thực.
-
-#### `kinematic_demo_gui.m`
-> Demo tương tác: kéo thanh trượt → 3D cập nhật trực tiếp.
-
----
-
-### Nhóm 7 — Phân tích Workspace
-
-#### `plot_workspace_limits.m`
-| | Chi tiết |
-|---|---|
-| **Input** | `A_mat`, `B_mat`, `L1`, `L2`, `gamma_ang` |
-| **Output** | Đồ thị giới hạn workspace (Z vs Roll, Z vs Pitch, v.v.) |
-
-#### `flat_workspace.m` / `rotate_workspace.m`
-> Phân tích workspace mặt phẳng (z cố định) và workspace xoay (roll/pitch cố định).
-
-#### `find_nominal_L_limits.m` / `find_L_limits_FK_MonteCarlo.m`
-> Tìm giới hạn chiều dài chân L_i theo lý thuyết và Monte Carlo.
-
----
-
-### Nhóm 8 — Hỗ trợ & Tải dữ liệu
-
-#### `load_simscape_params.m`
-| | Chi tiết |
-|---|---|
-| **Input** | Không |
-| **Output** | `m_p`, `I_p`, `m_arm`, `I_arm` — tham số vật lý từ mô hình Simscape |
-| **Gọi bởi** | `tinh_torque` (tự động) |
-
-#### `traj_to_motor_angle.m`
-| | Chi tiết |
-|---|---|
-| **Input** | File CSV quỹ đạo, `A_mat`, `B_mat`, `L1`, `L2`, `gamma_ang` |
-| **Output** | Ma trận `[N×6]` góc động cơ theo thời gian (°) |
-
----
-
-### Nhóm 9 — Python Viewer
-
-#### `sim.py`
-> Trình xem 3D độc lập, không cần MATLAB, chạy bằng Python 3.11.
-
-| | Chi tiết |
-|---|---|
-| **Input** | File CSV M-Code (7 hoặc 15 tham số), `config.json` |
-| **Output** | Cửa sổ 3D VisPy: platform, 6 chân, animation real-time |
-| **Stack** | Python 3.11, PyQt5, VisPy, NumPy, Pandas |
-| **Thread** | `AnimationThread` (QThread) — tách render khỏi UI |
-| **Safety** | 3-layer check Python tương đương MATLAB |
-| **Môi trường** | `venv311/` — cài sẵn tại workspace |
-
----
-
-## 🕸️ Sơ đồ liên kết giữa các function
-
-```
-                        ┌──────────────────┐
-                        │  Dashboard_Stewart5│ ◄── config.json
-                        │  (Entry Point)    │ ◄── Platform_Command.csv
-                        └───┬──────────────┘
-                            │calls
-              ┌─────────────▼─────────────────┐
-              │        calc_Geometry           │
-              │  ra,rb,α,β,d_a,d_b → A,B,γ   │
-              └─────────────┬─────────────────┘
-                            │ [A_mat, B_mat, gamma_ang]
-           ┌────────────────┼────────────────────┐
-           ▼                ▼                    ▼
-  ┌─────────────┐  ┌─────────────────┐  ┌──────────────┐
-  │  matranquay │  │donghocnguoc     │  │ check_pose   │
-  │  (R=Rz·Ry·Rx)│  │_final1 (IK)    │  │ _safety      │
-  └─────────────┘  └────────┬────────┘  └──────┬───────┘
-       used by all          │                   │calls
-                     phi_out│[1×6°]       ┌─────▼──────────────┐
-                            │             │donghocnguoc_final1  │
-                            │             │ + kiem_tra_ki_di    │
-                            │             └────────────────────┘
-                            ▼
-              ┌─────────────────────────────┐
-              │       jacobian_RUS          │
-              │  pose,pose_dot → J[6×6]    │◄── donghocnguoc_raw
-              └──────────┬──────────────────┘
-                         │ J, theta_dot
-            ┌────────────┼────────────────┐
-            ▼            ▼                ▼
-   ┌──────────────┐ ┌──────────────┐ ┌──────────────────┐
-   │  tinh_vel    │ │jacobian_motor│ │ donghocthuan_NR  │
-   │ →RPM[1×6]   │ │→J_q,q_dot   │ │ →pose_out(FK)    │
-   └──────────────┘ └──────┬───────┘ └──────────────────┘
-                           │
-                     ┌─────▼──────────────┐
-                     │    tinh_torque      │
-                     │  → tau[6×1 N·m]   │◄── load_simscape_params
-                     │  → F_joint[3×6]   │
-                     │  → f_rod[6×1]     │
-                     └────────────────────┘
-```
-
-### Sơ đồ kiểm định an toàn
-
-```
-pose [x,y,z,R,P,Y]
-        │
-        ▼
-┌───────────────┐  NaN?  ┌──────────────────────────┐
-│ donghocnguoc  │───YES──►│ REJECT: Ngoài tầm với    │
-│ _final1 (IK)  │        └──────────────────────────┘
-└───────┬───────┘
-        │ phi_out [1×6]
-        ▼
-┌───────────────────┐  out?  ┌──────────────────────────┐
-│ phi ∈ [−60,+100]° │──YES──►│ REJECT: Servo vượt giới  │
-└─────────┬─────────┘        └──────────────────────────┘
-          │
-          ▼
-┌────────────────────┐  YES  ┌──────────────────────────┐
-│ det(J) < 1×10⁻³   │──────►│ REJECT: Điểm kỳ dị!      │
-└──────────┬─────────┘       └──────────────────────────┘
-           │
-           ▼
-     ✅ AN TOÀN — Tiến hành di chuyển
-```
-
----
-
-## 🗂️ Nhánh chuyên đề
-
-| Nhánh | Nội dung | README |
-|---|---|---|
-| `main` | Tổng quan, catalogue đầy đủ (file này) | `README.md` |
-| `feature/inverse-kinematics` | IK, FK, Jacobian, Workspace | `kinematics/README.md` + `kinematics/USAGE.md` |
-| `feature/dynamics` | Moment, Newton-Euler, Simscape | `dynamics/README.md` + `dynamics/USAGE.md` |
-| `feature/data` | CSV M-Code, IMU, Motor_Angles, hình ảnh | `data/README.md` + `data/USAGE.md` |
-| `feature/cad` | File STEP thiết kế cơ khí | `cad/README.md` + `cad/USAGE.md` |
-
----
-
-## 🚀 Cài đặt & Chạy nhanh
-
-### MATLAB
-
-```matlab
-% 1. Khởi động Dashboard tổng hợp
-Dashboard_Stewart5
-
-% 2. Sinh quỹ đạo mới
-Trajectory_Generator
-
-% 3. FK nhanh từ góc động cơ
-run_forward_kinematics
-```
-
-### Python Viewer
-
-```powershell
-# Kích hoạt venv
-.\venv311\Scripts\Activate.ps1
-
-# Chạy viewer
-python sim.py
-```
-
-### Yêu cầu
-
-| Phần mềm | Phiên bản |
-|---|---|
-| MATLAB | R2023b trở lên |
-| Simscape Multibody | Toolbox đi kèm MATLAB |
-| Python | 3.11.x |
-| PyQt5 | 5.15.x |
-| VisPy | 0.16.x |
-| NumPy | ≥ 1.24 |
-| Pandas | ≥ 2.0 |
+| `main` | `README.md` (tài liệu này) | Tổng quan hệ thống, catalogue I/O, báo cáo ĐATN |
+| **`feature/inverse-kinematics`** | `kinematics/README.md`, `kinematics/USAGE.md` | Thuật toán IK, FK Newton-Raphson, phân tích Workspace |
+| **`feature/dynamics`** | `dynamics/README.md`, `dynamics/USAGE.md` | Tính moment $\tau$, mô hình Simscape Multibody, kiểm thử lực |
+| **`feature/data`** | `data/README.md`, `data/USAGE.md` | Bộ file M-Code 7/15 tham số, dữ liệu thực nghiệm IMU, ảnh phân tích |
+| **`feature/cad`** | `cad/README.md`, `cad/USAGE.md` | Bản vẽ 3D STEP, BOM chi tiết cơ khí, quy trình xuất `.xml` từ SolidWorks |

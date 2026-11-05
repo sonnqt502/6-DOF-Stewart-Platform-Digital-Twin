@@ -1,75 +1,58 @@
-# Hướng dẫn sử dụng — Dynamics
+# Hướng dẫn kỹ thuật — Chạy Mô phỏng và Đánh giá Động lực học
 
-## 1. Tính moment tại một pose cụ thể
+> **Tham chiếu chuẩn:** Mục 4.1 (Trang 45–56) & Mục 4.2 (Trang 56–64), Đồ án tốt nghiệp *ĐATN_NQTS.pdf*.
+
+---
+
+## 1. Kiểm nghiệm Động học ngược và Mô phỏng Simscape (Double Check)
+
+Để tái hiện quá trình kiểm chứng mức độ chính xác giữa động học ngược lý thuyết và mô phỏng Simscape như mô tả tại Trang 53–56 của ĐATN:
 
 ```matlab
-% Khởi tạo hình học (xem kinematics/USAGE.md)
+% 1. Nạp cấu hình hình học và thông số vật lý
+load_simscape_params;
+
+% 2. Mở mô hình Simscape Multibody
+open_system('Final_CKASForSIM30_11_SIM');
+
+% 3. Chạy mô phỏng kiểm tra với tín hiệu thử nghiệm hình sin (ví dụ: Heave ±150 mm)
+set_param('Final_CKASForSIM30_11_SIM', 'SimulationCommand', 'start');
+```
+
+---
+
+## 2. Tính toán Moment Động cơ và Lực Khớp (`tinh_torque.m`)
+
+```matlab
+% Khởi tạo hình học chuẩn
 [A_mat, B_mat, gamma_ang] = calc_Geometry(589.66, 429.566, 19.45, 53.32, 38.9, 10.0);
 L1 = 150; L2 = 747;
 
-% Pose, vận tốc, gia tốc
-pose      = [0, 0, 795.4, 0, 10, 0];       % (mm, °)
-pose_dot  = [0, 0, 0, 0, 2, 0];            % (mm/s, °/s)
-pose_ddot = [0, 0, 0, 0, 0.5, 0];          % (mm/s², °/s²)
+% Định nghĩa trạng thái chuyển động tức thời
+pose      = [0, 0, 795.4, 0, 5, 0];    % [x, y, z, roll, pitch, yaw] (mm, độ)
+pose_dot  = [0, 0, 30, 0, 2, 0];       % [vx, vy, vz, vroll, vpitch, vyaw] (mm/s, độ/s)
+pose_ddot = [0, 0, 100, 0, 10, 0];     % [ax, ay, az, aroll, apitch, ayaw] (mm/s², độ/s²)
 
-% Tính moment (dùng thông số mặc định từ load_simscape_params)
-[tau, tau_p, tau_I, Fci, Fbi, f_rod] = tinh_torque(pose, pose_dot, pose_ddot, ...
-    A_mat, B_mat, L1, L2, gamma_ang);
+% Tính moment và lực khớp
+[tau_motor, tau_platform, tau_inertia, F_joint_Ci, F_joint_Bi, f_rod] = ...
+    tinh_torque(pose, pose_dot, pose_ddot, A_mat, B_mat, L1, L2, gamma_ang);
 
-fprintf('Moment động cơ [N·m]:\n');
-disp(tau')
-fprintf('Lực trục thanh nối [N]:\n');
-disp(f_rod')
+% Xuất kết quả
+fprintf('Moment yêu cầu tại 6 động cơ (N.m):\n');
+disp(tau_motor');
+
+fprintf('Lực kéo/nén trong 6 thanh truyền (N):\n');
+disp(f_rod');
 ```
 
 ---
 
-## 2. Tính vận tốc động cơ (RPM)
+## 3. Khởi chạy Giao diện Giám sát Đồ họa
 
 ```matlab
-vel = [0, 0, 20, 0, 0, 0];  % heave 20 mm/s
-[rpm, J_v, phi] = tinh_vel(pose, vel, A_mat, B_mat, L1, L2, gamma_ang);
-fprintf('RPM động cơ: %s\n', num2str(rpm, '%.1f '));
+% Mở giao diện xem phân bố Moment theo thời gian
+gui_torque_motion;
+
+% Mở giao diện xem biểu đồ góc động cơ
+gui_motor_angle;
 ```
-
----
-
-## 3. Chạy mô hình Simscape
-
-```matlab
-load_simscape_params   % Nạp thông số vào workspace
-run_simulink           % Mở và chạy Final_CKASForSIM30_11_SIM.slx
-```
-
----
-
-## 4. Chuyển quỹ đạo CSV → góc động cơ
-
-```matlab
-% Xuất bảng [N×6] góc động cơ theo thời gian
-phi_traj = traj_to_motor_angle('Platform_Command.csv', A_mat, B_mat, L1, L2, gamma_ang);
-% phi_traj: [N×6] (°)
-```
-
----
-
-## 5. GUI xem moment
-
-```matlab
-gui_torque_motion   % Load file CSV và xem phân bố τ theo t
-gui_motor_angle     % Xem đồ thị 6 góc động cơ
-```
-
----
-
-## Thông số vật lý mặc định (CKAS W2)
-
-| Tham số | Giá trị | Đơn vị |
-|---|---|---|
-| Khối lượng bàn máy `m_p` | 30.065 | kg |
-| I_xx = I_zz | 9.85 | kg·m² |
-| I_yy | 19.65 | kg·m² |
-| Khối lượng tay quay `m_arm` | 1.585 | kg |
-| Quán tính rotor `I_rotor` | ~0.005 | kg·m² |
-
-> Các giá trị này được nạp tự động từ `load_simscape_params`. Có thể override bằng cách truyền trực tiếp vào `tinh_torque`.
